@@ -69,4 +69,9 @@ public class RoomRepositoryImple implements RoomRepository {
             return null;
         }
     }
+
+    @Override
+    public String generateNextId() {
+        return null;
+    }
 }

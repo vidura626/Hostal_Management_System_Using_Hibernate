@@ -1,4 +1,4 @@
-package entity.embedded;
+package lk.ijse.hostal.entity.embedded;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -5,7 +5,7 @@ import org.hibernate.Session;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface CRUD<T, ID> extends SuperRepo {
+public interface CRUDUtil<T, ID> extends SuperRepo {
     ID add(T obj, Session session);
 
     boolean update(T obj, Session session);
@@ -15,4 +15,6 @@ public interface CRUD<T, ID> extends SuperRepo {
     T search(ID id, Session session);
 
     List<T> getAll(Session session);
+
+    String generateNextId();
 }

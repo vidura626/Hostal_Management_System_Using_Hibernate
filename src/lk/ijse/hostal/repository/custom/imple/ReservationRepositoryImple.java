@@ -65,4 +65,9 @@ public class ReservationRepositoryImple implements ReservationRepository {
             return null;
         }
     }
+
+    @Override
+    public String generateNextId() {
+        return null;
+    }
 }

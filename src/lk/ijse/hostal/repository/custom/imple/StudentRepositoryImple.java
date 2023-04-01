@@ -67,4 +67,9 @@ public class StudentRepositoryImple implements StudentRepository {
             return null;
         }
     }
+
+    @Override
+    public String generateNextId() {
+        return null;
+    }
 }

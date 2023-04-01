@@ -68,4 +68,9 @@ public class LoginDetailsRepositoryImple implements LoginDetailsRepository {
             return null;
         }
     }
+
+    @Override
+    public String generateNextId() {
+        return null;
+    }
 }
