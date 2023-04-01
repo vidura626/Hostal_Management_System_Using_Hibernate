@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.hostal.controller.register.RegisterFormController">
+   <children>
+      <JFXButton layoutX="218.0" layoutY="330.0" onAction="#btnRegisterOnAction" prefHeight="34.0" prefWidth="162.0" text="Register" />
+      <TextField fx:id="txtFName" layoutX="83.0" layoutY="40.0" />
+      <TextField fx:id="txtAddress" layoutX="225.0" layoutY="107.0" />
+      <TextField fx:id="txtEmail" layoutX="225.0" layoutY="161.0" />
+      <TextField fx:id="txtUserName" layoutX="225.0" layoutY="215.0" />
+      <Label layoutX="29.0" layoutY="44.0" text="Name : " />
+      <TextField fx:id="txtMName" layoutX="247.0" layoutY="40.0" />
+      <TextField fx:id="txtLName" layoutX="420.0" layoutY="40.0" />
+      <Label layoutX="138.0" layoutY="116.0" text="Address : " />
+      <JFXButton layoutX="385.0" layoutY="107.0" onAction="#btnAddOnAction" prefHeight="34.0" prefWidth="69.0" text="New" />
+      <Label layoutX="138.0" layoutY="170.0" text="Email : " />
+      <Label layoutX="139.0" layoutY="224.0" text="Username : " />
+      <Label layoutX="139.0" layoutY="260.0" text="Password : " />
+      <PasswordField fx:id="txtPassword1" layoutX="226.0" layoutY="251.0" />
+      <PasswordField fx:id="txtPassword2" layoutX="226.0" layoutY="290.0" />
+      <Label layoutX="141.0" layoutY="299.0" text="Re - Password : " />
+   </children>
+</AnchorPane>

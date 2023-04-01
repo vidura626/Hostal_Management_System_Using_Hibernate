@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXScrollPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.hostal.controller.ReservationFormController">
+   <children>
+      <JFXComboBox fx:id="cmbSttd" labelFloat="true" layoutX="32.0" layoutY="26.0" prefHeight="26.0" prefWidth="186.0" promptText="Student : " />
+      <JFXComboBox fx:id="cmbRoom" labelFloat="true" layoutX="249.0" layoutY="26.0" prefHeight="26.0" prefWidth="186.0" promptText="Room :" />
+      <JFXButton layoutX="482.0" layoutY="53.0" onAction="#btnAddOnAction" text="Add" />
+      <JFXScrollPane layoutX="32.0" layoutY="111.0" prefHeight="265.0" prefWidth="527.0">
+         <children>
+            <TableView fx:id="tblManageReservation" prefHeight="200.0" prefWidth="200.0">
+              <columns>
+                <TableColumn fx:id="colStd" prefWidth="75.0" text="Student" />
+                <TableColumn fx:id="colRoom" prefWidth="75.0" text="Room" />
+                  <TableColumn fx:id="colStatus" prefWidth="75.0" text="Status" />
+                  <TableColumn fx:id="colUpdate" prefWidth="75.0" text="Update" />
+                  <TableColumn fx:id="colDelete" prefWidth="75.0" text="Delete" />
+              </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+         </children>
+      </JFXScrollPane>
+      <TextField fx:id="txtStatus" layoutX="159.0" layoutY="66.0" promptText="Status :" />
+      <Label layoutX="398.0" layoutY="17.0" text="Reservation ID :" />
+      <Label fx:id="txtID" layoutX="514.0" layoutY="17.0" prefHeight="18.0" prefWidth="55.0" text="xxxxx" />
+      <Label fx:id="txtKeyMoney" layoutX="41.0" layoutY="70.0" text="KeyMoney" />
+   </children>
+</AnchorPane>
