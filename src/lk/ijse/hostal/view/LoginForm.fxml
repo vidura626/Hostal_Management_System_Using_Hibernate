@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="lk.ijse.hostal.controller.LoginFormController"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.hostal.controller.LoginFormController">
+   <children>
+      <TextField fx:id="txtUsername" layoutX="225.0" layoutY="105.0" onAction="#txtUsernameOnAction" promptText="Username" />
+      <PasswordField fx:id="txtPassword" layoutX="225.0" layoutY="174.0" onAction="#txtPasswordOnAction" promptText="Password" />
+      <JFXButton layoutX="225.0" layoutY="238.0" onAction="#btnLoginOnAction" prefHeight="26.0" prefWidth="150.0" text="Login" />
+      <JFXButton layoutX="224.0" layoutY="325.0" onAction="#btnRegisterOnAction" prefHeight="26.0" prefWidth="150.0" text="Register" />
+   </children>
 </AnchorPane>

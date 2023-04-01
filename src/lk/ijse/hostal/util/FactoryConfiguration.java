@@ -1,7 +1,9 @@
 package lk.ijse.hostal.util;
 
-import lk.ijse.hostal.testEntity.Addres;
-import lk.ijse.hostal.testEntity.Person;
+
+import lk.ijse.hostal.entity.Reservation;
+import lk.ijse.hostal.entity.Room;
+import lk.ijse.hostal.entity.Student;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -14,11 +16,9 @@ public class FactoryConfiguration {
 
     private FactoryConfiguration(){
         Configuration configuration = new Configuration().configure()
-                .addAnnotatedClass(Person.class)
-                .addAnnotatedClass(Addres.class);
-//                .addAnnotatedClass(Student.class)
-//                .addAnnotatedClass(Room.class)
-//                .addAnnotatedClass(Reservation.class);
+                .addAnnotatedClass(Student.class)
+                .addAnnotatedClass(Room.class)
+                .addAnnotatedClass(Reservation.class);
         sessionFactory = configuration.buildSessionFactory();
     }
 

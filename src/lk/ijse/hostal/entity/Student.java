@@ -1,9 +1,10 @@
 package lk.ijse.hostal.entity;
 
-import entity.embedded.Address;
 import entity.embedded.Name;
+import lk.ijse.hostal.entity.embedded.Address;
 import lk.ijse.hostal.entity.embedded.Contact;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -14,6 +15,8 @@ import java.util.List;
 public class Student {
     @Id
     String id;
+    String nic;
+    String email;
     @Embedded
     Name name;
     @ElementCollection
@@ -32,6 +35,8 @@ public class Student {
     Date dob;
     Gender gender;
 
+    @CreationTimestamp
+    Date joinedDate;
     @OneToMany(mappedBy = "studentId", cascade = CascadeType.ALL)
     List<Reservation> reservations;
 }
