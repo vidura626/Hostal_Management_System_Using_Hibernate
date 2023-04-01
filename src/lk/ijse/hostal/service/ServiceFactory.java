@@ -1,5 +1,6 @@
 package lk.ijse.hostal.service;
 
+import lk.ijse.hostal.service.custom.imple.LoginDetailsBOImple;
 import lk.ijse.hostal.service.custom.imple.ReservationBOImple;
 import lk.ijse.hostal.service.custom.imple.RoomBOImple;
 import lk.ijse.hostal.service.custom.imple.StudentBOImple;
@@ -16,7 +17,7 @@ public class ServiceFactory {
     }
 
     public enum BOTypes {
-        STUDENT, ROOM, RESERVATION
+        STUDENT, ROOM, RESERVATION,LOGIN_DETAILS
     }
 
     public SuperBO getBO(BOTypes types) {
@@ -27,6 +28,8 @@ public class ServiceFactory {
                 return new RoomBOImple();
             case RESERVATION:
                 return new ReservationBOImple();
+            case LOGIN_DETAILS:
+                return new LoginDetailsBOImple();
             default:
                 return null;
         }

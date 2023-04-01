@@ -8,27 +8,61 @@ import java.util.List;
 
 public class ReservationRepositoryImple implements ReservationRepository {
     @Override
-    public Integer add(Reservation obj, Session session) {
-        return null;
+    public String add(Reservation obj, Session session) {
+        session.beginTransaction();
+        try {
+            String save = (String) session.save(obj);
+            session.getTransaction().commit();
+            return save;
+        }catch (Exception e){
+            session.getTransaction().rollback();
+            return null;
+        }
     }
 
     @Override
-    public Integer update(Reservation obj, Session session) {
-        return null;
+    public boolean update(Reservation obj, Session session) {
+        session.beginTransaction();
+        try {
+            session.update(obj);
+            session.getTransaction().commit();
+            return true;
+        }catch (Exception e){
+            session.getTransaction().rollback();
+            return false;
+        }
     }
 
     @Override
-    public boolean delete(Integer integer, Session session) {
-        return false;
+    public boolean delete(String id, Session session) {
+        session.beginTransaction();
+        try {
+            Reservation load = session.get(Reservation.class, id);
+            session.update(load);
+            session.getTransaction().commit();
+            return true;
+        }catch (Exception e){
+            session.getTransaction().rollback();
+            return false;
+        }
     }
 
     @Override
-    public Reservation search(Integer integer, Session session) {
-        return null;
+    public Reservation search(String id, Session session) {
+        try {
+            return session.get(Reservation.class, id);
+        }catch (Exception e){
+            return null;
+        }
     }
 
     @Override
     public List<Reservation> getAll(Session session) {
-        return null;
+        try {
+            List<Reservation> from_reservation = session.createQuery("FROM Reservation").getResultList();
+            return from_reservation;
+        }catch (Exception e){
+            return null;
+        }
     }
 }

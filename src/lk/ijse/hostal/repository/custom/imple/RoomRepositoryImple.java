@@ -1,35 +1,72 @@
 package lk.ijse.hostal.repository.custom.imple;
 
 import lk.ijse.hostal.entity.Reservation;
+import lk.ijse.hostal.entity.Room;
 import lk.ijse.hostal.repository.custom.ReservationRepository;
+import lk.ijse.hostal.repository.custom.RoomRepository;
 import org.hibernate.Session;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class RoomRepositoryImple implements ReservationRepository {
+public class RoomRepositoryImple implements RoomRepository {
 
     @Override
-    public Integer add(Reservation obj, Session session) {
-        return null;
+    public String add(Room obj, Session session) {
+        session.beginTransaction();
+        try{
+            String save = (String) session.save(obj);
+            session.getTransaction().commit();
+            return save;
+        }catch (Exception e) {
+            session.getTransaction().rollback();
+            return null;
+        }
     }
 
     @Override
-    public Integer update(Reservation obj, Session session) {
-        return null;
+    public boolean update(Room obj, Session session) {
+        session.beginTransaction();
+        try {
+            session.update(obj);
+            session.getTransaction().commit();
+            return true;
+        }catch (Exception e){
+            session.getTransaction().rollback();
+            return false;
+        }
     }
 
     @Override
-    public boolean delete(Integer integer, Session session) {
-        return false;
+    public boolean delete(String id, Session session) {
+        session.beginTransaction();
+        try {
+            Reservation load = session.get(Reservation.class, id);
+            session.update(load);
+            session.getTransaction().commit();
+            return true;
+        }catch (Exception e){
+            session.getTransaction().rollback();
+            return false;
+        }
     }
 
     @Override
-    public Reservation search(Integer integer, Session session) {
-        return null;
+    public Room search(String id, Session session) {
+        try {
+            return session.get(Room.class, id);
+        }catch (Exception e){
+            return null;
+        }
     }
 
     @Override
-    public List<Reservation> getAll(Session session) {
-        return null;
+    public List<Room> getAll(Session session) {
+        try {
+            List<Room> from_reservation = session.createQuery("FROM Room").getResultList();
+            return from_reservation;
+        }catch (Exception e){
+            return null;
+        }
     }
 }
