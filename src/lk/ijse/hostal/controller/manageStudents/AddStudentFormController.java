@@ -6,10 +6,18 @@ import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import lk.ijse.hostal.controller.util.Navigation;
+import lk.ijse.hostal.controller.util.Routes;
+import lk.ijse.hostal.service.ServiceFactory;
+import lk.ijse.hostal.service.custom.StudentBO;
+import lk.ijse.hostal.util.TransferObjects;
 
 public class AddStudentFormController {
 
@@ -58,8 +66,29 @@ public class AddStudentFormController {
     @FXML
     private JFXRadioButton rdoOther;
 
+    private Stage stage = new Stage();
+
+    private final StudentBO studentBO = (StudentBO) ServiceFactory.getInstance().getBO(ServiceFactory.BOTypes.STUDENT);
+
     @FXML
-    void btnAddAddressOnAction(ActionEvent event) {
+     void btnAddAddressOnAction(ActionEvent event) throws Exception {
+
+        /*  Pop up address window   */
+        if (stage.isShowing()) {
+            stage.close();
+        } else {
+            AnchorPane anchorPane = new AnchorPane();
+            stage.setScene(new Scene(anchorPane));
+            Navigation.navigate(Routes.ADDRESS_FORM, anchorPane);
+            stage.showAndWait();
+        }
+        /*-----------------------------------------*/
+
+        /*  Get address*/
+        String address = (String) TransferObjects.recieveObject();
+        System.out.println(address);
+        TransferObjects.clear();
+        /*--------------*/
 
     }
 
@@ -69,7 +98,13 @@ public class AddStudentFormController {
     }
 
     @FXML
-    void btnAddOnAction(ActionEvent event) {
+    void btnRegisterOnAction(ActionEvent event) {
+        /*  Name    */
+        String fName = txtFName.getText();
+        String mName = txtMName.getText();
+        String lName = txtLName.getText();
+
+        /*  Address */
 
     }
 

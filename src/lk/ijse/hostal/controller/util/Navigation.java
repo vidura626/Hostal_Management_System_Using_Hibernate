@@ -13,6 +13,10 @@ public class Navigation {
         String location = null;
 
         switch (routes) {
+            case ADDRESS_FORM:
+                window.setTitle("Add New Address");
+                location = "/manageStudents/AddressForm.fxml";
+                break;
             case LOGIN:
                 window.setTitle("Login");
                 location = "/LoginForm.fxml";
