@@ -1,12 +1,15 @@
 package lk.ijse.hostal.controller.manageRooms;
 
+import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 
 public class ManageRoomFormController {
 
+    public AnchorPane pane;
     @FXML
     private TableColumn<?, ?> colDelete;
 
@@ -29,15 +32,15 @@ public class ManageRoomFormController {
     private TableView<?> tblManageRoom;
 
     @FXML
-    private TextField txtId;
+    private JFXTextField txtId;
 
     @FXML
-    private TextField txtPrice;
+    private JFXTextField txtPrice;
 
     @FXML
-    private TextField txtQty;
+    private JFXTextField txtQty;
 
     @FXML
-    private TextField txtType;
+    private JFXTextField txtType;
 
 }

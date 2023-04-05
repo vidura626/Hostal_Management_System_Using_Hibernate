@@ -1,8 +1,8 @@
 package lk.ijse.hostal.dto;
 
 public class RoomDTO {
-    String room_type_id;
-    String type;
-    double key_money;
-    int qty;
+    private String room_type_id;
+    private String type;
+    private double key_money;
+    private int qty;
 }

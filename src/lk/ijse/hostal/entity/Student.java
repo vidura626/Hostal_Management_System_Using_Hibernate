@@ -1,6 +1,6 @@
 package lk.ijse.hostal.entity;
 
-import entity.embedded.Name;
+import lk.ijse.hostal.dto.embedded.Name;
 import lk.ijse.hostal.entity.embedded.Address;
 import lk.ijse.hostal.entity.embedded.Contact;
 import lombok.Data;
@@ -17,6 +17,11 @@ public class Student {
     String id;
     String nic;
     String email;
+
+    /*
+    Try to add image of student
+    */
+
     @Embedded
     Name name;
     @ElementCollection

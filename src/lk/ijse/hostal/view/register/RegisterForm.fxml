@@ -6,7 +6,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.hostal.controller.register.RegisterFormController">
+<AnchorPane fx:id="pane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.hostal.controller.register.RegisterFormController" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
    <children>
       <JFXButton layoutX="218.0" layoutY="330.0" onAction="#btnRegisterOnAction" prefHeight="34.0" prefWidth="162.0" text="Register" />
       <TextField fx:id="txtFName" layoutX="83.0" layoutY="40.0" />
@@ -24,5 +24,7 @@
       <PasswordField fx:id="txtPassword1" layoutX="226.0" layoutY="251.0" />
       <PasswordField fx:id="txtPassword2" layoutX="226.0" layoutY="290.0" />
       <Label layoutX="141.0" layoutY="299.0" text="Re - Password : " />
+      <Label layoutX="36.0" layoutY="14.0" text="ID :" />
+      <Label fx:id="lblId" layoutX="62.0" layoutY="14.0" text="xxxx" />
    </children>
 </AnchorPane>

@@ -2,34 +2,46 @@ package lk.ijse.hostal.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import lk.ijse.hostal.entity.LoginDetails;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import lk.ijse.hostal.controller.util.Navigation;
+import lk.ijse.hostal.controller.util.Routes;
 import lk.ijse.hostal.service.ServiceFactory;
 import lk.ijse.hostal.service.custom.LoginDetailsBO;
 
+import java.io.IOException;
+
 public class LoginFormController {
-    LoginDetailsBO loginDetailsBO = (LoginDetailsBO) ServiceFactory.getInstance().getBO(ServiceFactory.BOTypes.LOGIN_DETAILS);
+    @FXML
+    private AnchorPane pane;
+
     @FXML
     private PasswordField txtPassword;
 
     @FXML
     private TextField txtUsername;
 
-    @FXML
-    void btnLoginOnAction(ActionEvent event) {
-        boolean isTrue = loginDetailsBO.search(txtUsername.getText(), txtPassword.getText());
-        if (isTrue) {
-            //navigation to Dashboard
-            return;
-        }
-        new Alert(Alert.AlertType.WARNING,"Username or password is not matched !").show();
+    LoginDetailsBO loginDetailsBO = (LoginDetailsBO) ServiceFactory.getInstance().getBO(ServiceFactory.BOTypes.LOGIN_DETAILS);
+
+    public void initialize() throws IOException {
+
     }
 
     @FXML
-    void btnRegisterOnAction(ActionEvent event) {
+    void btnLoginOnAction(ActionEvent event) throws Exception {
 
+        Stage window = (Stage) txtUsername.getScene().getWindow();
+        window.setTitle("Dashboard");
+        window.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/DashboardForm.fxml"))));
+    }
+
+    @FXML
+    void btnRegisterOnAction(ActionEvent event) throws Exception {
+        Navigation.navigate(Routes.REGISTER_1, pane);
     }
 
     @FXML

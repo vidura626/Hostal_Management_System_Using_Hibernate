@@ -1,22 +1,24 @@
 package lk.ijse.hostal.dto;
 
-import lk.ijse.hostal.entity.embedded.Address;
+import lk.ijse.hostal.dto.embedded.Address;
+import lk.ijse.hostal.dto.embedded.Name;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class LoginDetailsDTO {
-    private int id;
+    private String id;
     //    Want to add an image using web cam and QR Code generator with email
-    String name;
-    List<Address> addresses;
-    String email;
-    String username;
-    String password;
+    private Name name;
+    private List<Address> addresses = new ArrayList<>();
+    private String email;
+    private String username;
+    private String password;
 
 }

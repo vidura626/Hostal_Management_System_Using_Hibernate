@@ -1,33 +1,45 @@
 package lk.ijse.hostal.controller.manageStudents;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.AnchorPane;
+import lk.ijse.hostal.controller.util.Navigation;
+import lk.ijse.hostal.controller.util.Routes;
 
 public class ManageStudentFormController {
 
     @FXML
-    private TableColumn<?, ?> colAge;
+    private AnchorPane pane;
 
     @FXML
-    private TableColumn<?, ?> colDelete;
-
-    @FXML
-    private TableColumn<?, ?> colGender;
+    private TableView<?> tblManageStudent;
 
     @FXML
     private TableColumn<?, ?> colId;
 
     @FXML
+    private TableColumn<?, ?> colNic;
+
+    @FXML
     private TableColumn<?, ?> colName;
 
     @FXML
-    private TableColumn<?, ?> colNic;
+    private TableColumn<?, ?> colGender;
+
+    @FXML
+    private TableColumn<?, ?> colAge;
 
     @FXML
     private TableColumn<?, ?> colUpdate;
 
     @FXML
-    private TableView<?> tblManageStudent;
+    private TableColumn<?, ?> colDelete;
+
+    @FXML
+    void btnStudentRegister(ActionEvent event) throws Exception {
+        Navigation.navigate(Routes.STUDENTS_ADD, pane);
+    }
 
 }

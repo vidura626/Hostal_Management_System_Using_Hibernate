@@ -4,6 +4,7 @@ import lk.ijse.hostal.dto.LoginDetailsDTO;
 import lk.ijse.hostal.repository.RepoFactory;
 import lk.ijse.hostal.repository.custom.LoginDetailsRepository;
 import lk.ijse.hostal.service.custom.LoginDetailsBO;
+import lk.ijse.hostal.util.Convertor;
 import lk.ijse.hostal.util.FactoryConfiguration;
 import org.hibernate.Session;
 
@@ -25,7 +26,7 @@ public class LoginDetailsBOImple implements LoginDetailsBO {
 
     @Override
     public boolean register(LoginDetailsDTO loginDetailsDTO) {
-        return false;
+        return loginRepo.add(Convertor.toLoginDetails(loginDetailsDTO), session) == null;
     }
 
     @Override

@@ -15,8 +15,9 @@ import java.util.List;
 public class LoginDetails {
     @Id
     private int id;
-
-    //    Want to add an image using web cam and QR Code generator with email
+    /*
+        QR Code generator with email
+    */
     String name;
 
     @ElementCollection
@@ -24,11 +25,11 @@ public class LoginDetails {
             name = "adminAddresses",
             joinColumns = @JoinColumn(name = "userId")
     )
-    List<Address> addresses;
+    private List<Address> addresses;
 
-    String email;
+    private String email;
 
-    String username;
-    String password;
+    private String username;
+    private String password;
 
 }

@@ -1,23 +1,31 @@
 package lk.ijse.hostal.controller;
 
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 
 public class ReservationFormController {
 
     @FXML
-    private JFXComboBox<?> cmbRoom;
+    private AnchorPane pane;
 
     @FXML
     private JFXComboBox<?> cmbSttd;
 
     @FXML
-    private TableColumn<?, ?> colDelete;
+    private JFXComboBox<?> cmbRoom;
+
+    @FXML
+    private TableView<?> tblManageReservation;
+
+    @FXML
+    private TableColumn<?, ?> colStd;
 
     @FXML
     private TableColumn<?, ?> colRoom;
@@ -26,22 +34,31 @@ public class ReservationFormController {
     private TableColumn<?, ?> colStatus;
 
     @FXML
-    private TableColumn<?, ?> colStd;
-
-    @FXML
     private TableColumn<?, ?> colUpdate;
 
     @FXML
-    private TableView<?> tblManageReservation;
+    private TableColumn<?, ?> colDelete;
 
     @FXML
     private Label txtID;
 
     @FXML
-    private TextField txtStatus;
+    private Label txtKeyMoney;
 
     @FXML
-    void btnAddOnAction(ActionEvent event) {
+    private JFXDatePicker datepickerFrom;
+
+    @FXML
+    private JFXDatePicker datepickerTo;
+
+    @FXML
+    private JFXTextField txtAmount;
+
+    @FXML
+    private JFXComboBox<?> cmbboxCheckoutType;
+
+    @FXML
+    void btnReserveOnAction(ActionEvent event) {
 
     }
 

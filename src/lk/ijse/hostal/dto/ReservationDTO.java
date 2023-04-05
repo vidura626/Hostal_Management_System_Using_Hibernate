@@ -4,8 +4,8 @@ import lk.ijse.hostal.entity.Room;
 import lk.ijse.hostal.entity.Student;
 
 public class ReservationDTO {
-    String res_id;
-    String status;
-    Student studentId;
-    Room room;
+    private String res_id;
+    private String status;
+    private Student studentId;
+    private Room room;
 }

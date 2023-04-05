@@ -1,16 +1,26 @@
 package lk.ijse.hostal.controller.manageStudents;
 
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXRadioButton;
+import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 
 public class AddStudentFormController {
+
+    @FXML
+    private AnchorPane pane;
+
+    @FXML
+    private Label txtID;
+
+    @FXML
+    private ImageView imgWebCam;
 
     @FXML
     private JFXComboBox<?> cmbAddress;
@@ -19,40 +29,34 @@ public class AddStudentFormController {
     private JFXComboBox<?> cmbContact;
 
     @FXML
-    private DatePicker datePicker;
+    private JFXTextField txtFName;
 
     @FXML
-    private ToggleGroup gender;
+    private JFXTextField txtMName;
 
     @FXML
-    private ImageView imgWebCam;
+    private JFXTextField txtLName;
 
     @FXML
-    private JFXRadioButton rdoFemale;
+    private JFXTextField txtEmail;
+
+    @FXML
+    private JFXTextField txtNic;
+
+    @FXML
+    private JFXDatePicker datePicker;
 
     @FXML
     private JFXRadioButton rdoMale;
 
     @FXML
+    private ToggleGroup tgleGender;
+
+    @FXML
+    private JFXRadioButton rdoFemale;
+
+    @FXML
     private JFXRadioButton rdoOther;
-
-    @FXML
-    private TextField txtEmail;
-
-    @FXML
-    private TextField txtFName;
-
-    @FXML
-    private Label txtID;
-
-    @FXML
-    private TextField txtLName;
-
-    @FXML
-    private TextField txtMName;
-
-    @FXML
-    private TextField txtNic;
 
     @FXML
     void btnAddAddressOnAction(ActionEvent event) {

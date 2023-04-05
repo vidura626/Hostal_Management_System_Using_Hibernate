@@ -21,6 +21,10 @@ public class Room {
     double key_money;
     int qty;
 
+    /*
+    Try to add image of room
+    */
+
     @OneToMany(mappedBy = "room",cascade = CascadeType.ALL)
     List<Reservation> reservations;
 }
