@@ -26,7 +26,7 @@ public class LoginDetailsBOImple implements LoginDetailsBO {
 
     @Override
     public boolean register(LoginDetailsDTO loginDetailsDTO) {
-        return loginRepo.add(Convertor.toLoginDetails(loginDetailsDTO), session) == null;
+        return loginRepo.add(Convertor.toLoginDetails(loginDetailsDTO), session);
     }
 
     @Override

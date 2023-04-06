@@ -15,4 +15,11 @@ import javax.persistence.Table;
 public class Contact {
     String description;
     String number;
+
+    @Override
+    public String toString() {
+        return description
+                .concat(" : ")
+                .concat(number);
+    }
 }

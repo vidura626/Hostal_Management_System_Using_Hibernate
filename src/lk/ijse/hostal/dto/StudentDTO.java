@@ -1,21 +1,29 @@
 package lk.ijse.hostal.dto;
 
+import lk.ijse.hostal.dto.embedded.Name;
 import lk.ijse.hostal.entity.Gender;
+import lk.ijse.hostal.entity.Reservation;
 import lk.ijse.hostal.entity.embedded.Address;
 import lk.ijse.hostal.entity.embedded.Contact;
-import lk.ijse.hostal.entity.embedded.Name;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class StudentDTO {
-    private String id;
-    private String nic;
-    private String email;
-    private Name name;
-    private List<Address> addresses = new ArrayList<>();
-    private List<Contact> contact = new ArrayList<>();
-    private Date dob;
-    private Gender gender;
+    String id;
+    String nic;
+    String email;
+    Name name;
+    List<Address> addresses;
+    List<Contact> contact;
+    Date dob;
+    Gender gender;
+    Date joinedDate;
+    List<Reservation> reservations;
 }

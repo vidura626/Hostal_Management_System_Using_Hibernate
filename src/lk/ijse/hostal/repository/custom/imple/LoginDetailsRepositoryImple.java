@@ -1,25 +1,22 @@
 package lk.ijse.hostal.repository.custom.imple;
 
 import lk.ijse.hostal.entity.LoginDetails;
-import lk.ijse.hostal.entity.Reservation;
 import lk.ijse.hostal.repository.custom.LoginDetailsRepository;
-import lk.ijse.hostal.repository.custom.ReservationRepository;
 import org.hibernate.Session;
 
-import java.io.Serializable;
 import java.util.List;
 
 public class LoginDetailsRepositoryImple implements LoginDetailsRepository {
     @Override
-    public Integer add(LoginDetails obj, Session session) {
+    public boolean add(LoginDetails obj, Session session) {
         session.beginTransaction();
         try{
             int save = (int) session.save(obj);
             session.getTransaction().commit();
-            return save;
+            return true;
         }catch (Exception e) {
             session.getTransaction().rollback();
-            return -1;
+            return false;
         }
     }
 

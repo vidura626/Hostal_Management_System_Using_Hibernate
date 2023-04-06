@@ -19,5 +19,12 @@ D:/Working_Directory/GDSE/Module - ORM/ORM_Coursework/src/hibernate.cfg.xml</rem
       <jdbc-url>jdbc:mysql://localhost/hostal?createDatabaseIfNotExist=true</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="postgres@localhost" uuid="9461cbd3-3103-466c-bb5f-d38e0af238c7">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/postgres</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

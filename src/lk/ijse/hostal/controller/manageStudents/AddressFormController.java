@@ -3,6 +3,8 @@ package lk.ijse.hostal.controller.manageStudents;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.stage.Stage;
+import lk.ijse.hostal.entity.embedded.Address;
 import lk.ijse.hostal.util.TransferObjects;
 
 public class AddressFormController {
@@ -19,6 +21,8 @@ public class AddressFormController {
     @FXML
     private JFXTextField txtPostalCode;
 
+    private Stage stage;
+
     @FXML
     void btnAddOnAction(ActionEvent event) {
         String houseNo = txtHouseNo.getText();
@@ -26,14 +30,15 @@ public class AddressFormController {
         String town = txtTown.getText();
         String postalCode = txtPostalCode.getText();
 
-        String address = houseNo.concat(" ")
-                .concat(streetName)
-                .concat(" ")
-                .concat(town)
-                .concat(" ")
-                .concat(postalCode);
+        Address address = new Address(houseNo, streetName, town, postalCode);
+        /*  Send object */
         TransferObjects.sendObject(address);
-        txtPostalCode.getScene().getWindow().hide();
+        /*--------------*/
+
+        /*  Hide window */
+        stage = (Stage) txtPostalCode.getScene().getWindow();
+        stage.hide();
+        /*--------------*/
     }
 
 }

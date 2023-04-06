@@ -2,25 +2,23 @@ package lk.ijse.hostal.repository.custom.imple;
 
 import lk.ijse.hostal.entity.Reservation;
 import lk.ijse.hostal.entity.Room;
-import lk.ijse.hostal.repository.custom.ReservationRepository;
 import lk.ijse.hostal.repository.custom.RoomRepository;
 import org.hibernate.Session;
 
-import java.io.Serializable;
 import java.util.List;
 
 public class RoomRepositoryImple implements RoomRepository {
 
     @Override
-    public String add(Room obj, Session session) {
+    public boolean add(Room obj, Session session) {
         session.beginTransaction();
         try{
             String save = (String) session.save(obj);
             session.getTransaction().commit();
-            return save;
+            return true;
         }catch (Exception e) {
             session.getTransaction().rollback();
-            return null;
+            return false;
         }
     }
 

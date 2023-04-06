@@ -4,18 +4,54 @@ import lk.ijse.hostal.dto.LoginDetailsDTO;
 import lk.ijse.hostal.dto.ReservationDTO;
 import lk.ijse.hostal.dto.RoomDTO;
 import lk.ijse.hostal.dto.StudentDTO;
+import lk.ijse.hostal.dto.embedded.Name;
 import lk.ijse.hostal.entity.LoginDetails;
 import lk.ijse.hostal.entity.Reservation;
 import lk.ijse.hostal.entity.Room;
 import lk.ijse.hostal.entity.Student;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Date;
+
 public class Convertor {
     public static StudentDTO fromStudent(Student student) {
-        return null;
+        return new StudentDTO(
+                student.getId(),
+                student.getNic(),
+                student.getEmail(),
+                new Name(
+                                student.getName().getFName(),
+                                student.getName().getMName(),
+                                student.getName().getLName()
+                        ),
+                student.getAddresses(),
+                student.getContact(),
+                student.getDob(),
+                student.getGender(),
+                student.getJoinedDate(),
+                student.getReservations()
+                );
     }
 
     public static Student toStudent(StudentDTO student) {
-        return null;
+        return new Student(
+                student.getId(),
+                student.getNic(),
+                student.getEmail(),
+                new lk.ijse.hostal.entity.embedded.Name(
+                        student.getName().getFName(),
+                        student.getName().getMName(),
+                        student.getName().getLName()
+                ),
+                student.getAddresses(),
+                student.getContact(),
+                student.getDob(),
+                student.getGender(),
+                Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()),
+                new ArrayList<Reservation>()
+        );
     }
 
     public static RoomDTO fromStudent(Room room) {
@@ -44,7 +80,7 @@ public class Convertor {
 //                loginDetails.getPassword()
 //        );
 
-    return null;
+        return null;
     }
 
     public static LoginDetails toLoginDetails(LoginDetailsDTO loginDetails) {
@@ -57,6 +93,6 @@ public class Convertor {
 //                loginDetails.getPassword()
 //        );
 
-    return null;
+        return null;
     }
 }

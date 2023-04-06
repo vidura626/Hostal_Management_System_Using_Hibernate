@@ -9,15 +9,15 @@ import java.util.List;
 public class StudentRepositoryImple implements StudentRepository {
 
     @Override
-    public String add(Student obj, Session session) {
+    public boolean add(Student obj, Session session) {
         session.beginTransaction();
         try {
             String save = (String) session.save(obj);
             session.getTransaction().commit();
-            return save;
+            return true;
         }catch (Exception e) {
             session.getTransaction().rollback();
-            return null;
+            return false;
         }
     }
 

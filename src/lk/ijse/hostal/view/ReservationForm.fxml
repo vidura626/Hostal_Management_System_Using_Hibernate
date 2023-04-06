@@ -14,14 +14,17 @@
    <children>
       <JFXComboBox fx:id="cmbSttd" labelFloat="true" layoutX="31.0" layoutY="68.0" prefHeight="26.0" prefWidth="186.0" promptText="Student : " />
       <JFXComboBox fx:id="cmbRoom" labelFloat="true" layoutX="248.0" layoutY="68.0" prefHeight="26.0" prefWidth="186.0" promptText="Room :" />
-      <JFXButton layoutX="731.0" layoutY="129.0" onAction="#btnReserveOnAction" text="Reserve room" />
+      <JFXButton layoutX="732.0" layoutY="140.0" onAction="#btnReserveOnAction" text="Reserve room" />
       <JFXScrollPane layoutX="14.0" layoutY="208.0" prefHeight="378.0" prefWidth="876.0">
          <children>
             <TableView fx:id="tblManageReservation" prefHeight="241.0" prefWidth="577.0">
               <columns>
-                <TableColumn fx:id="colStd" prefWidth="75.0" text="Student" />
-                <TableColumn fx:id="colRoom" prefWidth="75.0" text="Room" />
-                  <TableColumn fx:id="colStatus" prefWidth="75.0" text="Status" />
+                <TableColumn fx:id="colId" prefWidth="75.0" text="Reservation ID" />
+                <TableColumn fx:id="colStudentId" prefWidth="75.0" text="Student" />
+                  <TableColumn fx:id="colRoomId" prefWidth="75.0" text="Room" />
+                  <TableColumn fx:id="colFrom" prefWidth="75.0" text="Date From" />
+                  <TableColumn fx:id="colTo" prefWidth="75.0" text="Date To" />
+                  <TableColumn fx:id="colStatus" prefWidth="75.0" text="Payment Status" />
                   <TableColumn fx:id="colUpdate" prefWidth="75.0" text="Update" />
                   <TableColumn fx:id="colDelete" prefWidth="75.0" text="Delete" />
               </columns>
@@ -33,7 +36,7 @@
       </JFXScrollPane>
       <Label layoutX="607.0" layoutY="18.0" text="Reservation ID :" />
       <Label fx:id="txtID" layoutX="723.0" layoutY="18.0" prefHeight="21.0" prefWidth="155.0" text="xxxxx" />
-      <Label fx:id="txtKeyMoney" layoutX="31.0" layoutY="134.0" prefHeight="21.0" prefWidth="104.0" text="&lt;KeyMoney&gt;" />
+      <Label fx:id="txtKeyMoney" layoutX="50.0" layoutY="134.0" prefHeight="21.0" prefWidth="104.0" text="&lt;KeyMoney&gt;" />
       <JFXDatePicker fx:id="datepickerFrom" layoutX="475.0" layoutY="75.0" promptText="From" />
       <JFXDatePicker fx:id="datepickerTo" layoutX="685.0" layoutY="75.0" promptText="To" />
       <JFXTextField fx:id="txtAmount" labelFloat="true" layoutX="468.0" layoutY="129.0" prefHeight="40.0" prefWidth="173.0" promptText="Amount : " />

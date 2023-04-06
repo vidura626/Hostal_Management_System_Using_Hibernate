@@ -1,12 +1,9 @@
 package lk.ijse.hostal.controller.manageStudents;
 
-import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXDatePicker;
-import com.jfoenix.controls.JFXRadioButton;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.*;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
@@ -15,26 +12,50 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.hostal.controller.util.Navigation;
 import lk.ijse.hostal.controller.util.Routes;
+import lk.ijse.hostal.dto.StudentDTO;
+import lk.ijse.hostal.dto.embedded.Name;
+import lk.ijse.hostal.entity.Gender;
+import lk.ijse.hostal.entity.Reservation;
+import lk.ijse.hostal.entity.embedded.Address;
+import lk.ijse.hostal.entity.embedded.Contact;
 import lk.ijse.hostal.service.ServiceFactory;
 import lk.ijse.hostal.service.custom.StudentBO;
 import lk.ijse.hostal.util.TransferObjects;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 public class AddStudentFormController {
+
+    @FXML
+    private JFXButton btnAddressDelete;
+
+    @FXML
+    private JFXButton btnContactRemove;
+
+    @FXML
+    private JFXButton btnAddressEdit;
+
+    @FXML
+    private JFXButton btnContactEdit;
 
     @FXML
     private AnchorPane pane;
 
     @FXML
-    private Label txtID;
+    private Label lblID;
 
     @FXML
     private ImageView imgWebCam;
 
     @FXML
-    private JFXComboBox<?> cmbAddress;
+    private JFXComboBox<Address> cmbAddress;
 
     @FXML
-    private JFXComboBox<?> cmbContact;
+    private JFXComboBox<Contact> cmbContact;
 
     @FXML
     private JFXTextField txtFName;
@@ -52,7 +73,7 @@ public class AddStudentFormController {
     private JFXTextField txtNic;
 
     @FXML
-    private JFXDatePicker datePicker;
+    private JFXDatePicker datePickerDOB;
 
     @FXML
     private JFXRadioButton rdoMale;
@@ -66,35 +87,112 @@ public class AddStudentFormController {
     @FXML
     private JFXRadioButton rdoOther;
 
-    private Stage stage = new Stage();
-
+    private List<Stage> stagesAddress = new ArrayList<>();
+    private List<Stage> stagesContacts = new ArrayList<>();
     private final StudentBO studentBO = (StudentBO) ServiceFactory.getInstance().getBO(ServiceFactory.BOTypes.STUDENT);
 
-    @FXML
-     void btnAddAddressOnAction(ActionEvent event) throws Exception {
 
-        /*  Pop up address window   */
-        if (stage.isShowing()) {
-            stage.close();
+    public void initialize() {
+        setButtonVisibility();
+    }
+
+    void setButtonVisibility() {
+        if (cmbAddress.getSelectionModel().isEmpty()) {
+            btnAddressDelete.setVisible(false);
+            btnAddressEdit.setVisible(false);
         } else {
-            AnchorPane anchorPane = new AnchorPane();
-            stage.setScene(new Scene(anchorPane));
-            Navigation.navigate(Routes.ADDRESS_FORM, anchorPane);
-            stage.showAndWait();
+            btnAddressDelete.setVisible(true);
+            btnAddressEdit.setVisible(true);
         }
-        /*-----------------------------------------*/
+        if (cmbContact.getSelectionModel().isEmpty()) {
+            btnContactRemove.setVisible(false);
+            btnContactEdit.setVisible(false);
+        } else {
+            btnContactRemove.setVisible(true);
+            btnContactEdit.setVisible(true);
+        }
+    }
 
-        /*  Get address*/
-        String address = (String) TransferObjects.recieveObject();
-        System.out.println(address);
-        TransferObjects.clear();
-        /*--------------*/
-
+    Stage popUpWindow(List<Stage> stages, Routes route) throws Exception {
+        for (Stage temp : stages) {
+            if (temp.isShowing()) {
+                temp.close();
+                return null;
+            }
+        }
+        Stage stage = new Stage();
+        AnchorPane anchorPane = new AnchorPane();
+        stage.setScene(new Scene(anchorPane));
+        Navigation.navigate(route, anchorPane);
+        stage.showAndWait();
+        return stage;
     }
 
     @FXML
-    void btnAddContactOnAction(ActionEvent event) {
+    void btnAddAddressOnAction(ActionEvent event) throws Exception {
 
+        /*  Pop up address window   */
+        Stage stage = popUpWindow(stagesAddress, Routes.ADDRESS_FORM);
+         /*
+        for (Stage temp : stagesAddress) {
+            if (temp.isShowing()) {
+                temp.close();
+                return;
+            }
+        }
+        Stage stage = new Stage();
+        AnchorPane anchorPane = new AnchorPane();
+        stage.setScene(new Scene(anchorPane));
+        Navigation.navigate(Routes.ADDRESS_FORM, anchorPane);
+        stage.showAndWait();*/
+        /*-----------------------------------------*/
+
+        /*  Get address */
+        Address address = (Address) TransferObjects.recieveObject();
+        TransferObjects.clear();
+        /*--------------*/
+
+        /*  set combobox values */
+        cmbAddress.getItems().add(address);
+        cmbAddress.getSelectionModel().select(address);
+        /*----------------------*/
+
+        stagesAddress.add(stage);
+        cmbAddressOnAction(event);
+    }
+
+    @FXML
+    void btnAddContactOnAction(ActionEvent event) throws Exception {
+
+        /*  Pop up contact window   */
+        Stage stage = popUpWindow(stagesContacts, Routes.CONTACT_FORM);
+        /*
+        Stage stage = new Stage();
+        for (Stage temp : stagesContacts) {
+            if (temp.isShowing()) {
+                temp.close();
+                return;
+            }
+        }
+
+        AnchorPane anchorPane = new AnchorPane();
+        stage.setScene(new Scene(anchorPane));
+        Navigation.navigate(Routes.CONTACT_FORM, anchorPane);
+        stage.showAndWait();*/
+        /*-----------------------------------------*/
+
+        /*  Get address */
+        Contact contact = (Contact) TransferObjects.recieveObject();
+        TransferObjects.clear();
+        /*--------------*/
+
+        /*  set combobox values */
+        cmbContact.getItems().add(contact);
+        cmbContact.getSelectionModel().select(contact);
+        /*----------------------*/
+
+        stagesContacts.add(stage);
+        cmbContactOnAction(event);
     }
 
     @FXML
@@ -103,8 +201,54 @@ public class AddStudentFormController {
         String fName = txtFName.getText();
         String mName = txtMName.getText();
         String lName = txtLName.getText();
+        /*----------*/
 
         /*  Address */
+        ObservableList<Address> address = cmbAddress.getItems();
+        /*----------*/
+
+        /*  Contacts */
+        ObservableList<Contact> contacts = cmbContact.getItems();
+        /*-----------*/
+
+        /*  Email   */
+        String email = txtEmail.getText();
+        /*----------*/
+
+        /*  Nic     */
+        String nic = txtNic.getText();
+        /*----------*/
+
+        /*  Gender  */
+        Gender gender = rdoMale.isSelected() ? Gender.MALE : rdoFemale.isSelected() ? Gender.FEMALE : rdoOther.isSelected() ? Gender.OTHER : null;
+        /*----------*/
+
+        /*  DOB     */
+        LocalDate date = datePickerDOB.getValue();
+        Date dob = Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        /*----------*/
+
+        /*  Create Student DTO Object   */
+        StudentDTO studentDTO = new StudentDTO(
+                lblID.getId(),
+                nic,
+                email,
+                new Name(fName, mName, lName),
+                address,
+                contacts,
+                dob,
+                gender,
+                Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()),
+                new ArrayList<Reservation>()
+        );
+        /*------------------------------*/
+
+        boolean isSaved = studentBO.registerStudent(studentDTO);
+        if (isSaved) {
+            System.out.println("Saved");
+        } else {
+            System.out.println("Not Saved");
+        }
 
     }
 
@@ -113,4 +257,54 @@ public class AddStudentFormController {
 
     }
 
+    @FXML
+    void btnEditAddressOnAction(ActionEvent event) {
+        int selectedIndex = cmbAddress.getSelectionModel().getSelectedIndex();
+        stagesAddress.get(selectedIndex).show();
+    }
+
+    @FXML
+    void btnEditContactOnAction(ActionEvent event) {
+        int selectedIndex = cmbContact.getSelectionModel().getSelectedIndex();
+        stagesContacts.get(selectedIndex).show();
+        /*if (cmbContact.getSelectionModel().isEmpty()) {
+            new Alert(Alert.AlertType.WARNING, "Please select a default contact !").show();
+        } else if (cmbContact.getItems().size() == 0) {
+            new Alert(Alert.AlertType.WARNING, "Please provide contact !").show();
+        } else {
+            ObservableList<Address> addresses = cmbAddress.getItems();
+        }*/
+    }
+
+    @FXML
+    void cmbAddressOnAction(ActionEvent event) {
+        if (!cmbAddress.getSelectionModel().isEmpty()) {
+            btnAddressEdit.setVisible(true);
+            btnAddressDelete.setVisible(true);
+        }
+    }
+
+    @FXML
+    void cmbContactOnAction(ActionEvent event) {
+        if (!cmbContact.getSelectionModel().isEmpty()) {
+            btnContactEdit.setVisible(true);
+            btnContactRemove.setVisible(true);
+        }
+    }
+
+    @FXML
+    void btnRemoveAddressOnAction(ActionEvent event) {
+        int selectedIndex = cmbAddress.getSelectionModel().getSelectedIndex();
+        stagesAddress.remove(selectedIndex);
+        cmbAddress.getItems().remove(cmbAddress.getSelectionModel().getSelectedItem());
+        setButtonVisibility();
+    }
+
+    @FXML
+    void btnRemoveContactOnAction(ActionEvent event) {
+        int selectedIndex = cmbContact.getSelectionModel().getSelectedIndex();
+        stagesContacts.remove(selectedIndex);
+        cmbContact.getItems().remove(cmbContact.getSelectionModel().getSelectedItem());
+        setButtonVisibility();
+    }
 }

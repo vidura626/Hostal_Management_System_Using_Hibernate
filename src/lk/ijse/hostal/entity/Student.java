@@ -1,9 +1,12 @@
+
 package lk.ijse.hostal.entity;
 
-import lk.ijse.hostal.dto.embedded.Name;
 import lk.ijse.hostal.entity.embedded.Address;
 import lk.ijse.hostal.entity.embedded.Contact;
+import lk.ijse.hostal.entity.embedded.Name;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -12,6 +15,8 @@ import java.util.List;
 
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Student {
     @Id
     String id;
@@ -38,6 +43,9 @@ public class Student {
     )
     List<Contact> contact;
     Date dob;
+
+
+    @Enumerated(EnumType.STRING)
     Gender gender;
 
     @CreationTimestamp

@@ -8,15 +8,15 @@ import java.util.List;
 
 public class ReservationRepositoryImple implements ReservationRepository {
     @Override
-    public String add(Reservation obj, Session session) {
+    public boolean add(Reservation obj, Session session) {
         session.beginTransaction();
         try {
             String save = (String) session.save(obj);
             session.getTransaction().commit();
-            return save;
+            return true;
         }catch (Exception e){
             session.getTransaction().rollback();
-            return null;
+            return false;
         }
     }
 

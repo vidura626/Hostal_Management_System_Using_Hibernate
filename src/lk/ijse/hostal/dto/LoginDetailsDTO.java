@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 public class LoginDetailsDTO {
     private String id;
     //    Want to add an image using web cam and QR Code generator with email
@@ -20,5 +20,4 @@ public class LoginDetailsDTO {
     private String email;
     private String username;
     private String password;
-
 }

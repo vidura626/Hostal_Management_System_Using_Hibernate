@@ -1,13 +1,16 @@
 package lk.ijse.hostal.service.custom.imple;
 
 import lk.ijse.hostal.dto.StudentDTO;
+import lk.ijse.hostal.entity.Student;
 import lk.ijse.hostal.repository.RepoFactory;
 import lk.ijse.hostal.repository.custom.StudentRepository;
 import lk.ijse.hostal.service.custom.StudentBO;
+import lk.ijse.hostal.util.Convertor;
 import lk.ijse.hostal.util.FactoryConfiguration;
 import org.hibernate.Session;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class StudentBOImple implements StudentBO {
     private Session session = FactoryConfiguration.getInstance().getSession();
@@ -15,21 +18,21 @@ public class StudentBOImple implements StudentBO {
 
     @Override
     public boolean registerStudent(StudentDTO student) {
-        return false;
+        return repo.add(Convertor.toStudent(student), session);
     }
 
     @Override
     public boolean updateStudent(StudentDTO student) {
-        return false;
+        return repo.update(Convertor.toStudent(student), session);
     }
 
     @Override
     public StudentDTO searchStudent(String id) {
-        return null;
+        return Convertor.fromStudent(repo.search(id, session));
     }
 
     @Override
     public List<StudentDTO> getAllStudents() {
-        return null;
+        return repo.getAll(session).stream().map(Convertor::fromStudent).collect(Collectors.toList());
     }
 }

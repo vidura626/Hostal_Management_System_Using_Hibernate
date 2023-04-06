@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Embeddable;
 import javax.persistence.Table;
 
-@Table(name = "address")
+@Table
 @Embeddable
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,4 +17,14 @@ public class Address {
     String streetName;
     String town;
     String postalCode;
+
+    @Override
+    public String toString() {
+        return houseNo.concat(" ")
+                .concat(streetName)
+                .concat(" ")
+                .concat(town)
+                .concat(" ")
+                .concat(postalCode);
+    }
 }

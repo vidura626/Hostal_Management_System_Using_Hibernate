@@ -25,10 +25,19 @@ public class ReservationFormController {
     private TableView<?> tblManageReservation;
 
     @FXML
-    private TableColumn<?, ?> colStd;
+    private TableColumn<?, ?> colId;
 
     @FXML
-    private TableColumn<?, ?> colRoom;
+    private TableColumn<?, ?> colStudentId;
+
+    @FXML
+    private TableColumn<?, ?> colRoomId;
+
+    @FXML
+    private TableColumn<?, ?> colFrom;
+
+    @FXML
+    private TableColumn<?, ?> colTo;
 
     @FXML
     private TableColumn<?, ?> colStatus;

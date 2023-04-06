@@ -2,10 +2,21 @@ package lk.ijse.hostal.dto;
 
 import lk.ijse.hostal.entity.Room;
 import lk.ijse.hostal.entity.Student;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class ReservationDTO {
     private String res_id;
-    private String status;
+    private Date fromDate;
+    private Date toDate;
+    private double keyMoneyAmount;
+    private double paidAmount;
     private Student studentId;
     private Room room;
 }
