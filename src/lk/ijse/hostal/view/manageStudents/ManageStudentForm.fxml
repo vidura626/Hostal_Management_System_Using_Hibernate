@@ -17,8 +17,10 @@
             <TableColumn fx:id="colName" prefWidth="75.0" text="Name" />
             <TableColumn fx:id="colGender" prefWidth="75.0" text="Gender" />
             <TableColumn fx:id="colAge" prefWidth="75.0" text="Age" />
-            <TableColumn fx:id="colUpdate" prefWidth="75.0" text="Update" />
-            <TableColumn fx:id="colDelete" prefWidth="75.0" text="Delete" />
+            <TableColumn fx:id="colDate" prefWidth="75.0" text="Date" />
+            <TableColumn fx:id="colUpdate" prefWidth="75.0" text="Edit" />
+            <TableColumn fx:id="colDelete" prefWidth="75.0" text="Remove" />
+            <TableColumn fx:id="colMore" prefWidth="75.0" text="More...." />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

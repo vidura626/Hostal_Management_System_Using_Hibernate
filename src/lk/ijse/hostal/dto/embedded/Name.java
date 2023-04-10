@@ -15,4 +15,9 @@ public class Name {
     private String fName;
     private String mName;
     private String lName;
+
+    @Override
+    public String toString() {
+        return fName.concat(" ").concat(mName).concat(" ").concat(lName);
+    }
 }

@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
@@ -245,9 +246,9 @@ public class AddStudentFormController {
 
         boolean isSaved = studentBO.registerStudent(studentDTO);
         if (isSaved) {
-            System.out.println("Saved");
+            new Alert(Alert.AlertType.CONFIRMATION,"Added Success !").show();
         } else {
-            System.out.println("Not Saved");
+            new Alert(Alert.AlertType.WARNING,"Added Failed !").show();
         }
 
     }

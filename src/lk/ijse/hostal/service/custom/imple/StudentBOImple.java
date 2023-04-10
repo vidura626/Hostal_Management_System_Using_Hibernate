@@ -27,6 +27,11 @@ public class StudentBOImple implements StudentBO {
     }
 
     @Override
+    public boolean deleteStudent(String id) {
+        return repo.delete(id, session);
+    }
+
+    @Override
     public StudentDTO searchStudent(String id) {
         return Convertor.fromStudent(repo.search(id, session));
     }

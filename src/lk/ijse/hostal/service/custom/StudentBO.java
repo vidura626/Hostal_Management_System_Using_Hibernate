@@ -8,6 +8,7 @@ import java.util.List;
 public interface StudentBO extends SuperBO {
     public boolean registerStudent(StudentDTO student);
     public boolean updateStudent(StudentDTO student);
+    public boolean deleteStudent(String id);
     public StudentDTO searchStudent(String id);
     public List<StudentDTO> getAllStudents();
 

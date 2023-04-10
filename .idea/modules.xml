@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ORM_Coursework.iml" filepath="$PROJECT_DIR$/ORM_Coursework.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Hostal_Management_System.iml" filepath="$PROJECT_DIR$/Hostal_Management_System.iml" />
     </modules>
   </component>
 </project>
