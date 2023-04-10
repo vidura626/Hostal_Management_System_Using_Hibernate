@@ -10,66 +10,40 @@ import java.util.List;
 public class RoomRepositoryImple implements RoomRepository {
 
     @Override
-    public boolean add(Room obj, Session session) {
-        session.beginTransaction();
-        try{
-            String save = (String) session.save(obj);
-            session.getTransaction().commit();
-            return true;
-        }catch (Exception e) {
-            session.getTransaction().rollback();
-            return false;
-        }
+    public String add(Room obj, Session session) throws Exception {
+        return (String) session.save(obj);
     }
 
     @Override
-    public boolean update(Room obj, Session session) {
-        session.beginTransaction();
-        try {
-            session.update(obj);
-            session.getTransaction().commit();
-            return true;
-        }catch (Exception e){
-            session.getTransaction().rollback();
-            return false;
-        }
+    public void update(Room obj, Session session) throws Exception {
+        session.update(obj);
     }
 
     @Override
-    public boolean delete(String id, Session session) {
-        session.beginTransaction();
-        try {
-            Reservation load = session.get(Reservation.class, id);
-            session.update(load);
-            session.getTransaction().commit();
-            return true;
-        }catch (Exception e){
-            session.getTransaction().rollback();
-            return false;
-        }
+    public void delete(String id, Session session) throws Exception {
+        Reservation get = session.load(Reservation.class, id);
+        session.delete(get);
     }
 
     @Override
     public Room search(String id, Session session) {
-        try {
-            return session.get(Room.class, id);
-        }catch (Exception e){
-            return null;
-        }
+        return session.get(Room.class, id);
     }
 
     @Override
     public List<Room> getAll(Session session) {
-        try {
-            List<Room> from_reservation = session.createQuery("FROM Room").getResultList();
-            return from_reservation;
-        }catch (Exception e){
-            return null;
-        }
+        return session.createQuery("FROM Room").getResultList();
     }
 
     @Override
-    public String generateNextId() {
-        return null;
+    public String generateNextId(Session session) {
+        List resultList = session.createQuery("SELECT id FROM Room ORDER BY id DESC").setMaxResults(1).getResultList();
+        if (resultList.size() > 0) {
+            String id = (String) resultList.get(0);
+            int newId = Integer.parseInt(id.replace("R", "")) + 1;
+            return String.format("R%05d", newId);
+        } else {
+            return "R00001";
+        }
     }
 }

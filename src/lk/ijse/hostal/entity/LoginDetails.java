@@ -6,15 +6,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class LoginDetails {
+public class LoginDetails implements Serializable {
     @Id
-    private int id;
+    private String username;
     /*
         QR Code generator with email
     */
@@ -23,13 +24,9 @@ public class LoginDetails {
     @ElementCollection
     @CollectionTable(
             name = "adminAddresses",
-            joinColumns = @JoinColumn(name = "userId")
+            joinColumns = @JoinColumn()
     )
     private List<Address> addresses;
-
     private String email;
-
-    private String username;
     private String password;
-
 }

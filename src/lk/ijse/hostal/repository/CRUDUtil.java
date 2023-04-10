@@ -5,15 +5,15 @@ import org.hibernate.Session;
 import java.util.List;
 
 public interface CRUDUtil<T, ID> extends SuperRepo {
-    boolean add(T obj, Session session);
+    ID add(T obj, Session session) throws Exception;
 
-    boolean update(T obj, Session session);
+    void update(T obj, Session session) throws Exception;
 
-    boolean delete(ID id, Session session);
+    void delete(ID id, Session session) throws Exception;
 
     T search(ID id, Session session);
 
     List<T> getAll(Session session);
 
-    String generateNextId();
+    String generateNextId(Session session) throws Exception;
 }

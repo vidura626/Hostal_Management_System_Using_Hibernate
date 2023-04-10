@@ -1,14 +1,19 @@
 package lk.ijse.hostal.service.custom;
 
 import lk.ijse.hostal.dto.ReservationDTO;
+import lk.ijse.hostal.dto.RoomDTO;
+import lk.ijse.hostal.dto.StudentDTO;
+import lk.ijse.hostal.entity.Room;
+import lk.ijse.hostal.entity.Student;
 import lk.ijse.hostal.service.SuperBO;
 
 import java.util.List;
 
 public interface ReservationBO extends SuperBO {
-    boolean makeReservation(ReservationDTO reservationDTO);
-    boolean updateReservation(ReservationDTO reservationDTO);
-    boolean checkAvalability(String roomTypeId);
-    int getAvalability(String roomTypeId);
+    boolean makeReservation(ReservationDTO reservationDTO) throws Exception;
+    ReservationDTO searchReservation(String res_id) throws Exception;
+    ReservationDTO searchReservation(String studentId, String roomId);
+    ReservationDTO searchReservation(StudentDTO student, RoomDTO room);
+    boolean updateReservation(ReservationDTO reservationDTO) throws Exception;
     List<ReservationDTO> getAllReservations();
 }

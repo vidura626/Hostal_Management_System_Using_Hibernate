@@ -8,27 +8,37 @@ import lk.ijse.hostal.service.custom.StudentBO;
 import lk.ijse.hostal.util.Convertor;
 import lk.ijse.hostal.util.FactoryConfiguration;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class StudentBOImple implements StudentBO {
-    private Session session = FactoryConfiguration.getInstance().getSession();
+    private Session session;
     private StudentRepository repo = (StudentRepository) RepoFactory.getInstance().getRepository(RepoFactory.Repo.STUDENT);
 
     @Override
-    public boolean registerStudent(StudentDTO student) {
-        return repo.add(Convertor.toStudent(student), session);
+    public boolean registerStudent(StudentDTO student) throws Exception {
+        openSession();
+        repo.add(Convertor.toStudent(student), session);
+        closeAndCommitSession();
+        return true;
     }
 
     @Override
-    public boolean updateStudent(StudentDTO student) {
-        return repo.update(Convertor.toStudent(student), session);
+    public boolean updateStudent(StudentDTO student) throws Exception {
+        openSession();
+        repo.update(Convertor.toStudent(student), session);
+        closeAndCommitSession();
+        return true;
     }
 
     @Override
-    public boolean deleteStudent(String id) {
-        return repo.delete(id, session);
+    public boolean deleteStudent(String id) throws Exception {
+        openSession();
+        repo.delete(id, session);
+        closeAndCommitSession();
+        return true;
     }
 
     @Override
@@ -38,6 +48,19 @@ public class StudentBOImple implements StudentBO {
 
     @Override
     public List<StudentDTO> getAllStudents() {
+        openSession();
         return repo.getAll(session).stream().map(Convertor::fromStudent).collect(Collectors.toList());
+    }
+
+    @Override
+    public void openSession() {
+        session = FactoryConfiguration.getInstance().getSession();
+        session.beginTransaction();
+    }
+
+    @Override
+    public void closeAndCommitSession() {
+        session.getTransaction().commit();
+        session.close();
     }
 }

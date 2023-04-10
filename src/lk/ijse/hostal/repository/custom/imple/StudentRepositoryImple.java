@@ -9,67 +9,45 @@ import java.util.List;
 public class StudentRepositoryImple implements StudentRepository {
 
     @Override
-    public boolean add(Student obj, Session session) {
-        session.beginTransaction();
-        try {
-            String save = (String) session.save(obj);
-            session.getTransaction().commit();
-            return true;
-        }catch (Exception e) {
-            session.getTransaction().rollback();
-            return false;
-        }
+    public String add(Student obj, Session session) throws Exception {
+        return (String) session.save(obj);
     }
 
     @Override
-    public boolean update(Student obj, Session session) {
-        session.beginTransaction();
-        try {
-            session.update(obj);
-            session.getTransaction().commit();
-            return true;
-        }catch (Exception e) {
-            session.getTransaction().rollback();
-            return false;
-        }
+    public void update(Student obj, Session session) throws Exception {
+        session.update(obj);
     }
 
     @Override
-    public boolean delete(String id, Session session) {
-        session.beginTransaction();
-        try {
-            Student load = session.load(Student.class, id);
-            session.delete(load);
-            session.getTransaction().commit();
-            return true;
-        }catch (Exception e) {
-            session.getTransaction().rollback();
-            return false;
-        }
+    public void delete(String id, Session session) throws Exception {
+        Student get = session.load(Student.class, id);
+        session.delete(get);
     }
 
     @Override
     public Student search(String id, Session session) {
-        try {
-            return session.get(Student.class, id);
-        }catch (Exception e) {
-            session.getTransaction().rollback();
-            return null;
-        }
+        return session.get(Student.class, id);
     }
 
     @Override
     public List<Student> getAll(Session session) {
-        try{
+        try {
             List<Student> from_student = session.createQuery("From Student").getResultList();
             return from_student;
-        }catch (Exception e){
+        } catch (Exception e) {
             return null;
         }
     }
 
     @Override
-    public String generateNextId() {
-        return null;
+    public String generateNextId(Session session) {
+        List resultList = session.createQuery("SELECT id FROM Student ORDER BY id DESC").setMaxResults(1).getResultList();
+        if (resultList.size() > 0) {
+            String id = (String) resultList.get(0);
+            int newId = Integer.parseInt(id.replace("S", "")) + 1;
+            return String.format("S%05d", newId);
+        } else {
+            return "S00001";
+        }
     }
 }

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXScrollPane?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="pane" prefHeight="600.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.hostal.controller.ReservationFormController">
+   <children>
+      <JFXComboBox fx:id="cmbSttd" labelFloat="true" layoutX="31.0" layoutY="68.0" prefHeight="26.0" prefWidth="186.0" promptText="Student : " />
+      <JFXComboBox fx:id="cmbRoom" labelFloat="true" layoutX="248.0" layoutY="68.0" prefHeight="26.0" prefWidth="186.0" promptText="Room :" />
+      <JFXButton layoutX="732.0" layoutY="140.0" onAction="#btnReserveOnAction" text="Reserve room" />
+      <JFXScrollPane layoutX="14.0" layoutY="208.0" prefHeight="378.0" prefWidth="876.0">
+         <children>
+            <TableView fx:id="tblManageReservation" prefHeight="241.0" prefWidth="577.0">
+              <columns>
+                <TableColumn fx:id="colId" prefWidth="75.0" text="Reservation ID" />
+                <TableColumn fx:id="colStudentId" prefWidth="75.0" text="Student" />
+                  <TableColumn fx:id="colRoomId" prefWidth="75.0" text="Room" />
+                  <TableColumn fx:id="colFrom" prefWidth="75.0" text="Date From" />
+                  <TableColumn fx:id="colTo" prefWidth="75.0" text="Date To" />
+                  <TableColumn fx:id="colStatus" prefWidth="75.0" text="Payment Status" />
+                  <TableColumn fx:id="colUpdate" prefWidth="75.0" text="Update" />
+                  <TableColumn fx:id="colDelete" prefWidth="75.0" text="Delete" />
+              </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+         </children>
+      </JFXScrollPane>
+      <Label layoutX="607.0" layoutY="18.0" text="Reservation ID :" />
+      <Label fx:id="txtID" layoutX="723.0" layoutY="18.0" prefHeight="21.0" prefWidth="155.0" text="xxxxx" />
+      <Label fx:id="txtKeyMoney" layoutX="50.0" layoutY="134.0" prefHeight="21.0" prefWidth="104.0" text="&lt;KeyMoney&gt;" />
+      <JFXDatePicker fx:id="datepickerFrom" layoutX="475.0" layoutY="75.0" promptText="From" />
+      <JFXDatePicker fx:id="datepickerTo" layoutX="685.0" layoutY="75.0" promptText="To" />
+      <JFXTextField fx:id="txtAmount" labelFloat="true" layoutX="468.0" layoutY="129.0" prefHeight="40.0" prefWidth="173.0" promptText="Amount : " />
+      <JFXComboBox fx:id="cmbboxCheckoutType" labelFloat="true" layoutX="223.0" layoutY="129.0" prefHeight="40.0" prefWidth="197.0" promptText="Checkout Type" />
+   </children>
+</AnchorPane>

@@ -62,36 +62,20 @@ public class Convertor {
         return null;
     }
 
-    public static ReservationDTO fromStudent(Reservation reservation) {
+    public static ReservationDTO fromReservation(Reservation reservation) {
         return null;
     }
 
-    public static Reservation toStudent(ReservationDTO Reservation) {
+    public static Reservation toReservation(ReservationDTO Reservation) {
         return null;
     }
 
     public static LoginDetailsDTO fromLoginDetails(LoginDetails loginDetails) {
-//        return new LoginDetailsDTO(
-//                loginDetails.getId(),
-//                loginDetails.getName(),
-//                loginDetails.getAddresses(),
-//                loginDetails.getEmail(),
-//                loginDetails.getUsername(),
-//                loginDetails.getPassword()
-//        );
 
         return null;
     }
 
     public static LoginDetails toLoginDetails(LoginDetailsDTO loginDetails) {
-//        return new LoginDetails(
-//                loginDetails.getId(),
-//                loginDetails.getName(),
-//                loginDetails.getAddresses(),
-//                loginDetails.getEmail(),
-//                loginDetails.getUsername(),
-//                loginDetails.getPassword()
-//        );
 
         return null;
     }

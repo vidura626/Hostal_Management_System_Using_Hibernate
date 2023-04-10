@@ -6,9 +6,9 @@ import lk.ijse.hostal.service.SuperBO;
 import java.util.List;
 
 public interface StudentBO extends SuperBO {
-    public boolean registerStudent(StudentDTO student);
-    public boolean updateStudent(StudentDTO student);
-    public boolean deleteStudent(String id);
+    public boolean registerStudent(StudentDTO student) throws Exception;
+    public boolean updateStudent(StudentDTO student) throws Exception;
+    public boolean deleteStudent(String id) throws Exception;
     public StudentDTO searchStudent(String id);
     public List<StudentDTO> getAllStudents();
 

@@ -10,4 +10,6 @@ public interface RoomBO extends SuperBO {
     public boolean updateRoom(RoomDTO roomDto);
     public RoomDTO searchRoom(String id);
     public List<RoomDTO> getAllRooms();
+    int getAvalability(String roomTypeId);
+    boolean checkAvalability(String roomTypeId);
 }

@@ -7,16 +7,19 @@ import lk.ijse.hostal.service.custom.LoginDetailsBO;
 import lk.ijse.hostal.util.Convertor;
 import lk.ijse.hostal.util.FactoryConfiguration;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LoginDetailsBOImple implements LoginDetailsBO {
-    private Session session = FactoryConfiguration.getInstance().getSession();
+    private Session session;
     private LoginDetailsRepository loginRepo = (LoginDetailsRepository) RepoFactory.getInstance().getRepository(RepoFactory.Repo.LOGIN);
 
     @Override
-    public LoginDetailsDTO search(String username, String password) {
-        return null;
+    public LoginDetailsDTO search(String username) {
+        openSession();
+        return Convertor.fromLoginDetails(loginRepo.search(username, session));
     }
 
     @Override
@@ -25,17 +28,43 @@ public class LoginDetailsBOImple implements LoginDetailsBO {
     }
 
     @Override
-    public boolean register(LoginDetailsDTO loginDetailsDTO) {
-        return loginRepo.add(Convertor.toLoginDetails(loginDetailsDTO), session);
+    public boolean register(LoginDetailsDTO loginDetailsDTO) throws Exception {
+        openSession();
+        loginRepo.add(Convertor.toLoginDetails(loginDetailsDTO), session);
+        closeAndCommitSession();
+        return true;
     }
 
     @Override
-    public boolean update(LoginDetailsDTO loginDetailsDTO) {
-        return false;
+    public boolean update(LoginDetailsDTO loginDetailsDTO) throws Exception {
+        Transaction transaction = session.beginTransaction();
+        loginRepo.update(Convertor.toLoginDetails(loginDetailsDTO), session);
+        closeAndCommitSession();
+        return true;
+    }
+
+    @Override
+    public boolean delete(String username) throws Exception {
+        Transaction transaction = session.beginTransaction();
+        loginRepo.delete(username, session);
+        closeAndCommitSession();
+        return true;
     }
 
     @Override
     public List<LoginDetailsDTO> getAll() {
-        return null;
+        openSession();
+        return loginRepo.getAll(session).stream().map(Convertor::fromLoginDetails).collect(Collectors.toList());
+    }
+
+    @Override
+    public void openSession() {
+        session = FactoryConfiguration.getInstance().getSession();
+        session.beginTransaction();
+    }
+    @Override
+    public void closeAndCommitSession() {
+        session.getTransaction().commit();
+        session.close();
     }
 }
