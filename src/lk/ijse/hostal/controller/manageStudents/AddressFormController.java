@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 import lk.ijse.hostal.entity.embedded.Address;
 import lk.ijse.hostal.util.TransferObjects;
 
-public class AddressFormController {
+public class    AddressFormController {
 
     @FXML
     private JFXTextField txtHouseNo;

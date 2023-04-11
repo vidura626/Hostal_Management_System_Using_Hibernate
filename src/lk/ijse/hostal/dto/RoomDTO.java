@@ -1,19 +1,22 @@
 package lk.ijse.hostal.dto;
 
 import lk.ijse.hostal.entity.Reservation;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@RequiredArgsConstructor
 public class RoomDTO {
-String room_type_id;
+    @NonNull
+    String room_type_id;
+    @NonNull
     String type;
+    @NonNull
     double key_money;
+    @NonNull
     int qty;
     List<Reservation> reservations;
 

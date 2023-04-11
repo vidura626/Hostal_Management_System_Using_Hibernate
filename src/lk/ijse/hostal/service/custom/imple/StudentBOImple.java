@@ -43,6 +43,7 @@ public class StudentBOImple implements StudentBO {
 
     @Override
     public StudentDTO searchStudent(String id) {
+        openSession();
         return Convertor.fromStudent(repo.search(id, session));
     }
 

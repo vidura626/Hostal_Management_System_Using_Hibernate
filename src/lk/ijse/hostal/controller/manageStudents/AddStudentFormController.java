@@ -88,6 +88,7 @@ public class AddStudentFormController {
     @FXML
     private JFXRadioButton rdoOther;
 
+    private Stage stage = new Stage();
     private List<Stage> stagesAddress = new ArrayList<>();
     private List<Stage> stagesContacts = new ArrayList<>();
     private final StudentBO studentBO = (StudentBO) ServiceFactory.getInstance().getBO(ServiceFactory.BOTypes.STUDENT);
@@ -115,37 +116,25 @@ public class AddStudentFormController {
     }
 
     Stage popUpWindow(List<Stage> stages, Routes route) throws Exception {
-        for (Stage temp : stages) {
-            if (temp.isShowing()) {
-                temp.close();
-                return null;
-            }
+
+        if (stage.isShowing()) {
+            stage.hide();
         }
-        Stage stage = new Stage();
         AnchorPane anchorPane = new AnchorPane();
         stage.setScene(new Scene(anchorPane));
         Navigation.navigate(route, anchorPane);
+        stage.requestFocus();
         stage.showAndWait();
         return stage;
+
     }
 
     @FXML
     void btnAddAddressOnAction(ActionEvent event) throws Exception {
 
-        /*  Pop up address window   */
-        Stage stage = popUpWindow(stagesAddress, Routes.ADDRESS_FORM);
-         /*
-        for (Stage temp : stagesAddress) {
-            if (temp.isShowing()) {
-                temp.close();
-                return;
-            }
-        }
-        Stage stage = new Stage();
-        AnchorPane anchorPane = new AnchorPane();
-        stage.setScene(new Scene(anchorPane));
-        Navigation.navigate(Routes.ADDRESS_FORM, anchorPane);
-        stage.showAndWait();*/
+        /*  Pop up address window                  */
+        stage = popUpWindow(stagesAddress, Routes.ADDRESS_FORM);
+        if (!stage.isShowing()) return;
         /*-----------------------------------------*/
 
         /*  Get address */
@@ -165,21 +154,8 @@ public class AddStudentFormController {
     @FXML
     void btnAddContactOnAction(ActionEvent event) throws Exception {
 
-        /*  Pop up contact window   */
+        /*  Pop up contact window                  */
         Stage stage = popUpWindow(stagesContacts, Routes.CONTACT_FORM);
-        /*
-        Stage stage = new Stage();
-        for (Stage temp : stagesContacts) {
-            if (temp.isShowing()) {
-                temp.close();
-                return;
-            }
-        }
-
-        AnchorPane anchorPane = new AnchorPane();
-        stage.setScene(new Scene(anchorPane));
-        Navigation.navigate(Routes.CONTACT_FORM, anchorPane);
-        stage.showAndWait();*/
         /*-----------------------------------------*/
 
         /*  Get address */
@@ -244,13 +220,17 @@ public class AddStudentFormController {
         );
         /*------------------------------*/
 
-        boolean isSaved = studentBO.registerStudent(studentDTO);
-        if (isSaved) {
-            new Alert(Alert.AlertType.CONFIRMATION,"Added Success !").show();
-        } else {
-            new Alert(Alert.AlertType.WARNING,"Added Failed !").show();
-        }
+        boolean isSaved = false;
+        try {
+            isSaved = studentBO.registerStudent(studentDTO);
+            if (isSaved) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Added Success !").show();
 
+                txtNic.getScene().getWindow().hide();
+            }
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.WARNING, "Added Failed !").show();
+        }
     }
 
     @FXML
@@ -268,13 +248,6 @@ public class AddStudentFormController {
     void btnEditContactOnAction(ActionEvent event) {
         int selectedIndex = cmbContact.getSelectionModel().getSelectedIndex();
         stagesContacts.get(selectedIndex).show();
-        /*if (cmbContact.getSelectionModel().isEmpty()) {
-            new Alert(Alert.AlertType.WARNING, "Please select a default contact !").show();
-        } else if (cmbContact.getItems().size() == 0) {
-            new Alert(Alert.AlertType.WARNING, "Please provide contact !").show();
-        } else {
-            ObservableList<Address> addresses = cmbAddress.getItems();
-        }*/
     }
 
     @FXML

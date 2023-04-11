@@ -68,6 +68,7 @@ public class ManageStudentFormController {
     }
 
     private void setAllData() {
+        tblManageStudent.getItems().clear();
         List<StudentDTO> allStudents = studentBO.getAllStudents();
         for (StudentDTO st : allStudents) {
             JFXButton update = new JFXButton("Update");
@@ -94,21 +95,24 @@ public class ManageStudentFormController {
                 ButtonType cancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
                 Optional<ButtonType> buttonType = new Alert(Alert.AlertType.WARNING, "Are you sure ? ", ok, cancel).showAndWait();
                 if (buttonType.orElse(cancel) == ok) {
-                    boolean b = studentBO.deleteStudent(id);
-                    if (b) {
+                    try {
+                        studentBO.deleteStudent(id);
                         new Alert(Alert.AlertType.CONFIRMATION, "Student Removal Successfully ! ").show();
+                        setAllData();
+                        tblManageStudent.refresh();
+                    } catch (Exception e) {
                     }
                 } else {
                     new Alert(Alert.AlertType.CONFIRMATION, "Student Removal Canceled ! ").show();
                 }
             });
             more.setOnAction(event -> {
-                try {
+                /*try {
                     int selectedIndex = tblManageStudent.getSelectionModel().getSelectedIndex();
                     showingStage(Routes.VIEW_MORE,stages.get(selectedIndex));
                 } catch (Exception e) {
                     e.printStackTrace();
-                }
+                }*/
             });
         }
         tblManageStudent.refresh();

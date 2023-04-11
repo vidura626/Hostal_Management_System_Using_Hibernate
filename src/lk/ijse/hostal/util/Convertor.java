@@ -22,17 +22,17 @@ public class Convertor {
                 student.getNic(),
                 student.getEmail(),
                 new Name(
-                                student.getName().getFName(),
-                                student.getName().getMName(),
-                                student.getName().getLName()
-                        ),
+                        student.getName().getFName(),
+                        student.getName().getMName(),
+                        student.getName().getLName()
+                ),
                 student.getAddresses(),
                 student.getContact(),
                 student.getDob(),
                 student.getGender(),
                 student.getJoinedDate(),
                 student.getReservations()
-                );
+        );
     }
 
     public static Student toStudent(StudentDTO student) {
@@ -54,12 +54,24 @@ public class Convertor {
         );
     }
 
-    public static RoomDTO fromStudent(Room room) {
-        return null;
+    public static RoomDTO fromRoom(Room room) {
+        return new RoomDTO(
+                room.getRoom_type_id(),
+                room.getType(),
+                room.getKey_money(),
+                room.getQty(),
+                room.getReservations()
+        );
     }
 
-    public static Room toStudent(RoomDTO room) {
-        return null;
+    public static Room toRoom(RoomDTO room) {
+        return new Room(
+                room.getRoom_type_id(),
+                room.getType(),
+                room.getKey_money(),
+                room.getQty(),
+                room.getReservations()
+        );
     }
 
     public static ReservationDTO fromReservation(Reservation reservation) {

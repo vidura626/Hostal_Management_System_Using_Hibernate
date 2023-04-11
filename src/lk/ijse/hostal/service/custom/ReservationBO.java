@@ -12,8 +12,6 @@ import java.util.List;
 public interface ReservationBO extends SuperBO {
     boolean makeReservation(ReservationDTO reservationDTO) throws Exception;
     ReservationDTO searchReservation(String res_id) throws Exception;
-    ReservationDTO searchReservation(String studentId, String roomId);
-    ReservationDTO searchReservation(StudentDTO student, RoomDTO room);
     boolean updateReservation(ReservationDTO reservationDTO) throws Exception;
     List<ReservationDTO> getAllReservations();
 }

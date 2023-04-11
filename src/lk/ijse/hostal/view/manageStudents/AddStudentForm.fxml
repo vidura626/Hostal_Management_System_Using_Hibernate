@@ -10,7 +10,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="pane" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.hostal.controller.manageStudents.AddStudentFormController">
+<AnchorPane fx:id="pane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.hostal.controller.manageStudents.AddStudentFormController">
    <children>
       <Label fx:id="lblID" layoutX="300.0" layoutY="28.0" prefHeight="18.0" prefWidth="53.0" text="xxxx" />
       <Label layoutX="246.0" layoutY="28.0" prefHeight="18.0" prefWidth="53.0" text="ID : " />
@@ -19,18 +19,18 @@
       <Label layoutX="26.0" layoutY="125.0" prefHeight="18.0" prefWidth="53.0" text="Contact : " />
       <Label layoutX="26.0" layoutY="162.0" prefHeight="18.0" prefWidth="53.0" text="Email : " />
       <Label layoutX="26.0" layoutY="197.0" prefHeight="18.0" prefWidth="53.0" text="Nic : " />
-      <JFXButton layoutX="481.0" layoutY="336.0" onAction="#btnRegisterOnAction" text="Register" />
-      <JFXButton layoutX="249.0" layoutY="92.0" onAction="#btnAddAddressOnAction" text="Add" />
-      <JFXButton layoutX="249.0" layoutY="131.0" onAction="#btnAddContactOnAction" text="Add" />
+      <JFXButton layoutX="481.0" layoutY="336.0" onAction="#btnRegisterOnAction" styleClass="btn-primary" text="Register" />
+      <JFXButton layoutX="387.0" layoutY="100.0" onAction="#btnAddAddressOnAction" styleClass="btn-secondary" text="Add" />
+      <JFXButton layoutX="387.0" layoutY="146.0" onAction="#btnAddContactOnAction" styleClass="btn-secondary" text="Add" />
       <JFXButton layoutX="442.0" layoutY="227.0" onAction="#btnCaptureOnAction" text="Capture" />
       <ImageView fx:id="imgWebCam" fitHeight="106.0" fitWidth="169.0" layoutX="411.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true" />
       <JFXComboBox fx:id="cmbAddress" layoutX="95.0" layoutY="92.0" onAction="#cmbAddressOnAction" prefHeight="26.0" prefWidth="150.0" />
       <JFXComboBox fx:id="cmbContact" layoutX="95.0" layoutY="130.0" onAction="#cmbContactOnAction" prefHeight="26.0" prefWidth="150.0" />
-      <JFXTextField fx:id="txtFName" labelFloat="true" layoutX="86.0" layoutY="52.0" promptText="First : " />
-      <JFXTextField fx:id="txtMName" labelFloat="true" layoutX="242.0" layoutY="52.0" promptText="Middle:" />
-      <JFXTextField fx:id="txtLName" labelFloat="true" layoutX="411.0" layoutY="52.0" promptText="Last" />
-      <JFXTextField fx:id="txtEmail" labelFloat="true" layoutX="94.0" layoutY="168.0" promptText="Email : " />
-      <JFXTextField fx:id="txtNic" labelFloat="true" layoutX="94.0" layoutY="212.0" promptText="Nic : " />
+      <JFXTextField fx:id="txtFName" labelFloat="true" layoutX="86.0" layoutY="52.0" promptText="First : " styleClass="text-field" />
+      <JFXTextField fx:id="txtMName" labelFloat="true" layoutX="242.0" layoutY="52.0" promptText="Middle:" styleClass="text-field" />
+      <JFXTextField fx:id="txtLName" labelFloat="true" layoutX="411.0" layoutY="52.0" promptText="Last" styleClass="text-field" />
+      <JFXTextField fx:id="txtEmail" labelFloat="true" layoutX="94.0" layoutY="168.0" promptText="Email : " styleClass="text-field" />
+      <JFXTextField fx:id="txtNic" labelFloat="true" layoutX="94.0" layoutY="212.0" promptText="Nic : " styleClass="text-field" />
       <JFXDatePicker fx:id="datePickerDOB" editable="false" layoutX="76.0" layoutY="321.0" promptText="Date of Birth" />
       <JFXRadioButton fx:id="rdoMale" layoutX="33.0" layoutY="268.0" text="Male">
          <toggleGroup>

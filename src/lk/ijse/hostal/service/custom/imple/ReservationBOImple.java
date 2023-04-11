@@ -34,17 +34,6 @@ public class ReservationBOImple implements ReservationBO {
     }
 
     @Override
-    public ReservationDTO searchReservation(String studentId, String roomId) {
-        openSession();
-        return null;
-    }
-
-    @Override
-    public ReservationDTO searchReservation(StudentDTO student, RoomDTO room) {
-        return null;
-    }
-
-    @Override
     public boolean updateReservation(ReservationDTO reservationDTO) throws Exception {
         openSession();
         repo.update(Convertor.toReservation(reservationDTO), session);

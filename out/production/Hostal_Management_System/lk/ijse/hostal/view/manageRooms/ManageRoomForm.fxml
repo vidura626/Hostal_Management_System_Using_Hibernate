@@ -2,29 +2,55 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import java.lang.String?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pane" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.hostal.controller.manageRooms.ManageRoomFormController">
+<AnchorPane fx:id="pane" onMouseClicked="#paneOnMouseClickOnAction" prefHeight="600.0" prefWidth="900.0" stylesheets="@../css/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.hostal.controller.manageRooms.ManageRoomFormController">
    <children>
-      <JFXButton layoutX="471.0" layoutY="51.0" text="Add" />
-      <TableView fx:id="tblManageRoom" layoutX="33.0" layoutY="142.0" prefHeight="210.0" prefWidth="521.0">
-        <columns>
-          <TableColumn fx:id="colId" prefWidth="75.0" text="Id" />
-          <TableColumn fx:id="colType" prefWidth="75.0" text="Type" />
-            <TableColumn fx:id="colPrice" prefWidth="75.0" text="Price" />
-            <TableColumn fx:id="colQty" prefWidth="75.0" text="Qty" />
-            <TableColumn fx:id="colUpdate" prefWidth="75.0" text="Update" />
-            <TableColumn fx:id="colDelete" prefWidth="75.0" text="Delete" />
-        </columns>
-         <columnResizePolicy>
-            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-         </columnResizePolicy>
-      </TableView>
-      <JFXTextField fx:id="txtId" labelFloat="true" layoutX="42.0" layoutY="25.0" promptText="Room Type Id :" />
-      <JFXTextField fx:id="txtType" labelFloat="true" layoutX="237.0" layoutY="25.0" promptText="Type :" />
-      <JFXTextField fx:id="txtPrice" labelFloat="true" layoutX="42.0" layoutY="77.0" promptText="Key Money :" />
-      <JFXTextField fx:id="txtQty" labelFloat="true" layoutX="237.0" layoutY="82.0" promptText="Qty : " />
+      <JFXButton layoutX="718.0" layoutY="104.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#btnAddRoomOnAction" prefHeight="40.0" prefWidth="150.0" text="ADD">
+         <styleClass>
+            <String fx:value="btn" />
+            <String fx:value="btn-primary" />
+         </styleClass></JFXButton>
+      <JFXTextField fx:id="txtId" labelFloat="true" layoutX="22.0" layoutY="84.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="300.0" promptText="Room Type Id :" />
+      <JFXTextField fx:id="txtType" labelFloat="true" layoutX="348.0" layoutY="84.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="300.0" promptText="Type :" />
+      <JFXTextField fx:id="txtPrice" labelFloat="true" layoutX="22.0" layoutY="155.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="300.0" promptText="Key Money :" />
+      <JFXTextField fx:id="txtQty" labelFloat="true" layoutX="348.0" layoutY="155.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="300.0" promptText="Qty : " />
+      <JFXButton layoutX="718.0" layoutY="163.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#btnClearOnAction" prefHeight="40.0" prefWidth="150.0" text="CLEAR">
+         <styleClass>
+            <String fx:value="btn" />
+            <String fx:value="btn-secondary" />
+         </styleClass></JFXButton>
+      <Separator layoutX="13.0" layoutY="217.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="7.0" prefWidth="862.0" />
+      <Label layoutX="14.0" layoutY="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="51.0" prefWidth="300.0" text="Manage Rooms">
+         <font>
+            <Font name="Serif Bold" size="36.0" />
+         </font>
+      </Label>
+      <Separator layoutX="679.0" layoutY="97.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="108.0" prefWidth="0.0" />
+      <Separator layoutX="10.0" layoutY="59.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="7.0" prefWidth="862.0" />
+      <ScrollPane layoutX="15.0" layoutY="254.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="325.0" prefWidth="871.0">
+         <content>
+            <TableView fx:id="tblManageRoom" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#tblMngRoomOoMouseClicked" prefHeight="320.0" prefWidth="868.0" styleClass="filler" stylesheets="@../css/style.css">
+               <columns>
+                  <TableColumn fx:id="colId" onEditStart="#editColStart" prefWidth="75.0" text="Id" />
+                  <TableColumn fx:id="colType" prefWidth="75.0" text="Type" />
+                  <TableColumn fx:id="colPrice" prefWidth="75.0" text="Price" />
+                  <TableColumn fx:id="colQty" prefWidth="75.0" text="Qty" />
+                  <TableColumn fx:id="colUpdate" prefWidth="75.0" text="Update" />
+                  <TableColumn fx:id="colDelete" prefWidth="75.0" text="Delete" />
+               </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+         </content>
+      </ScrollPane>
    </children>
 </AnchorPane>

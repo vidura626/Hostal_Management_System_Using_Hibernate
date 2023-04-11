@@ -24,6 +24,8 @@ public class LoginDetailsBOImple implements LoginDetailsBO {
 
     @Override
     public boolean check(String username, String password) {
+        List<LoginDetailsDTO> collect = getAll().stream().filter(loginDetailsDTO -> loginDetailsDTO.getUsername().equals(username)).collect(Collectors.toList());
+        if (collect.size() > 0) return true;
         return false;
     }
 
@@ -62,6 +64,7 @@ public class LoginDetailsBOImple implements LoginDetailsBO {
         session = FactoryConfiguration.getInstance().getSession();
         session.beginTransaction();
     }
+
     @Override
     public void closeAndCommitSession() {
         session.getTransaction().commit();
