@@ -71,4 +71,8 @@ public class ReservationFormController {
 
     }
 
+    @FXML
+    void btnClearOnAction(ActionEvent event) {
+
+    }
 }

@@ -3,13 +3,27 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import java.lang.String?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="pane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.hostal.controller.LoginFormController">
+<AnchorPane fx:id="pane" prefHeight="400.0" prefWidth="600.0" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.hostal.controller.LoginFormController">
    <children>
-      <JFXButton layoutX="225.0" layoutY="238.0" onAction="#btnLoginOnAction" prefHeight="26.0" prefWidth="150.0" text="Login" />
-      <JFXButton layoutX="224.0" layoutY="325.0" onAction="#btnRegisterOnAction" prefHeight="26.0" prefWidth="150.0" text="Register" />
-      <JFXTextField fx:id="txtUsername" labelFloat="true" layoutX="216.0" layoutY="88.0" onAction="#txtUsernameOnAction" promptText="Username : " />
-      <JFXPasswordField fx:id="txtPassword" labelFloat="true" layoutX="215.0" layoutY="169.0" onAction="#txtPasswordOnAction" promptText="Password :" />
+      <JFXButton layoutX="218.0" layoutY="224.0" onAction="#btnLoginOnAction" prefHeight="26.0" prefWidth="150.0" stylesheets="@css/style.css" text="Login">
+         <styleClass>
+            <String fx:value="btn" />
+            <String fx:value="btn-lg" />
+            <String fx:value="btn-lightBlue" />
+         </styleClass></JFXButton>
+      <JFXButton layoutX="218.0" layoutY="311.0" onAction="#btnRegisterOnAction" prefHeight="26.0" prefWidth="150.0" stylesheets="@css/style.css" text="Register">
+         <styleClass>
+            <String fx:value="btn" />
+            <String fx:value="btn-lg" />
+            <String fx:value="btn-primary" />
+         </styleClass></JFXButton>
+      <JFXTextField fx:id="txtUsername" alignment="CENTER" labelFloat="true" layoutX="181.0" layoutY="97.0" onAction="#txtUsernameOnAction" prefWidth="223.0" promptText="Username" />
+      <JFXPasswordField fx:id="txtPassword" alignment="CENTER" labelFloat="true" layoutX="181.0" layoutY="160.0" onAction="#txtPasswordOnAction" prefWidth="223.0" promptText="Password" />
+      <Label alignment="CENTER" layoutX="274.0" layoutY="276.0" prefHeight="21.0" prefWidth="37.0" text="OR" />
+      <Label alignment="CENTER" layoutX="194.0" layoutY="12.0" prefHeight="21.0" prefWidth="197.0" styleClass="label-head" stylesheets="@css/style.css" text="LOGIN" />
    </children>
 </AnchorPane>

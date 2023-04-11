@@ -5,43 +5,91 @@
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXRadioButton?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import java.lang.String?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="pane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.hostal.controller.manageStudents.AddStudentFormController">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../css/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.hostal.controller.manageStudents.AddStudentFormController">
    <children>
-      <Label fx:id="lblID" layoutX="300.0" layoutY="28.0" prefHeight="18.0" prefWidth="53.0" text="xxxx" />
-      <Label layoutX="246.0" layoutY="28.0" prefHeight="18.0" prefWidth="53.0" text="ID : " />
-      <Label layoutX="33.0" layoutY="67.0" prefHeight="18.0" prefWidth="53.0" text="Name : " />
-      <Label layoutX="26.0" layoutY="87.0" prefHeight="18.0" prefWidth="53.0" text="Address : " />
-      <Label layoutX="26.0" layoutY="125.0" prefHeight="18.0" prefWidth="53.0" text="Contact : " />
-      <Label layoutX="26.0" layoutY="162.0" prefHeight="18.0" prefWidth="53.0" text="Email : " />
-      <Label layoutX="26.0" layoutY="197.0" prefHeight="18.0" prefWidth="53.0" text="Nic : " />
-      <JFXButton layoutX="481.0" layoutY="336.0" onAction="#btnRegisterOnAction" styleClass="btn-primary" text="Register" />
-      <JFXButton layoutX="387.0" layoutY="100.0" onAction="#btnAddAddressOnAction" styleClass="btn-secondary" text="Add" />
-      <JFXButton layoutX="387.0" layoutY="146.0" onAction="#btnAddContactOnAction" styleClass="btn-secondary" text="Add" />
-      <JFXButton layoutX="442.0" layoutY="227.0" onAction="#btnCaptureOnAction" text="Capture" />
-      <ImageView fx:id="imgWebCam" fitHeight="106.0" fitWidth="169.0" layoutX="411.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true" />
-      <JFXComboBox fx:id="cmbAddress" layoutX="95.0" layoutY="92.0" onAction="#cmbAddressOnAction" prefHeight="26.0" prefWidth="150.0" />
-      <JFXComboBox fx:id="cmbContact" layoutX="95.0" layoutY="130.0" onAction="#cmbContactOnAction" prefHeight="26.0" prefWidth="150.0" />
-      <JFXTextField fx:id="txtFName" labelFloat="true" layoutX="86.0" layoutY="52.0" promptText="First : " styleClass="text-field" />
-      <JFXTextField fx:id="txtMName" labelFloat="true" layoutX="242.0" layoutY="52.0" promptText="Middle:" styleClass="text-field" />
-      <JFXTextField fx:id="txtLName" labelFloat="true" layoutX="411.0" layoutY="52.0" promptText="Last" styleClass="text-field" />
-      <JFXTextField fx:id="txtEmail" labelFloat="true" layoutX="94.0" layoutY="168.0" promptText="Email : " styleClass="text-field" />
-      <JFXTextField fx:id="txtNic" labelFloat="true" layoutX="94.0" layoutY="212.0" promptText="Nic : " styleClass="text-field" />
-      <JFXDatePicker fx:id="datePickerDOB" editable="false" layoutX="76.0" layoutY="321.0" promptText="Date of Birth" />
-      <JFXRadioButton fx:id="rdoMale" layoutX="33.0" layoutY="268.0" text="Male">
+      <Label fx:id="lblID" alignment="CENTER" layoutX="756.0" layoutY="16.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="18.0" prefWidth="53.0" stylesheets="@../css/style.css" text="xxxx">
+         <styleClass>
+            <String fx:value="label-id" />
+            <String fx:value="label-green" />
+         </styleClass></Label>
+      <Label layoutX="601.0" layoutY="16.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="18.0" prefWidth="53.0" styleClass="label-id" stylesheets="@../css/style.css" text="ID : " />
+      <Label layoutX="27.0" layoutY="233.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="18.0" prefWidth="53.0" styleClass="label-id" stylesheets="@../css/style.css" text="Address" />
+      <Label layoutX="27.0" layoutY="295.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="18.0" prefWidth="53.0" styleClass="label-id" stylesheets="@../css/style.css" text="Contact" />
+      <JFXButton layoutX="692.0" layoutY="537.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#btnRegisterOnAction" text="REGISTER">
+         <styleClass>
+            <String fx:value="btn-primary" />
+            <String fx:value="btn" />
+            <String fx:value="btn-lg" />
+         </styleClass></JFXButton>
+      <JFXButton layoutX="589.0" layoutY="221.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#btnAddAddressOnAction" stylesheets="@../css/style.css" text="Add">
+         <styleClass>
+            <String fx:value="btn-lightBlue" />
+            <String fx:value="btn" />
+            <String fx:value="btn-sm" />
+         </styleClass></JFXButton>
+      <JFXButton layoutX="590.0" layoutY="286.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#btnAddContactOnAction" stylesheets="@../css/style.css" text="Add">
+         <styleClass>
+            <String fx:value="btn-lightBlue" />
+            <String fx:value="btn" />
+            <String fx:value="btn-sm" />
+         </styleClass></JFXButton>
+      <JFXComboBox fx:id="cmbAddress" layoutX="142.0" layoutY="216.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#cmbAddressOnAction" prefHeight="40.0" prefWidth="430.0" />
+      <JFXComboBox fx:id="cmbContact" layoutX="141.0" layoutY="281.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#cmbContactOnAction" prefHeight="40.0" prefWidth="437.0" />
+      <JFXTextField fx:id="txtFName" labelFloat="true" layoutX="149.0" layoutY="83.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="First : " styleClass="text-field" />
+      <JFXTextField fx:id="txtMName" labelFloat="true" layoutX="503.0" layoutY="83.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="Middle:" styleClass="text-field" />
+      <JFXTextField fx:id="txtLName" labelFloat="true" layoutX="149.0" layoutY="153.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="Last : " styleClass="text-field" />
+      <JFXTextField fx:id="txtEmail" labelFloat="true" layoutX="141.0" layoutY="430.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="Email : " styleClass="text-field" />
+      <JFXTextField fx:id="txtNic" labelFloat="true" layoutX="514.0" layoutY="430.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="Nic : " styleClass="text-field" />
+      <JFXDatePicker fx:id="datePickerDOB" editable="false" layoutX="512.0" layoutY="351.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="Date of Birth" />
+      <JFXRadioButton fx:id="rdoMale" layoutX="142.0" layoutY="360.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" text="Male">
          <toggleGroup>
             <ToggleGroup fx:id="tgleGender" />
          </toggleGroup>
       </JFXRadioButton>
-      <JFXRadioButton fx:id="rdoFemale" layoutX="120.0" layoutY="268.0" text="Female" toggleGroup="$tgleGender" />
-      <JFXRadioButton fx:id="rdoOther" layoutX="213.0" layoutY="268.0" text="Other" toggleGroup="$tgleGender" />
-      <JFXButton fx:id="btnAddressEdit" layoutX="292.0" layoutY="93.0" onAction="#btnEditAddressOnAction" text="Edit" visible="false" />
-      <JFXButton fx:id="btnContactEdit" layoutX="292.0" layoutY="131.0" onAction="#btnEditContactOnAction" text="Edit" visible="false" />
-      <JFXButton fx:id="btnAddressDelete" layoutX="338.0" layoutY="93.0" onAction="#btnRemoveAddressOnAction" text="Remove" visible="false" />
-      <JFXButton fx:id="btnContactRemove" layoutX="338.0" layoutY="130.0" onAction="#btnRemoveContactOnAction" text="Remove" visible="false" />
+      <JFXRadioButton fx:id="rdoFemale" layoutX="226.0" layoutY="361.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" text="Female" toggleGroup="$tgleGender" />
+      <JFXRadioButton fx:id="rdoOther" layoutX="327.0" layoutY="361.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" text="Other" toggleGroup="$tgleGender" />
+      <JFXButton fx:id="btnAddressEdit" layoutX="680.0" layoutY="221.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#btnEditAddressOnAction" stylesheets="@../css/style.css" text="Edit" visible="false">
+         <styleClass>
+            <String fx:value="btn" />
+            <String fx:value="btn-sm" />
+            <String fx:value="btn-lightBlue" />
+         </styleClass></JFXButton>
+      <JFXButton fx:id="btnContactEdit" layoutX="681.0" layoutY="286.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#btnEditContactOnAction" stylesheets="@../css/style.css" text="Edit" visible="false">
+         <styleClass>
+            <String fx:value="btn" />
+            <String fx:value="btn-sm" />
+            <String fx:value="btn-lightBlue" />
+         </styleClass></JFXButton>
+      <JFXButton fx:id="btnAddressDelete" layoutX="769.0" layoutY="221.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#btnRemoveAddressOnAction" stylesheets="@../css/style.css" text="Remove" visible="false">
+         <styleClass>
+            <String fx:value="btn" />
+            <String fx:value="btn-sm" />
+            <String fx:value="btn-lightRed" />
+         </styleClass></JFXButton>
+      <JFXButton fx:id="btnContactRemove" layoutX="770.0" layoutY="286.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#btnRemoveContactOnAction" stylesheets="@../css/style.css" text="Remove" visible="false">
+         <styleClass>
+            <String fx:value="btn" />
+            <String fx:value="btn-sm" />
+            <String fx:value="btn-lightRed" />
+         </styleClass></JFXButton>
+      <Label layoutX="27.0" layoutY="356.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="18.0" prefWidth="53.0" styleClass="label-id" stylesheets="@../css/style.css" text="Gender " />
+      <Label layoutX="11.0" layoutY="6.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="416.0" styleClass="label-head" stylesheets="@../css/style.css" text="REGISTER STUDENT" />
+      <Separator layoutX="6.0" layoutY="60.0" prefHeight="0.0" prefWidth="883.0" />
+      <Separator layoutX="6.0" layoutY="510.0" prefHeight="0.0" prefWidth="883.0" />
+      <JFXButton layoutX="515.0" layoutY="537.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#btnRegisterOnAction" text="CLEAR">
+         <styleClass>
+            <String fx:value="btn-primary" />
+            <String fx:value="btn-secondary" />
+            <String fx:value="btn" />
+            <String fx:value="btn-lg" />
+         </styleClass>
+      </JFXButton>
+      <Label layoutX="29.0" layoutY="123.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="18.0" prefWidth="53.0" styleClass="label-id" stylesheets="@../css/style.css" text="Name" />
    </children>
 </AnchorPane>

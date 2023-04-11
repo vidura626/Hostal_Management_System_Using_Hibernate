@@ -13,22 +13,24 @@
 
 <AnchorPane fx:id="pane" onMouseClicked="#paneOnMouseClickOnAction" prefHeight="600.0" prefWidth="900.0" stylesheets="@../css/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.hostal.controller.manageRooms.ManageRoomFormController">
    <children>
-      <JFXButton layoutX="718.0" layoutY="104.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#btnAddRoomOnAction" prefHeight="40.0" prefWidth="150.0" text="ADD">
+      <JFXButton layoutX="718.0" layoutY="104.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#btnAddRoomOnAction" prefHeight="40.0" prefWidth="150.0" stylesheets="@../css/style.css" text="ADD">
          <styleClass>
             <String fx:value="btn" />
+            <String fx:value="btn-lg" />
             <String fx:value="btn-primary" />
          </styleClass></JFXButton>
       <JFXTextField fx:id="txtId" labelFloat="true" layoutX="22.0" layoutY="84.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="300.0" promptText="Room Type Id :" />
       <JFXTextField fx:id="txtType" labelFloat="true" layoutX="348.0" layoutY="84.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="300.0" promptText="Type :" />
       <JFXTextField fx:id="txtPrice" labelFloat="true" layoutX="22.0" layoutY="155.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="300.0" promptText="Key Money :" />
       <JFXTextField fx:id="txtQty" labelFloat="true" layoutX="348.0" layoutY="155.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="300.0" promptText="Qty : " />
-      <JFXButton layoutX="718.0" layoutY="163.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#btnClearOnAction" prefHeight="40.0" prefWidth="150.0" text="CLEAR">
+      <JFXButton layoutX="718.0" layoutY="163.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#btnClearOnAction" prefHeight="40.0" prefWidth="150.0" stylesheets="@../css/style.css" text="CLEAR">
          <styleClass>
             <String fx:value="btn" />
+            <String fx:value="btn-lg" />
             <String fx:value="btn-secondary" />
          </styleClass></JFXButton>
       <Separator layoutX="13.0" layoutY="217.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="7.0" prefWidth="862.0" />
-      <Label layoutX="14.0" layoutY="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="51.0" prefWidth="300.0" text="Manage Rooms">
+      <Label layoutX="14.0" layoutY="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="300.0" styleClass="label-head" stylesheets="@../css/style.css" text="Manage Rooms">
          <font>
             <Font name="Serif Bold" size="36.0" />
          </font>

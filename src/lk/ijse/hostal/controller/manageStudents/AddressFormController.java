@@ -41,4 +41,8 @@ public class    AddressFormController {
         /*--------------*/
     }
 
+    @FXML
+    void btnClearOnAction(ActionEvent event) {
+
+    }
 }

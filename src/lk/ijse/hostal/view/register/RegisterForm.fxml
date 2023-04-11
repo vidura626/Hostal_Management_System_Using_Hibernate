@@ -1,30 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import java.lang.String?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="pane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.hostal.controller.register.RegisterFormController" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="680.0" stylesheets="@../css/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.hostal.controller.register.RegisterFormController">
    <children>
-      <JFXButton layoutX="218.0" layoutY="330.0" onAction="#btnRegisterOnAction" prefHeight="34.0" prefWidth="162.0" text="Register" />
-      <TextField fx:id="txtFName" layoutX="83.0" layoutY="40.0" />
-      <TextField fx:id="txtAddress" layoutX="225.0" layoutY="107.0" />
-      <TextField fx:id="txtEmail" layoutX="225.0" layoutY="161.0" />
-      <TextField fx:id="txtUserName" layoutX="225.0" layoutY="215.0" />
-      <Label layoutX="29.0" layoutY="44.0" text="Name : " />
-      <TextField fx:id="txtMName" layoutX="247.0" layoutY="40.0" />
-      <TextField fx:id="txtLName" layoutX="420.0" layoutY="40.0" />
-      <Label layoutX="138.0" layoutY="116.0" text="Address : " />
-      <JFXButton layoutX="385.0" layoutY="107.0" onAction="#btnAddOnAction" prefHeight="34.0" prefWidth="69.0" text="New" />
-      <Label layoutX="138.0" layoutY="170.0" text="Email : " />
-      <Label layoutX="139.0" layoutY="224.0" text="Username : " />
-      <Label layoutX="139.0" layoutY="260.0" text="Password : " />
-      <PasswordField fx:id="txtPassword1" layoutX="226.0" layoutY="251.0" />
-      <PasswordField fx:id="txtPassword2" layoutX="226.0" layoutY="290.0" />
-      <Label layoutX="141.0" layoutY="299.0" text="Re - Password : " />
-      <Label layoutX="36.0" layoutY="14.0" text="ID :" />
-      <Label fx:id="lblId" layoutX="62.0" layoutY="14.0" text="xxxx" />
+      <JFXButton layoutX="507.0" layoutY="357.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#btnRegisterOnAction" prefHeight="61.0" prefWidth="179.0" stylesheets="@../css/style.css" text="REGISTER">
+         <styleClass>
+            <String fx:value="btn" />
+            <String fx:value="btn-lg" />
+            <String fx:value="btn-primary" />
+         </styleClass></JFXButton>
+      <Label layoutX="461.0" layoutY="24.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="label-id" stylesheets="@../css/style.css" text="ID :" />
+      <Label fx:id="lblId" alignment="CENTER" layoutX="540.0" layoutY="24.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="117.0" stylesheets="@../css/style.css" text="xxxx">
+         <styleClass>
+            <String fx:value="label-id" />
+            <String fx:value="label-green" />
+         </styleClass></Label>
+      <JFXTextField fx:id="txtFName" labelFloat="true" layoutX="14.0" layoutY="96.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="Frist Name : " />
+      <JFXTextField fx:id="txtMName" labelFloat="true" layoutX="357.0" layoutY="96.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="Middle Name : " />
+      <JFXTextField fx:id="txtLName" labelFloat="true" layoutX="14.0" layoutY="158.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="Last Name : " />
+      <JFXTextField fx:id="txtEmail" labelFloat="true" layoutX="14.0" layoutY="221.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="Email : " />
+      <JFXTextField fx:id="txtUserName" labelFloat="true" layoutX="357.0" layoutY="221.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="Username : " />
+      <JFXPasswordField fx:id="txtPassword1" labelFloat="true" layoutX="14.0" layoutY="286.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="Password ; " />
+      <JFXPasswordField fx:id="txtPassword2" labelFloat="true" layoutX="357.0" layoutY="286.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="Re - type Password : " />
+      <JFXButton layoutX="331.0" layoutY="357.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#btnClearOnAction" prefHeight="61.0" prefWidth="179.0" stylesheets="@../css/style.css" text="CLEAR">
+         <styleClass>
+            <String fx:value="btn" />
+            <String fx:value="btn-lg" />
+            <String fx:value="btn-secondary" />
+         </styleClass>
+      </JFXButton>
+      <Label layoutX="14.0" layoutY="14.0" styleClass="label-head" stylesheets="@../css/style.css" text="ADMIN REGISTER" />
+      <Separator layoutX="14.0" layoutY="71.0" prefHeight="8.0" prefWidth="643.0" />
+      <Separator layoutX="14.0" layoutY="339.0" prefHeight="8.0" prefWidth="643.0" />
    </children>
 </AnchorPane>

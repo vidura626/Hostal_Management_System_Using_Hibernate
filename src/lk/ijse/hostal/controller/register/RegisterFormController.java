@@ -77,4 +77,8 @@ public class RegisterFormController {
         Navigation.navigate(Routes.REGISTER_2, pane);
     }
 
+    @FXML
+    void btnClearOnAction(ActionEvent event) {
+
+    }
 }

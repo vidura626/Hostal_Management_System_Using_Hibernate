@@ -124,7 +124,6 @@ public class ManageStudentFormController {
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colGender.setCellValueFactory(new PropertyValueFactory<>("gender"));
         colAge.setCellValueFactory(new PropertyValueFactory<>("age"));
-        colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
         colUpdate.setCellValueFactory(new PropertyValueFactory<>("update"));
         colDelete.setCellValueFactory(new PropertyValueFactory<>("delete"));
         colMore.setCellValueFactory(new PropertyValueFactory<>("more"));
