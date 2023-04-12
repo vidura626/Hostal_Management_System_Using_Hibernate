@@ -19,12 +19,16 @@ public class ContactFormController {
 
     private Stage stage;
 
+    public void initialize() {
+        TransferObjects.sendObject(null);
+    }
+
     @FXML
     void btnAddOnAction(ActionEvent event) {
         String description = txtDescription.getText();
         String number = txtContactNumber.getText();
 
-        Contact contact = new Contact(description,number);
+        Contact contact = new Contact(description, number);
         /*  Send object */
         TransferObjects.sendObject(contact);
         /*--------------*/

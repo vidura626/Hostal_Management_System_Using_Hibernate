@@ -104,7 +104,7 @@
     -fx-text-fill: white;
 }
 
-.cell {
+.table-view .cell {
     -fx-alignment: center;
     -fx-border-radius: 10;
     -fx-background-radius: 10;
@@ -113,16 +113,16 @@
     -fx-text-fill: darkgreen;
 }
 
-.cell:focused {
+.table-view .cell:focused {
     -fx-border-style: none;
     -fx-border-color: cornflowerblue;
 }
 
-.cell:even {
+.table-view .cell:even {
     -fx-background-color: white;
 }
 
-.cell:odd {
+.table-view .cell:odd {
     -fx-background-color: #d3d8e2;
 }
 
@@ -166,3 +166,5 @@
 .label-blue {
     -fx-background-color: dodgerblue;
 }
+
+/*  ComboBox    */

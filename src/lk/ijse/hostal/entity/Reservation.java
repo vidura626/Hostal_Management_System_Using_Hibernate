@@ -1,17 +1,14 @@
 package lk.ijse.hostal.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.util.Date;
 
 @Entity
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Reservation {
@@ -29,12 +26,18 @@ public class Reservation {
     private Date fromDate;
     private Date toDate;
     private double keyMoneyAmount;
-    private double paidAmount;
+    private double remainingAmount;
+    @Enumerated(EnumType.STRING)
+    private Status status;
     /*------------------------------------*/
 
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Student.class)
+    @ManyToOne
     private Student studentId;
 
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Room.class)
+    @ManyToOne
     private Room room;
+
+    public enum Status {
+        FULL, NOT_FULL
+    }
 }

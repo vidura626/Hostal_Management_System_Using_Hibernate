@@ -16,7 +16,7 @@ public class MngStudentTM {
     private String nic;
     private Name name;
     private String gender;
-    private int age;
+    private Date dob;
     private Date date;
     private JFXButton update;
     private JFXButton delete;

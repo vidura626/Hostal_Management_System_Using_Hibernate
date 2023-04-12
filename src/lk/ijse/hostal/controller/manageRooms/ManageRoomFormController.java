@@ -1,19 +1,18 @@
 package lk.ijse.hostal.controller.manageRooms;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.AccessibleAction;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseButton;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.StringConverter;
 import lk.ijse.hostal.controller.TM.MngRoomTM;
 import lk.ijse.hostal.dto.RoomDTO;
 import lk.ijse.hostal.service.ServiceFactory;
@@ -22,6 +21,7 @@ import lk.ijse.hostal.service.custom.RoomBO;
 import javax.persistence.PersistenceException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
+import java.util.Optional;
 
 public class ManageRoomFormController {
 
@@ -33,13 +33,13 @@ public class ManageRoomFormController {
     private TableColumn<?, ?> colId;
 
     @FXML
-    private TableColumn<?, ?> colPrice;
+    private TableColumn<Object, String> colPrice;
 
     @FXML
-    private TableColumn<?, ?> colQty;
+    private TableColumn<Object, String> colQty;
 
     @FXML
-    private TableColumn<?, ?> colType;
+    private TableColumn<Object, String> colType;
 
     @FXML
     private TableColumn<?, ?> colUpdate;
@@ -57,13 +57,33 @@ public class ManageRoomFormController {
     private JFXTextField txtQty;
 
     @FXML
-    private JFXTextField txtType;
+    private JFXComboBox<RoomDTO.RoomType> cmbType;
 
     RoomBO roomBO = (RoomBO) ServiceFactory.getInstance().getBO(ServiceFactory.BOTypes.ROOM);
 
     public void initialize() {
         setCellValueFactory();
         setAllData();
+        setComboBox();
+
+        tblManageRoom.setEditable(true);
+        colType.setCellFactory(ComboBoxTableCell.forTableColumn(
+                RoomDTO.RoomType.AC.toString(),
+                RoomDTO.RoomType.AC_FOOD.toString(),
+                RoomDTO.RoomType.NON_AC.toString(),
+                RoomDTO.RoomType.NON_AC_FOOD.toString()
+        ));
+        colQty.setCellFactory(TextFieldTableCell.forTableColumn());
+        colPrice.setCellFactory(TextFieldTableCell.forTableColumn());
+    }
+
+    private void setComboBox() {
+        cmbType.getItems().addAll(
+                RoomDTO.RoomType.AC,
+                RoomDTO.RoomType.AC_FOOD,
+                RoomDTO.RoomType.NON_AC,
+                RoomDTO.RoomType.NON_AC_FOOD
+        );
     }
 
     private void setAllData() {
@@ -71,27 +91,104 @@ public class ManageRoomFormController {
         ObservableList<MngRoomTM> items = tblManageRoom.getItems();
         List<RoomDTO> allRooms = roomBO.getAllRooms();
         for (RoomDTO roomDTO : allRooms) {
+
+            /*  BUttons to TableView    */
             JFXButton update = new JFXButton("Update");
             JFXButton delete = new JFXButton("Delete");
+            /*--------------------------*/
+
             items.add(new MngRoomTM(
                     roomDTO.getRoom_type_id(),
                     roomDTO.getType(),
-                    roomDTO.getKey_money(),
-                    roomDTO.getQty(),
+                    String.valueOf(roomDTO.getKey_money()),
+                    String.valueOf(roomDTO.getQty()),
                     update,
                     delete
             ));
 
 
             update.setOnAction(event -> {
+                ButtonType ok = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
+                ButtonType cancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+                Optional<ButtonType> buttonType = new Alert(Alert.AlertType.INFORMATION, "Are you sure?", ok, cancel).showAndWait();
+                MngRoomTM selectedItem = tblManageRoom.getSelectionModel().getSelectedItem();
+                RoomDTO original = roomBO.searchRoom(selectedItem.getId());
+                int selectedIndex = tblManageRoom.getSelectionModel().getSelectedIndex();
+
+                if (buttonType.orElse(cancel) == ok) {
+                    try {
+                        boolean b = roomBO.updateRoom(new RoomDTO(
+                                selectedItem.getId(),
+                                selectedItem.getType(),
+                                Double.parseDouble(selectedItem.getPrice()),
+                                Integer.parseInt(selectedItem.getQty()),
+                                original.getReservations()
+                        ));
+                        new Alert(Alert.AlertType.CONFIRMATION, "Updated !").show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        new Alert(Alert.AlertType.ERROR, "Not Updated !").show();
+                    }finally {
+                        setAllData();
+                    }
+                } else {
+                    selectedItem.setPrice(String.valueOf(original.getKey_money()));
+                    selectedItem.setQty(String.valueOf(original.getQty()));
+                    selectedItem.setType(original.getType());
+                    tblManageRoom.getItems().set(selectedIndex,selectedItem);
+                }
             });
 
             delete.setOnAction(event -> {
-                System.out.println("Deleted");
+                if(tblManageRoom.getSelectionModel().isEmpty()){
+                    new Alert(Alert.AlertType.INFORMATION,"Select a row").show();
+                    return;
+                }
+                ButtonType ok = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
+                ButtonType cancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+                Optional<ButtonType> buttonType = new Alert(Alert.AlertType.INFORMATION, "Are you sure?", ok, cancel).showAndWait();
+
+                if (buttonType.orElse(cancel) == ok) {
+                    String id = tblManageRoom.getSelectionModel().getSelectedItem().getId();
+                    System.out.println(id);
+                    try {
+                        boolean b = roomBO.deleteRoom(id);
+                        if (b) new Alert(Alert.AlertType.CONFIRMATION, "Deleted Successfully !").show();
+                        setAllData();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        new Alert(Alert.AlertType.ERROR, "Not Deleted !").show();
+                    }
+                }
             });
         }
         tblManageRoom.refresh();
     }
+
+    /*  Cell Edit   */
+    @FXML
+    void editType(TableColumn.CellEditEvent event) {
+        MngRoomTM selectedItem = tblManageRoom.getSelectionModel().getSelectedItem();
+        selectedItem.setType(event.getNewValue().toString());
+    }
+
+
+    @FXML
+    void editQty(TableColumn.CellEditEvent event) {
+        MngRoomTM selectedItem = tblManageRoom.getSelectionModel().getSelectedItem();
+        selectedItem.setQty(event.getNewValue().toString());
+
+    }
+
+    @FXML
+    void editPrice(TableColumn.CellEditEvent event) {
+        MngRoomTM selectedItem = tblManageRoom.getSelectionModel().getSelectedItem();
+        selectedItem.setPrice(event.getNewValue().toString());
+    }
+    /*--------------*/
+
 
     private void setCellValueFactory() {
         colId.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -105,29 +202,38 @@ public class ManageRoomFormController {
     @FXML
     void btnAddRoomOnAction() {
         try {
-            String id = txtId.getText();
-            String type = txtType.getText();
+            String roomId = txtId.getText();
+            RoomDTO.RoomType type = cmbType.getValue();
             double keyMoney = Double.parseDouble(txtPrice.getText());
             int qty = Integer.parseInt(txtQty.getText());
 
-            RoomDTO roomDTO = new RoomDTO(id, type, keyMoney, qty);
+            RoomDTO roomDTO = new RoomDTO(roomId, type.toString(), keyMoney, qty);
 
-            boolean b = roomBO.addRoom(roomDTO);
-            if (b) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Room is added Successfully !").show();
-            } else {
-                new Alert(Alert.AlertType.ERROR, "Room is not added !").show();
+            ButtonType ok = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
+            ButtonType cancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+            Optional<ButtonType> buttonType = new Alert(Alert.AlertType.INFORMATION, "Are you sure?", ok, cancel).showAndWait();
+
+            if (buttonType.orElse(cancel) == ok) {
+                boolean b = roomBO.addRoom(roomDTO);
+                if (b) {
+                    new Alert(Alert.AlertType.CONFIRMATION, "Room is added Successfully !").show();
+                } else {
+                    new Alert(Alert.AlertType.ERROR, "Room is not added !").show();
+                }
             }
-            setAllData();
-            clear();
         } catch (PersistenceException | SQLIntegrityConstraintViolationException e) {
             new Alert(Alert.AlertType.ERROR, "Already added !").show();
             clear();
         } catch (NumberFormatException e) {
+            e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "Check the form again !").show();
         } catch (Exception e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "Room is not added !").show();
+        }finally {
+            setAllData();
+            clear();
         }
     }
 
@@ -138,7 +244,7 @@ public class ManageRoomFormController {
 
     private void clear() {
         txtQty.clear();
-        txtType.clear();
+        cmbType.getSelectionModel().clearSelection();
         txtPrice.clear();
         txtId.clear();
     }
@@ -151,22 +257,14 @@ public class ManageRoomFormController {
         }
     }
 
-    @FXML
+    /*@FXML
     void tblMngRoomOoMouseClicked(MouseEvent event) {
         if (event.getClickCount() == 2) {
             MngRoomTM selectedItem = tblManageRoom.getSelectionModel().getSelectedItem();
             txtId.setText(selectedItem.getId());
             txtPrice.setText(String.valueOf(selectedItem.getPrice()));
-            txtType.setText(selectedItem.getType());
+            cmbType.getSelectionModel().select(RoomDTO.RoomType.valueOf(selectedItem.getType()));
             txtQty.setText(String.valueOf(selectedItem.getQty()));
         }
-    }
-
-    @FXML
-    void editColStart(ActionEvent event) {
-        colId.setOnEditStart(event1 -> {
-            System.out.println("srf");
-        });
-    }
-
+    }*/
 }

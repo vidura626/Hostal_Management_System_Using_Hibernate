@@ -7,7 +7,7 @@ public class TransferObjects {
     }
 
     public static Object recieveObject(){
-        return TransferObjects.object;
+        return object;
     }
 
     public static void clear(){

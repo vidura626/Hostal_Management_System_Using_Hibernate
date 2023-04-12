@@ -23,6 +23,10 @@ public class    AddressFormController {
 
     private Stage stage;
 
+    public void initialize() {
+        TransferObjects.sendObject(null);
+    }
+
     @FXML
     void btnAddOnAction(ActionEvent event) {
         String houseNo = txtHouseNo.getText();

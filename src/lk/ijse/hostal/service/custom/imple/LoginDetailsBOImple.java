@@ -19,7 +19,9 @@ public class LoginDetailsBOImple implements LoginDetailsBO {
     @Override
     public LoginDetailsDTO search(String username) {
         openSession();
-        return Convertor.fromLoginDetails(loginRepo.search(username, session));
+        LoginDetailsDTO loginDetailsDTO = Convertor.fromLoginDetails(loginRepo.search(username, session));
+        closeAndCommitSession();
+        return loginDetailsDTO;
     }
 
     @Override
@@ -56,7 +58,9 @@ public class LoginDetailsBOImple implements LoginDetailsBO {
     @Override
     public List<LoginDetailsDTO> getAll() {
         openSession();
-        return loginRepo.getAll(session).stream().map(Convertor::fromLoginDetails).collect(Collectors.toList());
+        List<LoginDetailsDTO> collect = loginRepo.getAll(session).stream().map(Convertor::fromLoginDetails).collect(Collectors.toList());
+        closeAndCommitSession();
+        return collect;
     }
 
     @Override

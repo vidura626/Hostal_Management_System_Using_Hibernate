@@ -1,5 +1,6 @@
 package lk.ijse.hostal.util;
 
+import lk.ijse.hostal.controller.TM.MngRoomTM;
 import lk.ijse.hostal.dto.LoginDetailsDTO;
 import lk.ijse.hostal.dto.ReservationDTO;
 import lk.ijse.hostal.dto.RoomDTO;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Convertor {
+
     public static StudentDTO fromStudent(Student student) {
         return new StudentDTO(
                 student.getId(),
@@ -50,14 +52,14 @@ public class Convertor {
                 student.getDob(),
                 student.getGender(),
                 Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()),
-                new ArrayList<Reservation>()
+                student.getReservations()
         );
     }
 
     public static RoomDTO fromRoom(Room room) {
         return new RoomDTO(
                 room.getRoom_type_id(),
-                room.getType(),
+                room.getType().toString(),
                 room.getKey_money(),
                 room.getQty(),
                 room.getReservations()
@@ -67,7 +69,7 @@ public class Convertor {
     public static Room toRoom(RoomDTO room) {
         return new Room(
                 room.getRoom_type_id(),
-                room.getType(),
+                RoomDTO.RoomType.valueOf(room.getType()),
                 room.getKey_money(),
                 room.getQty(),
                 room.getReservations()
@@ -75,11 +77,29 @@ public class Convertor {
     }
 
     public static ReservationDTO fromReservation(Reservation reservation) {
-        return null;
+        return new ReservationDTO(
+                reservation.getRes_id(),
+                reservation.getFromDate(),
+                reservation.getToDate(),
+                reservation.getKeyMoneyAmount(),
+                reservation.getRemainingAmount(),
+                reservation.getStatus(),
+                reservation.getStudentId(),
+                reservation.getRoom()
+        );
     }
 
-    public static Reservation toReservation(ReservationDTO Reservation) {
-        return null;
+    public static Reservation toReservation(ReservationDTO reservation) {
+        return new Reservation(
+                reservation.getRes_id(),
+                reservation.getFromDate(),
+                reservation.getToDate(),
+                reservation.getKeyMoneyAmount(),
+                reservation.getRemainingAmount(),
+                reservation.getStatus(),
+                reservation.getStudentId(),
+                reservation.getRoom()
+        );
     }
 
     public static LoginDetailsDTO fromLoginDetails(LoginDetails loginDetails) {

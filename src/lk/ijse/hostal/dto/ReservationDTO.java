@@ -1,5 +1,6 @@
 package lk.ijse.hostal.dto;
 
+import lk.ijse.hostal.entity.Reservation;
 import lk.ijse.hostal.entity.Room;
 import lk.ijse.hostal.entity.Student;
 import lombok.AllArgsConstructor;
@@ -16,7 +17,8 @@ public class ReservationDTO {
     private Date fromDate;
     private Date toDate;
     private double keyMoneyAmount;
-    private double paidAmount;
+    private double remainingAmount;
+    private Reservation.Status status;
     private Student studentId;
     private Room room;
 }

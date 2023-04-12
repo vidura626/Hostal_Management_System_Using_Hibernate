@@ -1,13 +1,14 @@
 package lk.ijse.hostal.entity;
 
+import lk.ijse.hostal.dto.RoomDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Entity
@@ -17,14 +18,10 @@ import java.util.List;
 public class Room {
     @Id
     String room_type_id;
-    String type;
+    @Enumerated(EnumType.STRING)
+    RoomDTO.RoomType type;
     double key_money;
     int qty;
-
-    /*
-    Try to add image of room
-    */
-
-    @OneToMany(mappedBy = "room",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "room",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     List<Reservation> reservations;
 }

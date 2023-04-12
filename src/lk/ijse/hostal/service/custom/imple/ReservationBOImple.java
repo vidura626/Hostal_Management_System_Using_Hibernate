@@ -28,9 +28,19 @@ public class ReservationBOImple implements ReservationBO {
     }
 
     @Override
+    public boolean deleteReservation(String id) throws Exception {
+        openSession();
+        repo.delete(id,session);
+        closeAndCommitSession();
+        return true;
+    }
+
+    @Override
     public ReservationDTO searchReservation(String res_id) throws Exception {
         openSession();
-        return Convertor.fromReservation(repo.search(res_id, session));
+        ReservationDTO reservationDTO = Convertor.fromReservation(repo.search(res_id, session));
+        closeAndCommitSession();
+        return reservationDTO;
     }
 
     @Override
@@ -44,7 +54,17 @@ public class ReservationBOImple implements ReservationBO {
     @Override
     public List<ReservationDTO> getAllReservations() {
         openSession();
-        return repo.getAll(session).stream().map(Convertor::fromReservation).collect(Collectors.toList());
+        List<ReservationDTO> collect = repo.getAll(session).stream().map(Convertor::fromReservation).collect(Collectors.toList());
+        closeAndCommitSession();
+        return collect;
+    }
+
+    @Override
+    public String generateNextId() throws Exception {
+        openSession();
+        String id = repo.generateNextId(session);
+        closeAndCommitSession();
+        return id;
     }
 
     @Override

@@ -6,8 +6,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import lk.ijse.hostal.controller.util.Navigation;
 import lk.ijse.hostal.controller.util.Routes;
 import lk.ijse.hostal.service.ServiceFactory;
@@ -42,6 +44,10 @@ public class LoginFormController {
     @FXML
     void btnRegisterOnAction(ActionEvent event) throws Exception {
         Navigation.navigate(Routes.REGISTER_1, pane);
+        Stage stage = (Stage) pane.getScene().getWindow();
+        stage.setWidth(700.00);
+        stage.setHeight(480.00);
+        stage.centerOnScreen();
     }
 
     @FXML
@@ -51,6 +57,11 @@ public class LoginFormController {
 
     @FXML
     void txtUsernameOnAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void showPasswordOnMousePressed(MouseEvent event){
 
     }
 

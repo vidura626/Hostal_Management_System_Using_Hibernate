@@ -22,6 +22,7 @@ public class StudentRepositoryImple implements StudentRepository {
     public void delete(String id, Session session) throws Exception {
         Student get = session.load(Student.class, id);
         session.delete(get);
+        session.detach(get);
     }
 
     @Override

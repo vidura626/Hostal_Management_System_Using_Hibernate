@@ -22,13 +22,13 @@
             <String fx:value="label-id" />
             <String fx:value="label-green" />
          </styleClass></Label>
-      <JFXTextField fx:id="txtFName" labelFloat="true" layoutX="14.0" layoutY="96.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="Frist Name : " />
-      <JFXTextField fx:id="txtMName" labelFloat="true" layoutX="357.0" layoutY="96.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="Middle Name : " />
-      <JFXTextField fx:id="txtLName" labelFloat="true" layoutX="14.0" layoutY="158.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="Last Name : " />
-      <JFXTextField fx:id="txtEmail" labelFloat="true" layoutX="14.0" layoutY="221.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="Email : " />
-      <JFXTextField fx:id="txtUserName" labelFloat="true" layoutX="357.0" layoutY="221.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="Username : " />
-      <JFXPasswordField fx:id="txtPassword1" labelFloat="true" layoutX="14.0" layoutY="286.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="Password ; " />
-      <JFXPasswordField fx:id="txtPassword2" labelFloat="true" layoutX="357.0" layoutY="286.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="Re - type Password : " />
+      <JFXTextField fx:id="txtFName" labelFloat="true" layoutX="52.0" layoutY="95.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="254.0" promptText="Frist Name : " />
+      <JFXTextField fx:id="txtMName" labelFloat="true" layoutX="364.0" layoutY="95.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="254.0" promptText="Middle Name : " />
+      <JFXTextField fx:id="txtLName" labelFloat="true" layoutX="52.0" layoutY="157.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="254.0" promptText="Last Name : " />
+      <JFXTextField fx:id="txtEmail" labelFloat="true" layoutX="52.0" layoutY="220.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="254.0" promptText="Email : " />
+      <JFXTextField fx:id="txtUserName" labelFloat="true" layoutX="364.0" layoutY="220.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="254.0" promptText="Username : " />
+      <JFXPasswordField fx:id="txtPassword1" labelFloat="true" layoutX="52.0" layoutY="285.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="254.0" promptText="Password ; " />
+      <JFXPasswordField fx:id="txtPassword2" labelFloat="true" layoutX="367.0" layoutY="285.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="254.0" promptText="Re - type Password : " />
       <JFXButton layoutX="331.0" layoutY="357.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#btnClearOnAction" prefHeight="61.0" prefWidth="179.0" stylesheets="@../css/style.css" text="CLEAR">
          <styleClass>
             <String fx:value="btn" />

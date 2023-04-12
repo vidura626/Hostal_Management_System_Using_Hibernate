@@ -7,6 +7,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 import lk.ijse.hostal.controller.util.Navigation;
 import lk.ijse.hostal.controller.util.Routes;
 import lk.ijse.hostal.dto.LoginDetailsDTO;
@@ -75,6 +77,9 @@ public class RegisterFormController {
 //        loginDetailsBO.register();
 
         Navigation.navigate(Routes.REGISTER_2, pane);
+        Stage stage = (Stage) pane.getScene().getWindow();
+        stage.setWidth(380.00);
+        stage.setHeight(360.00);
     }
 
     @FXML

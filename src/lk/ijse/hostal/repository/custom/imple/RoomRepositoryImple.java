@@ -1,6 +1,5 @@
 package lk.ijse.hostal.repository.custom.imple;
 
-import lk.ijse.hostal.entity.Reservation;
 import lk.ijse.hostal.entity.Room;
 import lk.ijse.hostal.repository.custom.RoomRepository;
 import org.hibernate.Session;
@@ -21,8 +20,9 @@ public class RoomRepositoryImple implements RoomRepository {
 
     @Override
     public void delete(String id, Session session) throws Exception {
-        Reservation get = session.load(Reservation.class, id);
+        Room get = session.load(Room.class, id);
         session.delete(get);
+        session.detach(get);
     }
 
     @Override
@@ -33,6 +33,7 @@ public class RoomRepositoryImple implements RoomRepository {
     @Override
     public List<Room> getAll(Session session) {
         return session.createQuery("FROM Room").getResultList();
+
     }
 
     @Override
@@ -40,10 +41,10 @@ public class RoomRepositoryImple implements RoomRepository {
         List resultList = session.createQuery("SELECT id FROM Room ORDER BY id DESC").setMaxResults(1).getResultList();
         if (resultList.size() > 0) {
             String id = (String) resultList.get(0);
-            int newId = Integer.parseInt(id.replace("R", "")) + 1;
-            return String.format("R%05d", newId);
+            int newId = Integer.parseInt(id.replace("RM-", "")) + 1;
+            return String.format("RM-%03d", newId);
         } else {
-            return "R00001";
+            return "RM-001";
         }
     }
 }

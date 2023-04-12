@@ -44,13 +44,26 @@ public class StudentBOImple implements StudentBO {
     @Override
     public StudentDTO searchStudent(String id) {
         openSession();
-        return Convertor.fromStudent(repo.search(id, session));
+        StudentDTO studentDTO = Convertor.fromStudent(repo.search(id, session));
+        closeAndCommitSession();
+        return studentDTO;
     }
 
     @Override
     public List<StudentDTO> getAllStudents() {
         openSession();
-        return repo.getAll(session).stream().map(Convertor::fromStudent).collect(Collectors.toList());
+        List<StudentDTO> collect = repo.getAll(session).stream().map(Convertor::fromStudent).collect(Collectors.toList());
+        closeAndCommitSession();
+        return collect;
+    }
+
+    @Override
+    public String generateLastId() throws Exception {
+        openSession();
+        String id = repo.generateNextId(session);
+        closeAndCommitSession();
+        return id;
+
     }
 
     @Override

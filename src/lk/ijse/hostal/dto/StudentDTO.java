@@ -26,4 +26,9 @@ public class StudentDTO {
     Gender gender;
     Date joinedDate;
     List<Reservation> reservations;
+
+    @Override
+    public String toString() {
+        return id.concat(" : ").concat(name.getFName());
+    }
 }

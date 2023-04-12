@@ -15,6 +15,7 @@ import lk.ijse.hostal.dto.StudentDTO;
 import lk.ijse.hostal.dto.embedded.Name;
 import lk.ijse.hostal.service.ServiceFactory;
 import lk.ijse.hostal.service.custom.StudentBO;
+import lk.ijse.hostal.util.TransferObjects;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -80,16 +81,32 @@ public class ManageStudentFormController {
                             st.getNic(),
                             st.getName(),
                             st.getGender().toString(),
-                            st.getDob().compareTo(Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant())),
+                            st.getDob(),
                             st.getJoinedDate(),
                             update,
                             delete,
                             more
                     )
             );
-            update.setOnAction(event -> System.out.println("update"));
+            update.setOnAction(event -> {
+                if (tblManageStudent.getSelectionModel().isEmpty()) {
+                    new Alert(Alert.AlertType.INFORMATION, "Select a row").show();
+                    return;
+                }
+                try {
+                    TransferObjects.sendObject(studentBO.searchStudent(tblManageStudent.getSelectionModel().getSelectedItem().getId()));
+                    showingStage(Routes.STUDENTS_ADD, stage);
+                    stage.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            });
             delete.setOnAction(event -> {
-                if (tblManageStudent.getSelectionModel().isEmpty()) return;
+                if (tblManageStudent.getSelectionModel().isEmpty()) {
+                    new Alert(Alert.AlertType.INFORMATION, "Select a row").show();
+                    return;
+                }
                 String id = tblManageStudent.getSelectionModel().getSelectedItem().getId();
                 ButtonType ok = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
                 ButtonType cancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
@@ -101,18 +118,23 @@ public class ManageStudentFormController {
                         setAllData();
                         tblManageStudent.refresh();
                     } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                } else {
-                    new Alert(Alert.AlertType.CONFIRMATION, "Student Removal Canceled ! ").show();
                 }
             });
             more.setOnAction(event -> {
-                /*try {
-                    int selectedIndex = tblManageStudent.getSelectionModel().getSelectedIndex();
-                    showingStage(Routes.VIEW_MORE,stages.get(selectedIndex));
+                try {
+                    if (tblManageStudent.getSelectionModel().isEmpty()) {
+                        new Alert(Alert.AlertType.INFORMATION, "Select a row").show();
+                        return;
+                    }
+                    String id = tblManageStudent.getSelectionModel().getSelectedItem().getId();
+                    TransferObjects.sendObject(id);
+                    showingStage(Routes.VIEW_MORE, stage);
+                    stage.close();
                 } catch (Exception e) {
                     e.printStackTrace();
-                }*/
+                }
             });
         }
         tblManageStudent.refresh();
@@ -123,7 +145,7 @@ public class ManageStudentFormController {
         colNic.setCellValueFactory(new PropertyValueFactory<>("nic"));
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colGender.setCellValueFactory(new PropertyValueFactory<>("gender"));
-        colAge.setCellValueFactory(new PropertyValueFactory<>("age"));
+        colAge.setCellValueFactory(new PropertyValueFactory<>("dob"));
         colUpdate.setCellValueFactory(new PropertyValueFactory<>("update"));
         colDelete.setCellValueFactory(new PropertyValueFactory<>("delete"));
         colMore.setCellValueFactory(new PropertyValueFactory<>("more"));
@@ -131,7 +153,9 @@ public class ManageStudentFormController {
 
     @FXML
     void btnStudentRegister(ActionEvent event) throws Exception {
-        showingStage(Routes.STUDENTS_ADD,stage);
+            showingStage(Routes.STUDENTS_ADD, stage);
+            stage.close();
+            setAllData();
     }
 
     void showingStage(Routes route, Stage stage) throws Exception {
@@ -141,7 +165,7 @@ public class ManageStudentFormController {
         if (stage.isShowing()) {
             stage.hide();
         } else {
-            stage.show();
+            stage.showAndWait();
         }
     }
 }

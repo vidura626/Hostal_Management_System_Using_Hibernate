@@ -33,27 +33,35 @@ public class RoomBOImple implements RoomBO {
     }
 
     @Override
+    public boolean deleteRoom(String roomId) throws Exception {
+        openSession();
+        repo.delete(roomId,session);
+        closeAndCommitSession();
+        return true;
+    }
+
+    @Override
     public RoomDTO searchRoom(String id) {
         openSession();
-        return Convertor.fromRoom(repo.search(id, session));
+        RoomDTO roomDTO = Convertor.fromRoom(repo.search(id, session));
+        closeAndCommitSession();
+        return roomDTO;
     }
 
     @Override
     public List<RoomDTO> getAllRooms() {
         openSession();
-        return repo.getAll(session).stream().map(Convertor::fromRoom).collect(Collectors.toList());
+        List<RoomDTO> collect = repo.getAll(session).stream().map(Convertor::fromRoom).collect(Collectors.toList());
+        closeAndCommitSession();
+        return collect;
     }
 
     @Override
-    public int getAvalability(String roomId) {
+    public String generateNextId() throws Exception {
         openSession();
-        return repo.search(roomId, session).getQty();
-    }
-
-    @Override
-    public boolean checkAvalability(String roomId) {
-        openSession();
-        return repo.search(roomId, session).getQty() > 0;
+        String id = repo.generateNextId(session);
+        closeAndCommitSession();
+        return id;
     }
 
     @Override

@@ -1,20 +1,20 @@
-
 package lk.ijse.hostal.entity;
 
 import lk.ijse.hostal.entity.embedded.Address;
 import lk.ijse.hostal.entity.embedded.Contact;
 import lk.ijse.hostal.entity.embedded.Name;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
+import lombok.*;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import java.util.Date;
 import java.util.List;
 
 @Entity
-@Data
+@Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Student {
@@ -29,6 +29,8 @@ public class Student {
 
     @Embedded
     Name name;
+
+    @LazyCollection(LazyCollectionOption.FALSE)
     @ElementCollection
     @CollectionTable(
             name = "addressess",
@@ -36,20 +38,21 @@ public class Student {
     )
     List<Address> addresses;
 
-    @ElementCollection
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @ElementCollection()
     @CollectionTable(
             name = "Contacts",
             joinColumns = @JoinColumn(name = "StudentId")
     )
     List<Contact> contact;
-    Date dob;
 
+    Date dob;
 
     @Enumerated(EnumType.STRING)
     Gender gender;
 
     @CreationTimestamp
     Date joinedDate;
-    @OneToMany(mappedBy = "studentId", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "studentId", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     List<Reservation> reservations;
 }

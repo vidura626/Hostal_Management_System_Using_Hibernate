@@ -23,6 +23,7 @@ public class ReservationRepositoryImple implements ReservationRepository {
     public void delete(String id, Session session) throws Exception {
         Reservation get = session.load(Reservation.class, id);
         session.delete(get);
+        session.detach(get);
     }
 
     @Override
@@ -40,10 +41,10 @@ public class ReservationRepositoryImple implements ReservationRepository {
         List resultList = session.createQuery("SELECT res_id FROM Reservation ORDER BY res_id DESC").setMaxResults(1).getResultList();
         if (resultList.size() > 0) {
             String id = (String) resultList.get(0);
-            int newId = Integer.parseInt(id.replace("RES", "")) + 1;
-            return String.format("RES%05d", newId);
+            int newId = Integer.parseInt(id.replace("RES-", "")) + 1;
+            return String.format("RES-%05d", newId);
         } else {
-            return "RES00001";
+            return "RES-00001";
         }
     }
 

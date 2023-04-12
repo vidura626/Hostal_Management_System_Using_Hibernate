@@ -15,23 +15,23 @@
 <AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@css/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.hostal.controller.ReservationFormController">
    <children>
       <JFXComboBox fx:id="cmbSttd" labelFloat="true" layoutX="32.0" layoutY="85.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="197.0" promptText="Student : " />
-      <JFXComboBox fx:id="cmbRoom" labelFloat="true" layoutX="255.0" layoutY="85.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="197.0" promptText="Room :" />
-      <JFXButton layoutX="755.0" layoutY="156.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#btnReserveOnAction" prefHeight="44.0" prefWidth="118.0" stylesheets="@css/style.css" text="RESERVE">
+      <JFXComboBox fx:id="cmbRoom" labelFloat="true" layoutX="248.0" layoutY="85.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#cmbRoomOnAction" prefHeight="40.0" prefWidth="197.0" promptText="Room :" />
+      <JFXButton layoutX="755.0" layoutY="156.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#btnReserveOnAction" prefHeight="44.0" prefWidth="115.0" stylesheets="@css/style.css" text="RESERVE">
          <styleClass>
             <String fx:value="btn" />
             <String fx:value="btn-lightBlue" />
          </styleClass></JFXButton>
       <Label layoutX="533.0" layoutY="24.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="label-id" stylesheets="@css/style.css" text="Reservation ID :" />
-      <Label fx:id="txtID" alignment="CENTER" layoutX="718.0" layoutY="24.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="21.0" prefWidth="155.0" stylesheets="@css/style.css" text="xxxxx">
+      <Label fx:id="lblId" alignment="CENTER" layoutX="718.0" layoutY="24.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="21.0" prefWidth="155.0" stylesheets="@css/style.css" text="xxxxx">
          <styleClass>
             <String fx:value="label-id" />
             <String fx:value="label-green" />
          </styleClass></Label>
-      <Label fx:id="txtKeyMoney" alignment="CENTER" layoutX="413.0" layoutY="162.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="21.0" prefWidth="144.0" styleClass="label-id" stylesheets="@css/style.css" text="&lt;KeyMoney&gt;" />
-      <JFXDatePicker fx:id="datepickerFrom" layoutX="485.0" layoutY="85.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="144.0" promptText="From" />
-      <JFXDatePicker fx:id="datepickerTo" layoutX="681.0" layoutY="85.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="144.0" promptText="To" />
-      <JFXTextField fx:id="txtAmount" labelFloat="true" layoutX="186.0" layoutY="152.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="197.0" promptText="Amount : " />
-      <JFXComboBox fx:id="cmbboxCheckoutType" labelFloat="true" layoutX="32.0" layoutY="152.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="125.0" promptText="Checkout Type" />
+      <Label fx:id="lblKeyMoney" alignment="CENTER" layoutX="404.0" layoutY="162.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="21.0" prefWidth="144.0" styleClass="label-id" stylesheets="@css/style.css" text="&lt;KeyMoney&gt;" />
+      <JFXDatePicker fx:id="datepickerFrom" layoutX="561.0" layoutY="85.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="144.0" promptText="From" />
+      <JFXDatePicker fx:id="datepickerTo" layoutX="721.0" layoutY="85.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="144.0" promptText="To" />
+      <JFXTextField fx:id="txtAmount" labelFloat="true" layoutX="177.0" layoutY="152.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="197.0" promptText="Amount : " />
+      <JFXComboBox fx:id="cmbboxCheckoutType" labelFloat="true" layoutX="32.0" layoutY="152.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#cmbCheckOnAction" prefHeight="40.0" prefWidth="125.0" promptText="Checkout Type" />
       <ScrollPane layoutX="25.0" layoutY="221.0" prefHeight="351.0" prefWidth="851.0">
          <content>
             <TableView fx:id="tblManageReservation" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="348.0" prefWidth="849.0">
@@ -54,11 +54,12 @@
       <Label alignment="CENTER" layoutX="15.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="label-head" stylesheets="@css/style.css" text="RESERVATION" />
       <Separator layoutX="15.0" layoutY="64.0" prefHeight="10.0" prefWidth="877.0" />
       <Separator layoutX="12.0" layoutY="204.0" prefHeight="10.0" prefWidth="877.0" />
-      <JFXButton layoutX="635.0" layoutY="156.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#btnClearOnAction" prefHeight="44.0" prefWidth="108.0" stylesheets="@css/style.css" text="CLEAR">
+      <JFXButton layoutX="619.0" layoutY="156.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#btnClearOnAction" prefHeight="44.0" prefWidth="115.0" stylesheets="@css/style.css" text="CLEAR">
          <styleClass>
             <String fx:value="btn" />
             <String fx:value="btn-secondary" />
          </styleClass>
       </JFXButton>
+      <Label fx:id="lblQty" alignment="CENTER" contentDisplay="CENTER" layoutX="467.0" layoutY="90.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="44.0" prefWidth="75.0" styleClass="label-id" stylesheets="@css/style.css" text="&lt;Qty&gt;" textFill="#6620b5" />
    </children>
 </AnchorPane>

@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 public class MngRoomTM {
     private String id;
     private String type;
-    private double price;
-    private int qty;
+    private String price;
+    private String qty;
     private JFXButton update;
     private JFXButton delete;
 }

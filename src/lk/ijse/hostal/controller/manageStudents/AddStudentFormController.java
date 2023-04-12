@@ -1,6 +1,7 @@
 package lk.ijse.hostal.controller.manageStudents;
 
 import com.jfoenix.controls.*;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,6 +24,7 @@ import lk.ijse.hostal.service.ServiceFactory;
 import lk.ijse.hostal.service.custom.StudentBO;
 import lk.ijse.hostal.util.TransferObjects;
 
+import javax.persistence.PersistenceException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -88,6 +90,14 @@ public class AddStudentFormController {
     @FXML
     private JFXRadioButton rdoOther;
 
+    @FXML
+    private JFXButton btnClear;
+
+    @FXML
+    private JFXButton btnRegister;
+
+    private boolean isUpdate = false;
+
     private Stage stage = new Stage();
     private List<Stage> stagesAddress = new ArrayList<>();
     private List<Stage> stagesContacts = new ArrayList<>();
@@ -95,7 +105,60 @@ public class AddStudentFormController {
 
 
     public void initialize() {
+        setId();
         setButtonVisibility();
+        update();
+    }
+
+    private void setId() {
+        try {
+            String id = studentBO.generateLastId();
+            lblID.setText(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void update() {
+        StudentDTO studentDTO = (StudentDTO) TransferObjects.recieveObject();
+        TransferObjects.clear();
+        btnRegister.setText("REGISTER");
+
+        if (studentDTO == null) return;
+
+        btnRegister.setText("UPDATE");
+
+        lblID.setText(studentDTO.getId());
+        txtNic.setText(studentDTO.getNic());
+        txtEmail.setText(studentDTO.getEmail());
+        txtFName.setText(studentDTO.getName().getFName());
+        txtMName.setText(studentDTO.getName().getMName());
+        txtLName.setText(studentDTO.getName().getLName());
+
+        ObservableList<Contact> contacts = FXCollections.observableArrayList();
+        contacts.addAll(studentDTO.getContact());
+
+        ObservableList<Address> addresses = FXCollections.observableArrayList();
+        addresses.addAll(studentDTO.getAddresses());
+
+        cmbContact.setItems(contacts);
+        cmbAddress.setItems(addresses);
+        switch (studentDTO.getGender()) {
+            case MALE:
+                rdoMale.setSelected(true);
+                break;
+            case FEMALE:
+                rdoFemale.setSelected(true);
+                break;
+            case OTHER:
+                rdoOther.setSelected(true);
+                break;
+        }
+        datePickerDOB.setValue(studentDTO.getDob().toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate());
+
+        isUpdate = true;
     }
 
     void setButtonVisibility() {
@@ -134,8 +197,9 @@ public class AddStudentFormController {
 
         /*  Pop up address window                  */
         stage = popUpWindow(stagesAddress, Routes.ADDRESS_FORM);
-        if (!stage.isShowing()) return;
         /*-----------------------------------------*/
+
+        if (TransferObjects.recieveObject() == null) return;
 
         /*  Get address */
         Address address = (Address) TransferObjects.recieveObject();
@@ -157,6 +221,8 @@ public class AddStudentFormController {
         /*  Pop up contact window                  */
         Stage stage = popUpWindow(stagesContacts, Routes.CONTACT_FORM);
         /*-----------------------------------------*/
+
+        if (TransferObjects.recieveObject() == null) return;
 
         /*  Get address */
         Contact contact = (Contact) TransferObjects.recieveObject();
@@ -207,7 +273,7 @@ public class AddStudentFormController {
 
         /*  Create Student DTO Object   */
         StudentDTO studentDTO = new StudentDTO(
-                lblID.getId(),
+                lblID.getText(),
                 nic,
                 email,
                 new Name(fName, mName, lName),
@@ -220,16 +286,28 @@ public class AddStudentFormController {
         );
         /*------------------------------*/
 
+
         boolean isSaved = false;
         try {
-            isSaved = studentBO.registerStudent(studentDTO);
-            if (isSaved) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Added Success !").show();
-
-                txtNic.getScene().getWindow().hide();
+            if (isUpdate) {
+                boolean b = studentBO.updateStudent(studentDTO);
+                if (b) {
+                    new Alert(Alert.AlertType.CONFIRMATION, "Update Success !").show();
+                }
+            } else {
+                isSaved = studentBO.registerStudent(studentDTO);
+                if (isSaved) {
+                    new Alert(Alert.AlertType.CONFIRMATION, "Added Success !").show();
+                }
             }
+        } catch (PersistenceException e) {
+            new Alert(Alert.AlertType.WARNING, "Already added !").show();
         } catch (Exception e) {
+            e.printStackTrace();
             new Alert(Alert.AlertType.WARNING, "Added Failed !").show();
+        } finally {
+            initialize();
+            txtNic.getScene().getWindow().hide();
         }
     }
 
@@ -248,6 +326,7 @@ public class AddStudentFormController {
     void btnEditContactOnAction(ActionEvent event) {
         int selectedIndex = cmbContact.getSelectionModel().getSelectedIndex();
         stagesContacts.get(selectedIndex).show();
+
     }
 
     @FXML
@@ -280,5 +359,10 @@ public class AddStudentFormController {
         stagesContacts.remove(selectedIndex);
         cmbContact.getItems().remove(cmbContact.getSelectionModel().getSelectedItem());
         setButtonVisibility();
+    }
+
+    @FXML
+    void btnClearOnAction(ActionEvent event) {
+
     }
 }
