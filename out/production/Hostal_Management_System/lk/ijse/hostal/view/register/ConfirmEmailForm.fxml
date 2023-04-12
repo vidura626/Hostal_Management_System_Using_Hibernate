@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import java.lang.String?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="320.0" prefWidth="380.0" stylesheets="@../css/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.hostal.controller.register.ConfirmEmailFormController">
+   <children>
+      <TextField fx:id="txtCode" layoutX="25.0" layoutY="88.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="326.0" />
+      <JFXButton layoutX="205.0" layoutY="147.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#btnConfirmOnAction" prefHeight="40.0" prefWidth="174.0" stylesheets="@../css/style.css" text="Confirm">
+         <styleClass>
+            <String fx:value="btn" />
+            <String fx:value="btn-lightBlue" />
+            <String fx:value="btn-md" />
+         </styleClass></JFXButton>
+      <JFXButton layoutX="25.0" layoutY="147.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#btnResendCodeOnAction" prefHeight="40.0" prefWidth="174.0" stylesheets="@../css/style.css" text="ReSend">
+         <styleClass>
+            <String fx:value="btn" />
+            <String fx:value="btn-secondary" />
+            <String fx:value="btn-md" />
+         </styleClass></JFXButton>
+      <JFXButton layoutX="115.0" layoutY="261.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#btnChangeEmailOnAction" prefHeight="40.0" prefWidth="139.0" stylesheets="@../css/style.css" text="Change">
+         <styleClass>
+            <String fx:value="btn" />
+            <String fx:value="btn-secondary" />
+            <String fx:value="btn-md" />
+         </styleClass></JFXButton>
+      <TextField layoutX="25.0" layoutY="215.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#txtChangeEmailOnAction" prefHeight="40.0" prefWidth="326.0" promptText="Email" />
+      <Label layoutX="14.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="label-head" stylesheets="@../css/style.css" text="Confirmation" />
+      <Separator layoutX="9.0" layoutY="64.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="9.0" prefWidth="328.0" />
+      <Separator layoutX="9.0" layoutY="196.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="9.0" prefWidth="328.0" />
+   </children>
+</AnchorPane>
