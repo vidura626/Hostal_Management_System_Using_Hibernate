@@ -24,7 +24,6 @@ public class LoginDetailsRepositoryImple implements LoginDetailsRepository {
     public void delete(String id, Session session) throws Exception {
         LoginDetails get = session.load(LoginDetails.class, id);
         session.delete(get);
-        session.detach(get);
     }
 
     @Override

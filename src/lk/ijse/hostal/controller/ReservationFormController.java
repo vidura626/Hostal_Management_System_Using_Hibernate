@@ -17,6 +17,7 @@ import lk.ijse.hostal.dto.RoomDTO;
 import lk.ijse.hostal.dto.StudentDTO;
 import lk.ijse.hostal.entity.Reservation;
 import lk.ijse.hostal.entity.Room;
+import lk.ijse.hostal.entity.Status;
 import lk.ijse.hostal.entity.Student;
 import lk.ijse.hostal.service.ServiceFactory;
 import lk.ijse.hostal.service.custom.ReservationBO;
@@ -90,7 +91,7 @@ public class ReservationFormController {
     private JFXTextField txtAmount;
 
     @FXML
-    private JFXComboBox<Reservation.Status> cmbboxCheckoutType;
+    private JFXComboBox<Status> cmbboxCheckoutType;
 
     private final StudentBO studentBO = (StudentBO) ServiceFactory.getInstance().getBO(ServiceFactory.BOTypes.STUDENT);
     private final RoomBO roomBO = (RoomBO) ServiceFactory.getInstance().getBO(ServiceFactory.BOTypes.ROOM);
@@ -174,7 +175,7 @@ public class ReservationFormController {
     }
 
     private void loadCheckoutCmb() {
-        ObservableList<Reservation.Status> statuses = FXCollections.observableArrayList(Reservation.Status.FULL, Reservation.Status.NOT_FULL);
+        ObservableList<Status> statuses = FXCollections.observableArrayList(Status.FULL, Status.NOT_FULL);
         cmbboxCheckoutType.setItems(statuses);
     }
 
@@ -210,7 +211,7 @@ public class ReservationFormController {
     void cmbCheckOnAction(ActionEvent event) {
         txtAmount.setVisible(false);
         if (cmbboxCheckoutType.getSelectionModel().isEmpty()) return;
-        if (cmbboxCheckoutType.getSelectionModel().getSelectedItem().equals(Reservation.Status.NOT_FULL))
+        if (cmbboxCheckoutType.getSelectionModel().getSelectedItem().equals(Status.NOT_FULL))
             txtAmount.setVisible(true);
 
     }
@@ -225,8 +226,8 @@ public class ReservationFormController {
         java.util.Date dateFrom = Date.from(valueFrom.atStartOfDay(ZoneId.systemDefault()).toInstant());
         LocalDate valueTo = datepickerTo.getValue();
         java.util.Date dateto = Date.from(valueTo.atStartOfDay(ZoneId.systemDefault()).toInstant());
-        Reservation.Status status = cmbboxCheckoutType.getValue();
-        double keyMoneyAmount = status.equals(Reservation.Status.FULL) ? room.getKey_money() : Double.parseDouble(txtAmount.getText());
+        Status status = cmbboxCheckoutType.getValue();
+        double keyMoneyAmount = status.equals(Status.FULL) ? room.getKey_money() : Double.parseDouble(txtAmount.getText());
 
         /*  Qty -   */
         room.setQty(room.getQty() - 1);

@@ -22,7 +22,6 @@ public class RoomRepositoryImple implements RoomRepository {
     public void delete(String id, Session session) throws Exception {
         Room get = session.load(Room.class, id);
         session.delete(get);
-        session.detach(get);
     }
 
     @Override
@@ -33,7 +32,6 @@ public class RoomRepositoryImple implements RoomRepository {
     @Override
     public List<Room> getAll(Session session) {
         return session.createQuery("FROM Room").getResultList();
-
     }
 
     @Override

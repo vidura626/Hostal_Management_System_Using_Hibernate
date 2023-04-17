@@ -16,7 +16,7 @@ public class FactoryConfiguration {
     private SessionFactory sessionFactory;
 
     private FactoryConfiguration() {
-        Configuration configuration = new Configuration().configure()
+        Configuration configuration = new Configuration()
                 .addAnnotatedClass(LoginDetails.class)
                 .addAnnotatedClass(Reservation.class)
                 .addAnnotatedClass(Room.class)

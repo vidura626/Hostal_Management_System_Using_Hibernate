@@ -113,8 +113,12 @@ public class ManageStudentFormController {
                 Optional<ButtonType> buttonType = new Alert(Alert.AlertType.WARNING, "Are you sure ? ", ok, cancel).showAndWait();
                 if (buttonType.orElse(cancel) == ok) {
                     try {
-                        studentBO.deleteStudent(id);
-                        new Alert(Alert.AlertType.CONFIRMATION, "Student Removal Successfully ! ").show();
+                        boolean b = studentBO.deleteStudent(id);
+                        if(b){
+                            new Alert(Alert.AlertType.CONFIRMATION, "Student Removal Successfully ! ").show();
+                        }else {
+                            System.out.println("sfujsefwsf");
+                        }
                         setAllData();
                         tblManageStudent.refresh();
                     } catch (Exception e) {

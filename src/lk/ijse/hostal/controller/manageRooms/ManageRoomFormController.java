@@ -108,6 +108,10 @@ public class ManageRoomFormController {
 
 
             update.setOnAction(event -> {
+                if(tblManageRoom.getSelectionModel().isEmpty()){
+                    new Alert(Alert.AlertType.INFORMATION,"Select a row").show();
+                    return;
+                }
                 ButtonType ok = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
                 ButtonType cancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
 
@@ -140,6 +144,9 @@ public class ManageRoomFormController {
                 }
             });
 
+            delete.setDisable(false);
+            if (roomDTO.getReservations().size()>0)delete.setDisable(true);
+            System.out.println(roomDTO.getReservations().size());
             delete.setOnAction(event -> {
                 if(tblManageRoom.getSelectionModel().isEmpty()){
                     new Alert(Alert.AlertType.INFORMATION,"Select a row").show();

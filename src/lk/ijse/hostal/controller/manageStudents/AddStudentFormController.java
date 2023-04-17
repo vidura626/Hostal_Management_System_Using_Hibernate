@@ -5,6 +5,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
@@ -157,7 +159,50 @@ public class AddStudentFormController {
         datePickerDOB.setValue(studentDTO.getDob().toInstant()
                 .atZone(ZoneId.systemDefault())
                 .toLocalDate());
+        try {
 
+            for (int i = 0; i < contacts.size(); i++) {
+                /*  Contact */
+                Stage stageContacts = new Stage();
+                AnchorPane paneContact = FXMLLoader.load(getClass().getResource("/lk/ijse/hostal/view/manageStudents/ContactForm.fxml"));
+
+                JFXTextField description = (JFXTextField) paneContact.lookup("#txtDescription");
+                description.setText(contacts.get(i).getDescription());
+
+                JFXTextField number = (JFXTextField) paneContact.lookup("#txtContactNumber");
+                number.setText(contacts.get(i).getNumber());
+
+                stageContacts.setScene(new Scene(paneContact));
+                stagesContacts.add(stageContacts);
+
+            }
+            /*----------*/
+
+            /*  Address */
+            for (int i = 0; i < addresses.size(); i++) {
+                AnchorPane paneAddress = FXMLLoader.load(getClass().getResource("/lk/ijse/hostal/view/manageStudents/AddressForm.fxml"));
+                Stage stageAddress = new Stage();
+
+                JFXTextField houseNo = (JFXTextField) paneAddress.lookup("#txtHouseNo");
+                houseNo.setText(addresses.get(i).getHouseNo());
+
+                JFXTextField streetNumber = (JFXTextField) paneAddress.lookup("#txtStreetName");
+                streetNumber.setText(addresses.get(i).getStreetName());
+
+                JFXTextField town = (JFXTextField) paneAddress.lookup("#txtTown");
+                town.setText(addresses.get(i).getHouseNo());
+
+                JFXTextField postalCode = (JFXTextField) paneAddress.lookup("#txtPostalCode");
+                postalCode.setText(addresses.get(i).getPostalCode());
+
+                stageAddress.setScene(new Scene(paneAddress));
+                stagesAddress.add(stageAddress);
+            }
+            /*----------*/
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         isUpdate = true;
     }
 
