@@ -56,11 +56,10 @@ public class LoginFormController {
                     Stage window = (Stage) txtUsername.getScene().getWindow();
                     window.setTitle("Dashboard");
                     window.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/DashboardForm.fxml"))));
+                    return;
                 } else {
-                    new Alert(Alert.AlertType.INFORMATION, "Username or passoword is not matched !").show();
+                    new Alert(Alert.AlertType.INFORMATION, "Username or password is not matched !").show();
                 }
-            } else {
-                new Alert(Alert.AlertType.INFORMATION, "Account not found !").show();
             }
         }
     }

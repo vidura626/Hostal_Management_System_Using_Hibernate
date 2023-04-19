@@ -26,10 +26,14 @@ public class FormValidate {
         regexList.put("StreetNo","^.*?\\s[N]{0,1}([-a-zA-Z0-9]+)\\s*\\w*$");
         regexList.put("Town","^([a-zA-Z\\u0080-\\u024F]+(?:. |-| |'))*[a-zA-Z\\u0080-\\u024F]*$");
         regexList.put("PostalCode","^\\d{5}(?:[-\\s]\\d{4})?$");
+        regexList.put("username","^(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]$");
     }
     public static boolean check(RegexTypes types,String text){
         String regex = null;
         switch (types){
+            case USERNAME:
+                regex = regexList.get("username").toString();
+                break;
             case POSTAL_CODE:
                 regex = regexList.get("PostalCode").toString();
                 break;

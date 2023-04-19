@@ -14,13 +14,17 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import lk.ijse.hostal.controller.TM.MngUserTM;
+import lk.ijse.hostal.controller.util.FormValidate;
 import lk.ijse.hostal.controller.util.Navigation;
+import lk.ijse.hostal.controller.util.RegexTypes;
 import lk.ijse.hostal.controller.util.Routes;
 import lk.ijse.hostal.dto.LoginDetailsDTO;
 import lk.ijse.hostal.service.ServiceFactory;
 import lk.ijse.hostal.service.custom.LoginDetailsBO;
 import lk.ijse.hostal.util.TransferObjects;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -65,6 +69,8 @@ public class UserFormController {
     @FXML
     private JFXButton btnAddOrUpdate;
 
+    private ArrayList<JFXTextField> textFields = new ArrayList<>();
+
     @FXML
     private Label lblUserId;
 
@@ -73,6 +79,8 @@ public class UserFormController {
     private final LoginDetailsBO loginDetailsBO = (LoginDetailsBO) ServiceFactory.getInstance().getBO(ServiceFactory.BOTypes.LOGIN_DETAILS);
 
     public void initialize() {
+        textFields.clear();
+        Collections.addAll(textFields, txtName, txtEmail, txtUsername);
         btnAddOrUpdate.setText("ADD");
         setCellValueFactory();
         loadData();
@@ -145,10 +153,10 @@ public class UserFormController {
                     ButtonType cancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
 
                     Optional<ButtonType> buttonType = new Alert(Alert.AlertType.INFORMATION, "Are you sure?", ok, cancel).showAndWait();
-                    if(buttonType.orElse(cancel)==ok){
+                    if (buttonType.orElse(cancel) == ok) {
                         boolean isDelete = loginDetailsBO.delete(selectedItem.getId());
                         if (isDelete) {
-                            new Alert(Alert.AlertType.CONFIRMATION,"User Deleted !").show();
+                            new Alert(Alert.AlertType.CONFIRMATION, "User Deleted !").show();
                             tblManageUser.getItems().remove(selectedItem);
                             tblManageUser.refresh();
                         }
@@ -156,7 +164,7 @@ public class UserFormController {
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                }finally {
+                } finally {
                     initialize();
                 }
             });
@@ -173,6 +181,11 @@ public class UserFormController {
 
     @FXML
     void btnAddUserOnAction(ActionEvent event) {
+        /*  Validation  */
+        boolean validate = FormValidate.validate(textFields, RegexTypes.NAME, RegexTypes.EMAIL, RegexTypes.USERNAME);
+        if (!validate) return;
+        /*--------------*/
+
         txtPassword1.setFocusColor(null);
         txtPassword2.setFocusColor(null);
 
@@ -183,8 +196,8 @@ public class UserFormController {
         String pass_01 = txtPassword1.getText();
         String pass_02 = txtPassword2.getText();
 
-        if (!pass_01.equals(pass_02)) {
-            new Alert(Alert.AlertType.WARNING, "Passwords are not matched !").show();
+        if (!pass_01.equals(pass_02)||pass_01.equals("")||pass_02.equals("")) {
+            new Alert(Alert.AlertType.WARNING, "Check the password fields again !").show();
             txtPassword1.setFocusColor(Paint.valueOf("red"));
             txtPassword2.setFocusColor(Paint.valueOf("red"));
             txtPassword1.requestFocus();
