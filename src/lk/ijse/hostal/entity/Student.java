@@ -55,4 +55,9 @@ public class Student {
     Date joinedDate;
     @OneToMany(mappedBy = "studentId", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     List<Reservation> reservations;
+
+    @Override
+    public String toString() {
+        return id.concat(" : ").concat(name.getFName());
+    }
 }

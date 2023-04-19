@@ -20,4 +20,9 @@ public class Room {
     int qty;
     @OneToMany(mappedBy = "room",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     List<Reservation> reservations;
+
+    @Override
+    public String toString() {
+        return room_type_id.concat(" ").concat(type.toString());
+    }
 }

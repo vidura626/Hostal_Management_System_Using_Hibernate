@@ -12,6 +12,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.hostal.controller.TM.ReservationTM;
+import lk.ijse.hostal.controller.util.FormValidate;
+import lk.ijse.hostal.controller.util.RegexTypes;
 import lk.ijse.hostal.dto.ReservationDTO;
 import lk.ijse.hostal.dto.RoomDTO;
 import lk.ijse.hostal.dto.StudentDTO;
@@ -31,6 +33,8 @@ import org.hibernate.Transaction;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -93,11 +97,15 @@ public class ReservationFormController {
     @FXML
     private JFXComboBox<Status> cmbboxCheckoutType;
 
+    private ArrayList<JFXTextField> textFields = new ArrayList<>();
+
     private final StudentBO studentBO = (StudentBO) ServiceFactory.getInstance().getBO(ServiceFactory.BOTypes.STUDENT);
     private final RoomBO roomBO = (RoomBO) ServiceFactory.getInstance().getBO(ServiceFactory.BOTypes.ROOM);
     private final ReservationBO reservationBO = (ReservationBO) ServiceFactory.getInstance().getBO(ServiceFactory.BOTypes.RESERVATION);
 
     public void initialize() {
+        textFields.clear();
+        Collections.addAll(textFields,txtAmount);
         loadStudentsCmb();
         loadRoomsCmb();
         loadCheckoutCmb();
@@ -218,16 +226,30 @@ public class ReservationFormController {
 
     @FXML
     void btnReserveOnAction(ActionEvent event) {
+
+        //Validations
+        if(cmbRoom.getSelectionModel().isEmpty()
+                ||cmbSttd.getSelectionModel().isEmpty()
+                ||cmbboxCheckoutType.getSelectionModel().isEmpty()
+                ||datepickerFrom.getValue()==null
+                ||datepickerTo.getValue()==null){
+            new Alert(Alert.AlertType.WARNING,"Check the form again !").show();
+            return;
+        }
+        boolean validate = FormValidate.validate(textFields, RegexTypes.AMOUNT);
+        if(!validate){
+            return;
+        }
+
         String res_id = lblId.getText();
         StudentDTO std = cmbSttd.getSelectionModel().getSelectedItem();
         RoomDTO room = cmbRoom.getSelectionModel().getSelectedItem();
-
         LocalDate valueFrom = datepickerTo.getValue();
         java.util.Date dateFrom = Date.from(valueFrom.atStartOfDay(ZoneId.systemDefault()).toInstant());
         LocalDate valueTo = datepickerTo.getValue();
         java.util.Date dateto = Date.from(valueTo.atStartOfDay(ZoneId.systemDefault()).toInstant());
         Status status = cmbboxCheckoutType.getValue();
-        double keyMoneyAmount = status.equals(Status.FULL) ? room.getKey_money() : Double.parseDouble(txtAmount.getText());
+        String keyMoneyAmount = status.equals(Status.FULL) ? String.valueOf(room.getKey_money()) : txtAmount.getText();
 
         /*  Qty -   */
         room.setQty(room.getQty() - 1);
@@ -237,8 +259,8 @@ public class ReservationFormController {
                     res_id,
                     dateFrom,
                     dateto,
-                    keyMoneyAmount,
-                    room.getKey_money() - keyMoneyAmount,
+                    Double.parseDouble(keyMoneyAmount),
+                    room.getKey_money() - Double.parseDouble(keyMoneyAmount),
                     status,
                     Convertor.toStudent(std),
                     Convertor.toRoom(room)
