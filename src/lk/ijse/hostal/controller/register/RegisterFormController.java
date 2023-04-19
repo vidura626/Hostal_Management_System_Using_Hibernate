@@ -53,11 +53,6 @@ public class RegisterFormController {
     private List<Address> addresses = new ArrayList<>();
 
     @FXML
-    void btnAddOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
     void btnRegisterOnAction(ActionEvent event) throws Exception {
         String id = lblId.getText();
         String fName = txtFName.getText();

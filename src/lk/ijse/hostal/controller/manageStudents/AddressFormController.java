@@ -4,10 +4,15 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
+import lk.ijse.hostal.controller.util.FormValidate;
+import lk.ijse.hostal.controller.util.RegexTypes;
 import lk.ijse.hostal.entity.embedded.Address;
 import lk.ijse.hostal.util.TransferObjects;
 
-public class    AddressFormController {
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class AddressFormController {
 
     @FXML
     private JFXTextField txtHouseNo;
@@ -21,14 +26,20 @@ public class    AddressFormController {
     @FXML
     private JFXTextField txtPostalCode;
 
+    private ArrayList<JFXTextField> textFields = new ArrayList<>();
     private Stage stage;
 
     public void initialize() {
+        textFields.clear();
+        Collections.addAll(textFields, txtHouseNo, txtStreetName, txtTown, txtPostalCode);
         TransferObjects.sendObject(null);
     }
 
     @FXML
     void btnAddOnAction(ActionEvent event) {
+        //Validation
+        boolean validate = FormValidate.validate(textFields, RegexTypes.HOUSE_NO, RegexTypes.STREET_NAME, RegexTypes.TOWN_NAME, RegexTypes.POSTAL_CODE);
+        if (!validate) return;
         String houseNo = txtHouseNo.getText();
         String streetName = txtStreetName.getText();
         String town = txtTown.getText();

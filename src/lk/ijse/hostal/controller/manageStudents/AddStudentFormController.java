@@ -13,8 +13,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
+import lk.ijse.hostal.controller.util.FormValidate;
 import lk.ijse.hostal.controller.util.Navigation;
+import lk.ijse.hostal.controller.util.RegexTypes;
 import lk.ijse.hostal.controller.util.Routes;
 import lk.ijse.hostal.dto.StudentDTO;
 import lk.ijse.hostal.dto.embedded.Name;
@@ -30,6 +33,7 @@ import javax.persistence.PersistenceException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -98,6 +102,7 @@ public class AddStudentFormController {
     @FXML
     private JFXButton btnRegister;
 
+    private ArrayList<JFXTextField> textFields = new ArrayList<>();
     private boolean isUpdate = false;
 
     private Stage stage = new Stage();
@@ -107,6 +112,8 @@ public class AddStudentFormController {
 
 
     public void initialize() {
+        textFields.clear();
+        Collections.addAll(textFields, txtFName, txtMName, txtLName, txtEmail, txtNic);
         setId();
         setButtonVisibility();
         update();
@@ -285,6 +292,19 @@ public class AddStudentFormController {
 
     @FXML
     void btnRegisterOnAction(ActionEvent event) {
+        /*  Validation  */
+        boolean validate = FormValidate.validate(textFields, RegexTypes.NAME, RegexTypes.NAME, RegexTypes.NAME,
+                RegexTypes.EMAIL, RegexTypes.NIC);
+        if (!validate) return;
+        if (datePickerDOB.getValue() == null
+                || tgleGender.selectedToggleProperty().isNull().getValue()
+                || cmbAddress.getSelectionModel().isEmpty()
+                || cmbContact.getSelectionModel().isEmpty()) {
+            new Alert(Alert.AlertType.WARNING, "Fill the form correctly !").show();
+            return;
+        }
+        /*--------------*/
+
         /*  Name    */
         String fName = txtFName.getText();
         String mName = txtMName.getText();
@@ -354,6 +374,16 @@ public class AddStudentFormController {
             initialize();
             txtNic.getScene().getWindow().hide();
         }
+    }
+
+    private void setFocusColor() {
+        txtFName.setFocusColor(Paint.valueOf("GREEN"));
+        txtMName.setFocusColor(Paint.valueOf("GREEN"));
+        txtLName.setFocusColor(Paint.valueOf("GREEN"));
+        txtEmail.setFocusColor(Paint.valueOf("GREEN"));
+        txtNic.setFocusColor(Paint.valueOf("GREEN"));
+        cmbContact.setFocusColor(Paint.valueOf("GREEN"));
+        cmbAddress.setFocusColor(Paint.valueOf("GREEN"));
     }
 
     @FXML
