@@ -12,14 +12,19 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Paint;
 import javafx.util.StringConverter;
 import lk.ijse.hostal.controller.TM.MngRoomTM;
+import lk.ijse.hostal.controller.util.FormValidate;
+import lk.ijse.hostal.controller.util.RegexTypes;
 import lk.ijse.hostal.dto.RoomDTO;
 import lk.ijse.hostal.service.ServiceFactory;
 import lk.ijse.hostal.service.custom.RoomBO;
 
 import javax.persistence.PersistenceException;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,12 +64,16 @@ public class ManageRoomFormController {
     @FXML
     private JFXComboBox<RoomDTO.RoomType> cmbType;
 
+    private ArrayList<JFXTextField> textFields = new ArrayList<>();
     RoomBO roomBO = (RoomBO) ServiceFactory.getInstance().getBO(ServiceFactory.BOTypes.ROOM);
 
     public void initialize() {
+        textFields.clear();
+        Collections.addAll(textFields, txtId, txtPrice, txtQty);
         setCellValueFactory();
         setAllData();
         setComboBox();
+        setDefaultFocusColours();
 
         tblManageRoom.setEditable(true);
         colType.setCellFactory(ComboBoxTableCell.forTableColumn(
@@ -75,6 +84,10 @@ public class ManageRoomFormController {
         ));
         colQty.setCellFactory(TextFieldTableCell.forTableColumn());
         colPrice.setCellFactory(TextFieldTableCell.forTableColumn());
+    }
+
+    private void setDefaultFocusColours() {
+        cmbType.setFocusColor(null);
     }
 
     private void setComboBox() {
@@ -108,10 +121,11 @@ public class ManageRoomFormController {
 
 
             update.setOnAction(event -> {
-                if(tblManageRoom.getSelectionModel().isEmpty()){
-                    new Alert(Alert.AlertType.INFORMATION,"Select a row").show();
+                if (tblManageRoom.getSelectionModel().isEmpty()) {
+                    new Alert(Alert.AlertType.INFORMATION, "Select a row").show();
                     return;
                 }
+
                 ButtonType ok = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
                 ButtonType cancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
 
@@ -121,6 +135,12 @@ public class ManageRoomFormController {
                 int selectedIndex = tblManageRoom.getSelectionModel().getSelectedIndex();
 
                 if (buttonType.orElse(cancel) == ok) {
+                    if (selectedItem.getType().equals(original.getType())
+                            || Integer.parseInt(selectedItem.getQty()) == original.getQty()
+                            || Double.parseDouble(selectedItem.getPrice()) == original.getKey_money()) {
+                        new Alert(Alert.AlertType.INFORMATION,"No changes").show();
+                        return;
+                    }
                     try {
                         boolean b = roomBO.updateRoom(new RoomDTO(
                                 selectedItem.getId(),
@@ -133,22 +153,22 @@ public class ManageRoomFormController {
                     } catch (Exception e) {
                         e.printStackTrace();
                         new Alert(Alert.AlertType.ERROR, "Not Updated !").show();
-                    }finally {
+                    } finally {
                         setAllData();
                     }
                 } else {
                     selectedItem.setPrice(String.valueOf(original.getKey_money()));
                     selectedItem.setQty(String.valueOf(original.getQty()));
                     selectedItem.setType(original.getType());
-                    tblManageRoom.getItems().set(selectedIndex,selectedItem);
+                    tblManageRoom.getItems().set(selectedIndex, selectedItem);
                 }
             });
 
             delete.setDisable(false);
-            if (roomDTO.getReservations().size()>0)delete.setDisable(true);
+            if (roomDTO.getReservations().size() > 0) delete.setDisable(true);
             delete.setOnAction(event -> {
-                if(tblManageRoom.getSelectionModel().isEmpty()){
-                    new Alert(Alert.AlertType.INFORMATION,"Select a row").show();
+                if (tblManageRoom.getSelectionModel().isEmpty()) {
+                    new Alert(Alert.AlertType.INFORMATION, "Select a row").show();
                     return;
                 }
                 ButtonType ok = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
@@ -184,14 +204,16 @@ public class ManageRoomFormController {
     @FXML
     void editQty(TableColumn.CellEditEvent event) {
         MngRoomTM selectedItem = tblManageRoom.getSelectionModel().getSelectedItem();
-        selectedItem.setQty(event.getNewValue().toString());
+        boolean check = FormValidate.check(RegexTypes.QTY, event.getNewValue().toString());
+        if (check) selectedItem.setQty(event.getNewValue().toString());
 
     }
 
     @FXML
     void editPrice(TableColumn.CellEditEvent event) {
         MngRoomTM selectedItem = tblManageRoom.getSelectionModel().getSelectedItem();
-        selectedItem.setPrice(event.getNewValue().toString());
+        boolean check = FormValidate.check(RegexTypes.AMOUNT, event.getNewValue().toString());
+        if (check) selectedItem.setPrice(event.getNewValue().toString());
     }
     /*--------------*/
 
@@ -207,6 +229,18 @@ public class ManageRoomFormController {
 
     @FXML
     void btnAddRoomOnAction() {
+        //Validation
+        boolean validate = FormValidate.validate(textFields, RegexTypes.ROOM_ID, RegexTypes.AMOUNT, RegexTypes.QTY);
+        if (!validate) {
+            return;
+        }
+        System.out.println("sediojfse");
+        if (cmbType.getSelectionModel().isEmpty()) {
+            cmbType.setFocusColor(Paint.valueOf("RED"));
+            cmbType.requestFocus();
+            return;
+        }
+
         try {
             String roomId = txtId.getText();
             RoomDTO.RoomType type = cmbType.getValue();
@@ -237,7 +271,7 @@ public class ManageRoomFormController {
         } catch (Exception e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "Room is not added !").show();
-        }finally {
+        } finally {
             setAllData();
             clear();
         }
