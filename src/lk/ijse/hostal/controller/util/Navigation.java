@@ -10,6 +10,7 @@ public class Navigation {
     public static void navigate(Routes routes, AnchorPane pane) throws Exception {
         pane.getChildren().clear();
         Stage window = (Stage) pane.getScene().getWindow();
+        window.setResizable(false);
         String location = null;
 
         switch (routes) {
