@@ -11,23 +11,23 @@ import java.util.List;
 
 public class LoginDetailsRepositoryImple implements LoginDetailsRepository {
     @Override
-    public String add(LoginDetails obj, Session session) throws Exception {
-       return (String) session.save(obj);
+    public Integer add(LoginDetails obj, Session session) throws Exception {
+        return (Integer) session.save(obj);
     }
 
     @Override
     public void update(LoginDetails obj, Session session) throws Exception {
-        session.update(obj);
+        session.saveOrUpdate(obj);
     }
 
     @Override
-    public void delete(String id, Session session) throws Exception {
+    public void delete(Integer id, Session session) throws Exception {
         LoginDetails get = session.load(LoginDetails.class, id);
         session.delete(get);
     }
 
     @Override
-    public LoginDetails search(String id, Session session) {
+    public LoginDetails search(Integer id, Session session) {
         return session.get(LoginDetails.class, id);
     }
 
@@ -39,12 +39,16 @@ public class LoginDetailsRepositoryImple implements LoginDetailsRepository {
 
     @Override
     public String generateNextId(Session session) {
-        return null;
+        List resultList = session.createQuery("SELECT id FROM LoginDetails ORDER BY id DESC").setMaxResults(1).getResultList();
+        if (resultList.size() > 0) {
+            return String.valueOf((int) resultList.get(0) + 1);
+        }
+        return String.valueOf(1);
     }
 
     @Override
-    public boolean check(String username, String password, Session session) {
-        LoginDetails search = search(username, session);
+    public boolean check(int id, String password, Session session) {
+        LoginDetails search = search(id, session);
         return search.getPassword().equals(password);
     }
 }

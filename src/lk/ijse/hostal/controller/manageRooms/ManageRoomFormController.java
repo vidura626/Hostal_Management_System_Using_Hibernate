@@ -146,7 +146,6 @@ public class ManageRoomFormController {
 
             delete.setDisable(false);
             if (roomDTO.getReservations().size()>0)delete.setDisable(true);
-            System.out.println(roomDTO.getReservations().size());
             delete.setOnAction(event -> {
                 if(tblManageRoom.getSelectionModel().isEmpty()){
                     new Alert(Alert.AlertType.INFORMATION,"Select a row").show();

@@ -7,10 +7,11 @@ import lk.ijse.hostal.service.SuperBO;
 import java.util.List;
 
 public interface LoginDetailsBO extends SuperBO {
-    LoginDetailsDTO search(String username) throws Exception;
-    boolean check(String username, String password);
+    LoginDetailsDTO search(int id) throws Exception;
+    boolean check(int id, String password) throws Exception;
     boolean register(LoginDetailsDTO loginDetailsDTO) throws Exception;
     boolean update(LoginDetailsDTO loginDetailsDTO) throws Exception;
-    boolean delete(String username) throws Exception;
+    boolean delete(int id) throws Exception;
+    int getLastId() throws Exception;
     List<LoginDetailsDTO> getAll();
 }

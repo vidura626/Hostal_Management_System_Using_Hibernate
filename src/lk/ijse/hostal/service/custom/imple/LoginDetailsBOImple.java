@@ -17,18 +17,19 @@ public class LoginDetailsBOImple implements LoginDetailsBO {
     private LoginDetailsRepository loginRepo = (LoginDetailsRepository) RepoFactory.getInstance().getRepository(RepoFactory.Repo.LOGIN);
 
     @Override
-    public LoginDetailsDTO search(String username) {
+    public LoginDetailsDTO search(int id) {
         openSession();
-        LoginDetailsDTO loginDetailsDTO = Convertor.fromLoginDetails(loginRepo.search(username, session));
+        LoginDetailsDTO loginDetailsDTO = Convertor.fromLoginDetails(loginRepo.search(id, session));
         closeAndCommitSession();
         return loginDetailsDTO;
     }
 
     @Override
-    public boolean check(String username, String password) {
-        List<LoginDetailsDTO> collect = getAll().stream().filter(loginDetailsDTO -> loginDetailsDTO.getUsername().equals(username)).collect(Collectors.toList());
-        if (collect.size() > 0) return true;
-        return false;
+    public boolean check(int id, String password) throws Exception {
+        openSession();
+        boolean check = loginRepo.check(id, password, session);
+        closeAndCommitSession();
+        return check;
     }
 
     @Override
@@ -41,18 +42,26 @@ public class LoginDetailsBOImple implements LoginDetailsBO {
 
     @Override
     public boolean update(LoginDetailsDTO loginDetailsDTO) throws Exception {
-        Transaction transaction = session.beginTransaction();
+        openSession();
         loginRepo.update(Convertor.toLoginDetails(loginDetailsDTO), session);
         closeAndCommitSession();
         return true;
     }
 
     @Override
-    public boolean delete(String username) throws Exception {
-        Transaction transaction = session.beginTransaction();
-        loginRepo.delete(username, session);
+    public boolean delete(int id) throws Exception {
+        openSession();
+        loginRepo.delete(id, session);
         closeAndCommitSession();
         return true;
+    }
+
+    @Override
+    public int getLastId() throws Exception {
+        openSession();
+        int i = Integer.parseInt(loginRepo.generateNextId(session));
+        closeAndCommitSession();
+        return i;
     }
 
     @Override

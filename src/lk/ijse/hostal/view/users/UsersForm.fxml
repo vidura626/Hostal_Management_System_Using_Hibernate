@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import java.lang.String?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="pane" onMouseClicked="#paneOnMouseClickOnAction" prefHeight="600.0" prefWidth="900.0" stylesheets="@../css/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.hostal.controller.users.UserFormController">
+   <children>
+      <JFXButton fx:id="btnAddOrUpdate" layoutX="720.0" layoutY="118.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#btnAddUserOnAction" prefHeight="40.0" prefWidth="150.0" stylesheets="@../css/style.css" text="ADD">
+         <styleClass>
+            <String fx:value="btn" />
+            <String fx:value="btn-lg" />
+            <String fx:value="btn-primary" />
+         </styleClass></JFXButton>
+      <JFXTextField fx:id="txtName" labelFloat="true" layoutX="28.0" layoutY="78.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="300.0" promptText="Name : " />
+      <JFXTextField fx:id="txtUsername" labelFloat="true" layoutX="28.0" layoutY="139.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="300.0" promptText="Username : " />
+      <JFXButton layoutX="720.0" layoutY="177.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#btnClearOnAction" prefHeight="40.0" prefWidth="150.0" stylesheets="@../css/style.css" text="CLEAR">
+         <styleClass>
+            <String fx:value="btn" />
+            <String fx:value="btn-lg" />
+            <String fx:value="btn-secondary" />
+         </styleClass></JFXButton>
+      <Separator layoutX="15.0" layoutY="252.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="7.0" prefWidth="862.0" />
+      <Label layoutX="14.0" layoutY="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="300.0" styleClass="label-head" stylesheets="@../css/style.css" text="Manage Users">
+         <font>
+            <Font name="Serif Bold" size="36.0" />
+         </font>
+      </Label>
+      <Separator layoutX="681.0" layoutY="114.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="108.0" prefWidth="0.0" />
+      <Separator layoutX="10.0" layoutY="59.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="7.0" prefWidth="862.0" />
+      <ScrollPane layoutX="15.0" layoutY="275.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="316.0" prefWidth="862.0">
+         <content>
+            <TableView fx:id="tblManageUser" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="313.0" prefWidth="859.0" styleClass="filler" stylesheets="@../css/style.css">
+               <columns>
+                  <TableColumn fx:id="colUsername" prefWidth="75.0" text="Username" />
+                  <TableColumn fx:id="colName" prefWidth="75.0" text="Name" />
+                  <TableColumn fx:id="colEmail" prefWidth="75.0" text="Email" />
+                  <TableColumn fx:id="colUpdate" prefWidth="75.0" text="Update" />
+                  <TableColumn fx:id="colDelete" prefWidth="75.0" text="Delete" />
+               </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+         </content>
+      </ScrollPane>
+      <JFXTextField fx:id="txtEmail" labelFloat="true" layoutX="359.0" layoutY="77.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="300.0" promptText="Email : " />
+      <JFXPasswordField fx:id="txtPassword1" labelFloat="true" layoutX="28.0" layoutY="203.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="300.0" promptText="Password : " />
+      <JFXPasswordField fx:id="txtPassword2" labelFloat="true" layoutX="359.0" layoutY="202.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="300.0" promptText="Re-type Password : " />
+      <Label layoutX="659.0" layoutY="19.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="label-id" stylesheets="@../css/style.css" text="User Id : " />
+      <Label fx:id="lblUserId" alignment="CENTER" layoutX="751.0" layoutY="19.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="108.0" text="XXXX">
+         <styleClass>
+            <String fx:value="label-green" />
+            <String fx:value="label-id" />
+         </styleClass>
+      </Label>
+   </children>
+</AnchorPane>

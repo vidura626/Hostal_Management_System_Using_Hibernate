@@ -15,18 +15,12 @@ import java.util.List;
 @NoArgsConstructor
 public class LoginDetails implements Serializable {
     @Id
+    private int id;
     private String username;
     /*
         QR Code generator with email
     */
     String name;
-
-    @ElementCollection
-    @CollectionTable(
-            name = "adminAddresses",
-            joinColumns = @JoinColumn()
-    )
-    private List<Address> addresses;
     private String email;
     private String password;
 }

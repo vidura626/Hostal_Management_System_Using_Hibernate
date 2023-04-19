@@ -13,6 +13,14 @@ public class Navigation {
         String location = null;
 
         switch (routes) {
+            case USER_CONFIRM:
+                window.setTitle("Confirm");
+                location="/users/ConfirmPasswordForm.fxml";
+                break;
+            case USERS:
+                window.setTitle("User");
+                location="/users/UsersForm.fxml";
+                break;
             case VIEW_MORE:
                 window.setTitle("View more");
                 location = "/manageStudents/ViewReservtionsForm.fxml";
@@ -39,7 +47,7 @@ public class Navigation {
                 break;
             case REGISTER_2:
                 window.setTitle("Confirmation");
-                location = "/register/ConfirmEmailForm.fxml";
+                location = "/register/ConfirmPasswordForm.fxml";
                 break;
             case STUDENTS_ADD:
                 window.setTitle("Add New Student");

@@ -13,11 +13,10 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 public class LoginDetailsDTO {
-    private String id;
     //    Want to add an image using web cam and QR Code generator with email
-    private Name name;
-    private List<Address> addresses = new ArrayList<>();
-    private String email;
+    private int id;
     private String username;
+    private String name;
+    private String email;
     private String password;
 }

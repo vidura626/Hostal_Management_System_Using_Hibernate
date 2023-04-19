@@ -103,12 +103,22 @@ public class Convertor {
     }
 
     public static LoginDetailsDTO fromLoginDetails(LoginDetails loginDetails) {
-
-        return null;
+        return new LoginDetailsDTO(
+                loginDetails.getId(),
+                loginDetails.getUsername(),
+                loginDetails.getName(),
+                loginDetails.getEmail(),
+                loginDetails.getPassword()
+        );
     }
 
     public static LoginDetails toLoginDetails(LoginDetailsDTO loginDetails) {
-
-        return null;
+        return new LoginDetails(
+                loginDetails.getId(),
+                loginDetails.getUsername(),
+                loginDetails.getName(),
+                loginDetails.getEmail(),
+                loginDetails.getPassword()
+        );
     }
 }

@@ -12,10 +12,12 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 import lk.ijse.hostal.controller.util.Navigation;
 import lk.ijse.hostal.controller.util.Routes;
+import lk.ijse.hostal.dto.LoginDetailsDTO;
 import lk.ijse.hostal.service.ServiceFactory;
 import lk.ijse.hostal.service.custom.LoginDetailsBO;
 
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 public class LoginFormController {
     @FXML
@@ -29,8 +31,12 @@ public class LoginFormController {
 
     LoginDetailsBO loginDetailsBO = (LoginDetailsBO) ServiceFactory.getInstance().getBO(ServiceFactory.BOTypes.LOGIN_DETAILS);
 
-    public void initialize() throws IOException {
-
+    public void initialize()  {
+        try {
+            loginDetailsBO.register(new LoginDetailsDTO(1,"User","user","user@gmail.com","1234"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

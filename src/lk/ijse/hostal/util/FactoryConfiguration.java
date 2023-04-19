@@ -9,6 +9,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import java.io.IOException;
+import java.util.Properties;
+
 
 public class FactoryConfiguration {
     private static FactoryConfiguration factoryConfiguration;
@@ -16,12 +19,19 @@ public class FactoryConfiguration {
     private SessionFactory sessionFactory;
 
     private FactoryConfiguration() {
-        Configuration configuration = new Configuration()
-                .addAnnotatedClass(LoginDetails.class)
-                .addAnnotatedClass(Reservation.class)
+//        Properties properties=new Properties();
+//        try {
+//            properties.load(ClassLoader.getSystemClassLoader().getResourceAsStream("Hibernate.properties"));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        Configuration configuration=new Configuration().
+                addAnnotatedClass(Student.class)
                 .addAnnotatedClass(Room.class)
-                .addAnnotatedClass(Student.class);
-        sessionFactory = configuration.buildSessionFactory();
+                .addAnnotatedClass(LoginDetails.class)
+                .addAnnotatedClass(Reservation.class);
+//        configuration.addProperties(properties);
+        sessionFactory=configuration.buildSessionFactory();
     }
 
     public static FactoryConfiguration getInstance() {

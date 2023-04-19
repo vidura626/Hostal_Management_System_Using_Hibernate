@@ -49,5 +49,12 @@
       </JFXButton>
       <JFXButton layoutX="1005.0" layoutY="24.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#btnLogOnAction" text="Log out" />
       <Separator layoutX="9.0" layoutY="60.0" prefHeight="9.0" prefWidth="1082.0" />
+      <JFXButton buttonType="RAISED" layoutX="14.0" layoutY="366.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#btnUsersOnAction" stylesheets="@css/style.css" text="Users">
+         <styleClass>
+            <String fx:value="btn" />
+            <String fx:value="btn-lg" />
+            <String fx:value="btn-primary" />
+         </styleClass>
+      </JFXButton>
    </children>
 </AnchorPane>

@@ -41,4 +41,10 @@ public class DashboardFormController {
         Navigation.navigate(Routes.RESERVATIONS, paneContainer);
     }
 
+    @FXML
+    void btnUsersOnAction(ActionEvent event) throws Exception {
+        Navigation.navigate(Routes.USERS, paneContainer);
+
+    }
+
 }
