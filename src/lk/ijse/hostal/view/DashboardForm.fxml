@@ -26,7 +26,7 @@
          </styleClass>
       </JFXButton>
       <Label alignment="CENTER" layoutX="715.0" layoutY="24.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="label-id" stylesheets="@css/style.css" text="Hello : " />
-      <Label fx:id="lblAdminName" alignment="CENTER" layoutX="798.0" layoutY="24.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="171.0" stylesheets="@css/style.css" text="xxxxx">
+      <Label fx:id="lblAdminName" alignment="CENTER" layoutX="798.0" layoutY="24.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="171.0" stylesheets="@css/style.css" text="xxxxx" textFill="#f9fff2">
          <styleClass>
             <String fx:value="label-id" />
             <String fx:value="label-blue" />

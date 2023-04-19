@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.hostal.controller.util.Navigation;
 import lk.ijse.hostal.controller.util.Routes;
+import lk.ijse.hostal.util.TransferObjects;
 
 public class DashboardFormController {
 
@@ -15,6 +16,11 @@ public class DashboardFormController {
 
     @FXML
     private AnchorPane paneContainer;
+
+    public void initialize(){
+        lblAdminName.setText(String.valueOf(TransferObjects.recieveObject()));
+        TransferObjects.clear();
+    }
 
     @FXML
     void btnDashboardOnAction(ActionEvent event) throws Exception {

@@ -1,9 +1,11 @@
 package lk.ijse.hostal.controller;
 
+import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -15,8 +17,12 @@ import lk.ijse.hostal.controller.util.Routes;
 import lk.ijse.hostal.dto.LoginDetailsDTO;
 import lk.ijse.hostal.service.ServiceFactory;
 import lk.ijse.hostal.service.custom.LoginDetailsBO;
+import lk.ijse.hostal.util.TransferObjects;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class LoginFormController {
@@ -27,24 +33,36 @@ public class LoginFormController {
     private PasswordField txtPassword;
 
     @FXML
-    private TextField txtUsername;
+    private JFXTextField txtUsername;
 
     LoginDetailsBO loginDetailsBO = (LoginDetailsBO) ServiceFactory.getInstance().getBO(ServiceFactory.BOTypes.LOGIN_DETAILS);
 
-    public void initialize()  {
+    public void initialize() {
         try {
-            loginDetailsBO.register(new LoginDetailsDTO(1,"User","user","user@gmail.com","1234"));
+            loginDetailsBO.register(new LoginDetailsDTO(1, "User", "user", "user@gmail.com", "1234"));
         } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
     @FXML
     void btnLoginOnAction(ActionEvent event) throws Exception {
-
-        Stage window = (Stage) txtUsername.getScene().getWindow();
-        window.setTitle("Dashboard");
-        window.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/DashboardForm.fxml"))));
+        String username = txtUsername.getText();
+        String pass = txtPassword.getText();
+        List<LoginDetailsDTO> all = loginDetailsBO.getAll();
+        for (LoginDetailsDTO detailsDTO : all) {
+            if (detailsDTO.getUsername().equals(username)) {
+                if (detailsDTO.getPassword().equals(pass)) {
+                    TransferObjects.sendObject(detailsDTO.getName());
+                    Stage window = (Stage) txtUsername.getScene().getWindow();
+                    window.setTitle("Dashboard");
+                    window.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/DashboardForm.fxml"))));
+                } else {
+                    new Alert(Alert.AlertType.INFORMATION, "Username or passoword is not matched !").show();
+                }
+            } else {
+                new Alert(Alert.AlertType.INFORMATION, "Account not found !").show();
+            }
+        }
     }
 
     @FXML
@@ -67,7 +85,7 @@ public class LoginFormController {
     }
 
     @FXML
-    void showPasswordOnMousePressed(MouseEvent event){
+    void showPasswordOnMousePressed(MouseEvent event) {
 
     }
 
