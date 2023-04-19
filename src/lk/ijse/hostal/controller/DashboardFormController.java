@@ -2,8 +2,12 @@ package lk.ijse.hostal.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 import lk.ijse.hostal.controller.util.Navigation;
 import lk.ijse.hostal.controller.util.Routes;
 import lk.ijse.hostal.util.TransferObjects;
@@ -17,19 +21,25 @@ public class DashboardFormController {
     @FXML
     private AnchorPane paneContainer;
 
-    public void initialize(){
+    public void initialize() {
         lblAdminName.setText(String.valueOf(TransferObjects.recieveObject()));
         TransferObjects.clear();
     }
 
     @FXML
     void btnDashboardOnAction(ActionEvent event) throws Exception {
-        Navigation.navigate(Routes.DASHBOARD,pane);
+        Navigation.navigate(Routes.DASHBOARD, pane);
     }
 
     @FXML
     void btnLogOnAction(ActionEvent event) throws Exception {
-        Navigation.navigate(Routes.LOGIN,pane);
+        Stage stage = (Stage) pane.getScene().getWindow();
+        stage.setResizable(false);
+        pane.getChildren().clear();
+        pane = FXMLLoader.load(getClass().getResource("../view/LoginForm.fxml"));
+        stage.setScene(new Scene(pane));
+        stage.show();
+        stage.setTitle("Login");
     }
 
     @FXML
