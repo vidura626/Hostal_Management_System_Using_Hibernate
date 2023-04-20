@@ -2,6 +2,7 @@ package lk.ijse.hostal.entity;
 
 import lk.ijse.hostal.dto.RoomDTO;
 import lombok.*;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import java.util.List;
@@ -11,6 +12,9 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
 public class Room {
     @Id
     String room_type_id;
@@ -19,6 +23,7 @@ public class Room {
     double key_money;
     int qty;
     @OneToMany(mappedBy = "room",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
     List<Reservation> reservations;
 
     @Override

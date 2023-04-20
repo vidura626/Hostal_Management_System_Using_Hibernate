@@ -19,18 +19,11 @@ public class FactoryConfiguration {
     private SessionFactory sessionFactory;
 
     private FactoryConfiguration() {
-//        Properties properties=new Properties();
-//        try {
-//            properties.load(ClassLoader.getSystemClassLoader().getResourceAsStream("Hibernate.properties"));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
         Configuration configuration=new Configuration().
                 addAnnotatedClass(Student.class)
                 .addAnnotatedClass(Room.class)
                 .addAnnotatedClass(LoginDetails.class)
                 .addAnnotatedClass(Reservation.class);
-//        configuration.addProperties(properties);
         sessionFactory=configuration.buildSessionFactory();
     }
 

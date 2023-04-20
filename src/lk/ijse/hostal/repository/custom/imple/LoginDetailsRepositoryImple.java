@@ -4,9 +4,7 @@ import lk.ijse.hostal.entity.LoginDetails;
 import lk.ijse.hostal.repository.custom.LoginDetailsRepository;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
-import org.hibernate.query.internal.QueryImpl;
 
-import java.io.Serializable;
 import java.util.List;
 
 public class LoginDetailsRepositoryImple implements LoginDetailsRepository {
@@ -33,13 +31,17 @@ public class LoginDetailsRepositoryImple implements LoginDetailsRepository {
 
     @Override
     public List<LoginDetails> getAll(Session session) {
-        List<LoginDetails> from_loginDetails = session.createQuery("from LoginDetails").getResultList();
-        return from_loginDetails;
+        Query from_loginDetails = session.createQuery("from LoginDetails");
+        from_loginDetails.setCacheable(true);
+        List<LoginDetails> resultList = from_loginDetails.getResultList();
+        return resultList;
     }
 
     @Override
     public String generateNextId(Session session) {
-        List resultList = session.createQuery("SELECT id FROM LoginDetails ORDER BY id DESC").setMaxResults(1).getResultList();
+        Query query = session.createQuery("SELECT id FROM LoginDetails ORDER BY id DESC").setMaxResults(1);
+        query.setCacheable(true);
+        List resultList = query.getResultList();
         if (resultList.size() > 0) {
             return String.valueOf((int) resultList.get(0) + 1);
         }

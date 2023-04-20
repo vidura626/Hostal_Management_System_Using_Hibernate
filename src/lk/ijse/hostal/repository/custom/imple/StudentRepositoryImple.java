@@ -3,6 +3,7 @@ package lk.ijse.hostal.repository.custom.imple;
 import lk.ijse.hostal.entity.Student;
 import lk.ijse.hostal.repository.custom.StudentRepository;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import java.util.List;
 
@@ -32,8 +33,9 @@ public class StudentRepositoryImple implements StudentRepository {
     @Override
     public List<Student> getAll(Session session) {
         try {
-            List<Student> from_student = session.createQuery("From Student").getResultList();
-            return from_student;
+            Query from_student = session.createQuery("From Student");
+            from_student.setCacheable(true);
+            return from_student.getResultList();
         } catch (Exception e) {
             return null;
         }

@@ -17,6 +17,9 @@ import lk.ijse.hostal.controller.util.Routes;
 import lk.ijse.hostal.dto.LoginDetailsDTO;
 import lk.ijse.hostal.service.ServiceFactory;
 import lk.ijse.hostal.service.custom.LoginDetailsBO;
+import lk.ijse.hostal.service.custom.ReservationBO;
+import lk.ijse.hostal.service.custom.RoomBO;
+import lk.ijse.hostal.service.custom.StudentBO;
 import lk.ijse.hostal.util.TransferObjects;
 
 import java.io.IOException;
@@ -36,8 +39,17 @@ public class LoginFormController {
     private JFXTextField txtUsername;
 
     LoginDetailsBO loginDetailsBO = (LoginDetailsBO) ServiceFactory.getInstance().getBO(ServiceFactory.BOTypes.LOGIN_DETAILS);
+    StudentBO studentBO = (StudentBO) ServiceFactory.getInstance().getBO(ServiceFactory.BOTypes.STUDENT);
+    RoomBO roomBO = (RoomBO) ServiceFactory.getInstance().getBO(ServiceFactory.BOTypes.ROOM);
+    ReservationBO reservationBO = (ReservationBO) ServiceFactory.getInstance().getBO(ServiceFactory.BOTypes.RESERVATION);
 
     public void initialize() {
+        /*  Loan all data for caches    */
+        loginDetailsBO.getAll();
+        studentBO.getAllStudents();
+        roomBO.getAllRooms();
+        reservationBO.getAllReservations();
+        /*------------------------------*/
         try {
             loginDetailsBO.register(new LoginDetailsDTO(1, "User", "user", "user@gmail.com", "1234"));
         } catch (Exception e) {
@@ -62,15 +74,6 @@ public class LoginFormController {
                 }
             }
         }
-    }
-
-    @FXML
-    void btnRegisterOnAction(ActionEvent event) throws Exception {
-        Navigation.navigate(Routes.REGISTER_1, pane);
-        Stage stage = (Stage) pane.getScene().getWindow();
-        stage.setWidth(700.00);
-        stage.setHeight(480.00);
-        stage.centerOnScreen();
     }
 
     @FXML

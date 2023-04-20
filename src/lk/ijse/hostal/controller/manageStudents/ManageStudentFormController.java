@@ -102,6 +102,7 @@ public class ManageStudentFormController {
                 }
 
             });
+            if (st.getReservations().size() > 0) delete.setDisable(true);
             delete.setOnAction(event -> {
                 if (tblManageStudent.getSelectionModel().isEmpty()) {
                     new Alert(Alert.AlertType.INFORMATION, "Select a row").show();

@@ -10,7 +10,7 @@
 
 <AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.hostal.controller.DashboardFormController">
    <children>
-      <AnchorPane fx:id="paneContainer" layoutX="186.0" layoutY="78.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" />
+      <AnchorPane fx:id="paneContainer" layoutX="186.0" layoutY="78.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.9" prefHeight="600.0" prefWidth="900.0" />
       <JFXButton buttonType="RAISED" layoutX="14.0" layoutY="190.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#btnMngRoomsOnAction" stylesheets="@css/style.css" text="Rooms">
          <styleClass>
             <String fx:value="btn" />

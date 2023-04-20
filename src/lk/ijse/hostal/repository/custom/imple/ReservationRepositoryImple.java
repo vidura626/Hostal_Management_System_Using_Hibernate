@@ -33,12 +33,16 @@ public class ReservationRepositoryImple implements ReservationRepository {
 
     @Override
     public List<Reservation> getAll(Session session) {
-        return session.createQuery("FROM Reservation").getResultList();
+        Query from_reservation = session.createQuery("FROM Reservation");
+        from_reservation.setCacheable(true);
+        return from_reservation.getResultList();
     }
 
     @Override
     public String generateNextId(Session session) {
-        List resultList = session.createQuery("SELECT res_id FROM Reservation ORDER BY res_id DESC").setMaxResults(1).getResultList();
+        Query query = session.createQuery("SELECT res_id FROM Reservation ORDER BY res_id DESC").setMaxResults(1);
+        query.setCacheable(true);
+        List resultList = query.getResultList();
         if (resultList.size() > 0) {
             String id = (String) resultList.get(0);
             int newId = Integer.parseInt(id.replace("RES-", "")) + 1;

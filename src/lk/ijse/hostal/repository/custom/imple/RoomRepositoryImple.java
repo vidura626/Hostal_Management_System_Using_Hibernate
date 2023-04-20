@@ -3,6 +3,7 @@ package lk.ijse.hostal.repository.custom.imple;
 import lk.ijse.hostal.entity.Room;
 import lk.ijse.hostal.repository.custom.RoomRepository;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import java.util.List;
 
@@ -31,7 +32,9 @@ public class RoomRepositoryImple implements RoomRepository {
 
     @Override
     public List<Room> getAll(Session session) {
-        return session.createQuery("FROM Room").getResultList();
+        Query from_room = session.createQuery("FROM Room");
+        from_room.setCacheable(true);
+        return from_room.getResultList();
     }
 
     @Override
