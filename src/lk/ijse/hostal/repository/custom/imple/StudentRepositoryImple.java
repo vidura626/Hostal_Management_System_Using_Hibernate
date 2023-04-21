@@ -16,6 +16,7 @@ public class StudentRepositoryImple implements StudentRepository {
 
     @Override
     public void update(Student obj, Session session) throws Exception {
+        session.detach(obj);
         session.update(obj);
     }
 

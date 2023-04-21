@@ -42,7 +42,6 @@
                   <TableColumn fx:id="colFrom" prefWidth="75.0" text="From" />
                   <TableColumn fx:id="colTo" prefWidth="75.0" text="To" />
                   <TableColumn fx:id="colStatus" prefWidth="75.0" text="Status" />
-                  <TableColumn fx:id="colUpdate" prefWidth="75.0" text="Update" />
                   <TableColumn fx:id="colDelete" prefWidth="75.0" text="Delete" />
               </columns>
                <columnResizePolicy>

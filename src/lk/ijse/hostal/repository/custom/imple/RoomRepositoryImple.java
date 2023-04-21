@@ -16,6 +16,7 @@ public class RoomRepositoryImple implements RoomRepository {
 
     @Override
     public void update(Room obj, Session session) throws Exception {
+//        session.detach(obj);
         session.update(obj);
     }
 

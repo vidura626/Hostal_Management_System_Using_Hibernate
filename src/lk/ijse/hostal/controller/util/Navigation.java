@@ -14,6 +14,10 @@ public class Navigation {
         String location = null;
 
         switch (routes) {
+            case VIEW_NOT_PAID:
+                window.setTitle("View Not Paids");
+                location = "/ViewNotPaidsForm.fxml";
+                break;
             case USER_CONFIRM:
                 window.setTitle("Confirm");
                 location="/users/ConfirmPasswordForm.fxml";

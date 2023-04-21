@@ -15,6 +15,7 @@ public class LoginDetailsRepositoryImple implements LoginDetailsRepository {
 
     @Override
     public void update(LoginDetails obj, Session session) throws Exception {
+        session.detach(obj);
         session.saveOrUpdate(obj);
     }
 

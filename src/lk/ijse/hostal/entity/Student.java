@@ -20,7 +20,7 @@ import java.util.List;
 @NoArgsConstructor
 
 @Cacheable
-@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Student {
     @Id
     String id;
@@ -32,7 +32,7 @@ public class Student {
     */
 
     @Embedded
-    @Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     Name name;
 
     @LazyCollection(LazyCollectionOption.FALSE)
@@ -41,7 +41,7 @@ public class Student {
             name = "addressess",
             joinColumns = @JoinColumn(name = "StudentId")
     )
-    @Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     List<Address> addresses;
 
     @LazyCollection(LazyCollectionOption.FALSE)
@@ -50,7 +50,7 @@ public class Student {
             name = "Contacts",
             joinColumns = @JoinColumn(name = "StudentId")
     )
-    @Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     List<Contact> contact;
 
     Date dob;
@@ -61,7 +61,7 @@ public class Student {
     @CreationTimestamp
     Date joinedDate;
     @OneToMany(mappedBy = "studentId", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
+    @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.TRANSACTIONAL)
     List<Reservation> reservations;
 
     @Override

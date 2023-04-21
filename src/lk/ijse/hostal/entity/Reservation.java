@@ -2,6 +2,7 @@ package lk.ijse.hostal.entity;
 
 import lombok.*;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import javax.transaction.Transactional;
@@ -14,7 +15,7 @@ import java.util.Date;
 @NoArgsConstructor
 
 @Cacheable
-@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.TRANSACTIONAL)
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Reservation {
     @Id
     private String res_id;
@@ -22,14 +23,16 @@ public class Reservation {
     private Date toDate;
     private double keyMoneyAmount;
     private double remainingAmount;
+
     @Enumerated(EnumType.STRING)
+    @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Status status;
 
     @ManyToOne
-    @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
+    @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.TRANSACTIONAL)
     private Student studentId;
 
     @ManyToOne
-    @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
+    @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.TRANSACTIONAL)
     private Room room;
 }

@@ -37,6 +37,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class ReservationFormController {
 
@@ -72,9 +73,6 @@ public class ReservationFormController {
 
     @FXML
     private TableColumn<?, ?> colStatus;
-
-    @FXML
-    private TableColumn<?, ?> colUpdate;
 
     @FXML
     private TableColumn<?, ?> colDelete;
@@ -124,7 +122,6 @@ public class ReservationFormController {
         ObservableList<ReservationTM> reservations = FXCollections.observableArrayList();
 
         for (ReservationDTO reservationDTO : allReservations) {
-            JFXButton update = new JFXButton("Update");
             JFXButton delete = new JFXButton("Delete");
             reservations.add(new ReservationTM(
                     reservationDTO.getRes_id(),
@@ -133,35 +130,9 @@ public class ReservationFormController {
                     reservationDTO.getFromDate(),
                     reservationDTO.getToDate(),
                     reservationDTO.getStatus(),
-                    update,
                     delete
             ));
-            update.setOnAction(event -> {
-                if (tblManageReservation.getSelectionModel().isEmpty()) {
-                    new Alert(Alert.AlertType.INFORMATION, "select a row").show();
-                    return;
-                }
-                /*  Set Values to the fields    */
-                ReservationTM selectedItem = tblManageReservation.getSelectionModel().getSelectedItem();
-                try {
-                    cmbSttd.getSelectionModel().select(Convertor.fromStudent(selectedItem.getStudentId()));
-                    cmbRoom.getSelectionModel().select(Convertor.fromRoom(selectedItem.getRoom()));
-                    datepickerFrom.setValue(selectedItem.getFromDate().toInstant()
-                            .atZone(ZoneId.systemDefault())
-                            .toLocalDate());
-                    datepickerTo.setValue(selectedItem.getToDate().toInstant()
-                            .atZone(ZoneId.systemDefault())
-                            .toLocalDate());
-                    cmbboxCheckoutType.getSelectionModel().select(selectedItem.getStatus());
-                    lblQty.setText(String.valueOf(selectedItem.getRoom().getQty()));
-                    lblId.setText(selectedItem.getRes_id());
-                    lblKeyMoney.setText(String.valueOf(selectedItem.getRoom().getKey_money()));
-                    /*------------------------------*/
-                    btnReserve.setText("UPDATE");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            });
+
             delete.setOnAction(event -> {
                 if (tblManageReservation.getSelectionModel().isEmpty()) {
                     new Alert(Alert.AlertType.INFORMATION, "select a row").show();
@@ -199,7 +170,6 @@ public class ReservationFormController {
         colDelete.setCellValueFactory(new PropertyValueFactory<>("delete"));
         colFrom.setCellValueFactory(new PropertyValueFactory<>("fromDate"));
         colRoomId.setCellValueFactory(new PropertyValueFactory<>("room"));
-        colUpdate.setCellValueFactory(new PropertyValueFactory<>("update"));
         colTo.setCellValueFactory(new PropertyValueFactory<>("toDate"));
         colStudentId.setCellValueFactory(new PropertyValueFactory<>("studentId"));
         colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
@@ -263,9 +233,12 @@ public class ReservationFormController {
             new Alert(Alert.AlertType.WARNING, "Check the form again !").show();
             return;
         }
-        boolean validate = FormValidate.validate(textFields, RegexTypes.AMOUNT);
-        if (!validate) {
-            return;
+
+        if(cmbboxCheckoutType.getValue().equals(Status.NOT_FULL)){
+            boolean validate = FormValidate.validate(textFields, RegexTypes.AMOUNT);
+            if (!validate) {
+                return;
+            }
         }
 
         if (Integer.parseInt(lblQty.getText()) <= 0) {
@@ -283,17 +256,35 @@ public class ReservationFormController {
         Status status = cmbboxCheckoutType.getValue();
         String keyMoneyAmount = status.equals(Status.FULL) ? String.valueOf(room.getKey_money()) : txtAmount.getText();
 
-        /*  If Update  */
+        /* *//*  If Update  *//*
         if (btnReserve.getText().equals("UPDATE")) {
+
             ReservationTM selectedItem = tblManageReservation.getSelectionModel().getSelectedItem();
             try {
-                ReservationDTO originalItem = reservationBO.searchReservation(selectedItem.getRes_id());
-                selectedItem.getRoom().setQty(originalItem.getRoom().getQty()+1);
-                boolean b = roomBO.updateRoom(Convertor.fromRoom(selectedItem.getRoom()));
+                Reservation reservation = Convertor.toReservation(reservationBO.searchReservation(selectedItem.getRes_id()));
+
+                Room oldRoom = selectedItem.getRoom();
+                Student oldStudent = selectedItem.getStudentId();
+                oldStudent.getReservations().remove(reservation);
+//                studentBO.updateStudent(Convertor.fromStudent(oldStudent));
+                oldRoom.setQty(oldRoom.getQty()+1);
+                oldRoom.getReservations().remove(reservation);
+
+                roomBO.updateRoom(Convertor.fromRoom(oldRoom));
+                Room currentRoom = Convertor.toRoom(cmbRoom.getSelectionModel().getSelectedItem());
+                currentRoom.setQty(currentRoom.getQty()-1);
+                currentRoom.getReservations().add(reservation);
+
+                reservation.setRoom(Convertor.toRoom(room));
+                reservationBO.updateReservation(Convertor.fromReservation(reservation));
+
+                roomBO.updateRoom(Convertor.fromRoom(currentRoom));
+                System.out.println("Update is succeeded");
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
+            return;
+        }*/
 
         /*  Qty -   */
         room.setQty(room.getQty() - 1);
@@ -309,7 +300,6 @@ public class ReservationFormController {
                     Convertor.toStudent(std),
                     Convertor.toRoom(room)
             );
-            std.getReservations().add(reservation);
             room.getReservations().add(reservation);
             boolean isReserve = roomBO.updateRoom(room);
             if (isReserve) {
@@ -318,10 +308,7 @@ public class ReservationFormController {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            loadId();
-            setVisibility();
-            setTable();
-            loadRoomsCmb();
+            initialize();
             btnClearOnAction(event);
         }
     }

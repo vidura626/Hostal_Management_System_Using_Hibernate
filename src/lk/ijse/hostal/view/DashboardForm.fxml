@@ -56,5 +56,12 @@
             <String fx:value="btn-primary" />
          </styleClass>
       </JFXButton>
+      <JFXButton buttonType="RAISED" layoutX="14.0" layoutY="422.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#btnNotPaidOnAction" prefHeight="77.0" stylesheets="@css/style.css" text="Not Paid">
+         <styleClass>
+            <String fx:value="btn" />
+            <String fx:value="btn-lg" />
+            <String fx:value="btn-primary" />
+         </styleClass>
+      </JFXButton>
    </children>
 </AnchorPane>

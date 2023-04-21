@@ -12,10 +12,13 @@ public class ReservationRepositoryImple implements ReservationRepository {
     @Override
     public String add(Reservation obj, Session session) throws Exception {
         return (String) session.save(obj);
+       /* session.detach(obj);
+        return save;*/
     }
 
     @Override
     public void update(Reservation obj, Session session) throws Exception {
+        session.detach(obj);
         session.update(obj);
     }
 
@@ -28,7 +31,9 @@ public class ReservationRepositoryImple implements ReservationRepository {
 
     @Override
     public Reservation search(String id, Session session) {
-        return session.get(Reservation.class, id);
+        Reservation reservation = session.get(Reservation.class, id);
+        session.detach(reservation);
+        return reservation;
     }
 
     @Override
@@ -54,7 +59,9 @@ public class ReservationRepositoryImple implements ReservationRepository {
 
     @Override
     public Reservation searchReservation(String studentId, String roomId, Session session) {
-        List<Reservation> resultList = session.createQuery("FROM Reservation ORDER BY res_id DESC").setMaxResults(1).getResultList();
+        Query query = session.createQuery("FROM Reservation ORDER BY res_id DESC").setMaxResults(1);
+        query.setCacheable(true);
+        List<Reservation> resultList = query.getResultList();
         if(resultList.size()>0){
             return resultList.get(0);
         }

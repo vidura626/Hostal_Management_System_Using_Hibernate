@@ -63,4 +63,9 @@ public class DashboardFormController {
 
     }
 
+    @FXML
+    void btnNotPaidOnAction(ActionEvent event) throws Exception {
+        Navigation.navigate(Routes.VIEW_NOT_PAID, paneContainer);
+    }
+
 }

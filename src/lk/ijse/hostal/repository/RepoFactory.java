@@ -1,9 +1,6 @@
 package lk.ijse.hostal.repository;
 
-import lk.ijse.hostal.repository.custom.imple.LoginDetailsRepositoryImple;
-import lk.ijse.hostal.repository.custom.imple.ReservationRepositoryImple;
-import lk.ijse.hostal.repository.custom.imple.RoomRepositoryImple;
-import lk.ijse.hostal.repository.custom.imple.StudentRepositoryImple;
+import lk.ijse.hostal.repository.custom.imple.*;
 import lk.ijse.hostal.util.FactoryConfiguration;
 import org.hibernate.Session;
 
@@ -20,11 +17,13 @@ public class RepoFactory {
     }
 
     public enum Repo {
-        STUDENT, ROOM, RESERVATION,LOGIN
+        STUDENT, ROOM, RESERVATION,LOGIN, CUSTOM
     }
 
     public SuperRepo getRepository(Repo repo) {
         switch (repo) {
+            case CUSTOM:
+                return new CustomRepositoryImple();
             case STUDENT:
                 return new StudentRepositoryImple();
             case ROOM:

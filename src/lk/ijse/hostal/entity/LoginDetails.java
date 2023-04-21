@@ -16,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 
 @Cacheable
-@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class LoginDetails implements Serializable {
     @Id
     private int id;

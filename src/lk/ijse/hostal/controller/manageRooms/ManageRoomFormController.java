@@ -105,7 +105,7 @@ public class ManageRoomFormController {
         List<RoomDTO> allRooms = roomBO.getAllRooms();
         for (RoomDTO roomDTO : allRooms) {
 
-            /*  BUttons to TableView    */
+            /*  Buttons to TableView    */
             JFXButton update = new JFXButton("Update");
             JFXButton delete = new JFXButton("Delete");
             /*--------------------------*/
@@ -134,10 +134,11 @@ public class ManageRoomFormController {
                 RoomDTO original = roomBO.searchRoom(selectedItem.getId());
                 int selectedIndex = tblManageRoom.getSelectionModel().getSelectedIndex();
 
+                original.setQty(22);
                 if (buttonType.orElse(cancel) == ok) {
                     if (selectedItem.getType().equals(original.getType())
-                            || Integer.parseInt(selectedItem.getQty()) == original.getQty()
-                            || Double.parseDouble(selectedItem.getPrice()) == original.getKey_money()) {
+                            && Integer.parseInt(selectedItem.getQty()) == original.getQty()
+                            && Double.parseDouble(selectedItem.getPrice()) == original.getKey_money()) {
                         new Alert(Alert.AlertType.INFORMATION,"No changes").show();
                         return;
                     }
@@ -178,7 +179,6 @@ public class ManageRoomFormController {
 
                 if (buttonType.orElse(cancel) == ok) {
                     String id = tblManageRoom.getSelectionModel().getSelectedItem().getId();
-                    System.out.println(id);
                     try {
                         boolean b = roomBO.deleteRoom(id);
                         if (b) new Alert(Alert.AlertType.CONFIRMATION, "Deleted Successfully !").show();
@@ -234,7 +234,6 @@ public class ManageRoomFormController {
         if (!validate) {
             return;
         }
-        System.out.println("sediojfse");
         if (cmbType.getSelectionModel().isEmpty()) {
             cmbType.setFocusColor(Paint.valueOf("RED"));
             cmbType.requestFocus();

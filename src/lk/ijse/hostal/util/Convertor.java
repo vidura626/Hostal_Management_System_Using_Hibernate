@@ -1,15 +1,9 @@
 package lk.ijse.hostal.util;
 
 import lk.ijse.hostal.controller.TM.MngRoomTM;
-import lk.ijse.hostal.dto.LoginDetailsDTO;
-import lk.ijse.hostal.dto.ReservationDTO;
-import lk.ijse.hostal.dto.RoomDTO;
-import lk.ijse.hostal.dto.StudentDTO;
+import lk.ijse.hostal.dto.*;
 import lk.ijse.hostal.dto.embedded.Name;
-import lk.ijse.hostal.entity.LoginDetails;
-import lk.ijse.hostal.entity.Reservation;
-import lk.ijse.hostal.entity.Room;
-import lk.ijse.hostal.entity.Student;
+import lk.ijse.hostal.entity.*;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -17,6 +11,26 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Convertor {
+
+    public static CustomDTO fromCustom(Custom custom) {
+        return new CustomDTO(
+                custom.getReservationId(),
+                custom.getStudentName(),
+                custom.getRemainingAmount(),
+                custom.getRoomId(),
+                custom.getRoomType()
+        );
+    }
+
+    public static Custom toCustom(CustomDTO custom) {
+        return new Custom(
+                custom.getReservationId(),
+                custom.getStudentName(),
+                custom.getRemainingAmount(),
+                custom.getRoomId(),
+                custom.getRoomType()
+        );
+    }
 
     public static StudentDTO fromStudent(Student student) {
         return new StudentDTO(

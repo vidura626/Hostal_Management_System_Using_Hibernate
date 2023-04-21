@@ -20,7 +20,6 @@ public class ReservationTM {
     private Date fromDate;
     private Date toDate;
     private Status status;
-    private JFXButton update;
     private JFXButton delete;
 
 }

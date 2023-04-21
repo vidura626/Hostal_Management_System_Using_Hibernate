@@ -19,4 +19,9 @@ public class Name {
     String fName;
     String mName;
     String lName;
+
+    @Override
+    public String toString() {
+        return fName;
+    }
 }
