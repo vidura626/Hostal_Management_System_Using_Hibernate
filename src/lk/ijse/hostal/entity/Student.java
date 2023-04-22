@@ -61,7 +61,6 @@ public class Student {
     @CreationTimestamp
     Date joinedDate;
     @OneToMany(mappedBy = "studentId", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.TRANSACTIONAL)
     List<Reservation> reservations;
 
     @Override

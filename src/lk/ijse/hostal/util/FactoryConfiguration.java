@@ -5,6 +5,7 @@ import lk.ijse.hostal.entity.LoginDetails;
 import lk.ijse.hostal.entity.Reservation;
 import lk.ijse.hostal.entity.Room;
 import lk.ijse.hostal.entity.Student;
+import org.hibernate.Cache;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -31,6 +32,9 @@ public class FactoryConfiguration {
 
     public Session getSession() {
         return sessionFactory.openSession();
+    }
+    public Cache getCach() {
+        return sessionFactory.getCache();
     }
 
 

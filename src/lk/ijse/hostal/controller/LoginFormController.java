@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -29,6 +30,10 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class LoginFormController {
+
+    @FXML
+    private CheckBox checkBoxTogglePasss;
+
     @FXML
     private AnchorPane pane;
 
@@ -38,12 +43,18 @@ public class LoginFormController {
     @FXML
     private JFXTextField txtUsername;
 
+    @FXML
+    private JFXTextField txtShowPass;
+
     LoginDetailsBO loginDetailsBO = (LoginDetailsBO) ServiceFactory.getInstance().getBO(ServiceFactory.BOTypes.LOGIN_DETAILS);
     StudentBO studentBO = (StudentBO) ServiceFactory.getInstance().getBO(ServiceFactory.BOTypes.STUDENT);
     RoomBO roomBO = (RoomBO) ServiceFactory.getInstance().getBO(ServiceFactory.BOTypes.ROOM);
     ReservationBO reservationBO = (ReservationBO) ServiceFactory.getInstance().getBO(ServiceFactory.BOTypes.RESERVATION);
 
     public void initialize() {
+        txtShowPass.setVisible(false);
+        txtPassword.setVisible(true);
+        checkBoxTogglePasss.setSelected(false);
         /*  Loan all data for caches    */
         loginDetailsBO.getAll();
         studentBO.getAllStudents();
@@ -55,6 +66,7 @@ public class LoginFormController {
         } catch (Exception e) {
         }
     }
+
 
     @FXML
     void btnLoginOnAction(ActionEvent event) throws Exception {
@@ -71,24 +83,36 @@ public class LoginFormController {
                     return;
                 } else {
                     new Alert(Alert.AlertType.INFORMATION, "Username or password is not matched !").show();
+                    return;
                 }
             }
         }
+        new Alert(Alert.AlertType.INFORMATION, "Try again !").show();
     }
 
     @FXML
     void txtPasswordOnAction(ActionEvent event) {
-
+        try {
+            btnLoginOnAction(event);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     void txtUsernameOnAction(ActionEvent event) {
-
+        txtPassword.requestFocus();
     }
 
     @FXML
-    void showPasswordOnMousePressed(MouseEvent event) {
-
+    void checkBoxOnAction(ActionEvent event) {
+        if (checkBoxTogglePasss.isSelected()) {
+            txtShowPass.setVisible(true);
+            txtPassword.setVisible(false);
+            txtShowPass.setText(txtPassword.getText());
+        } else {
+            txtShowPass.setVisible(false);
+            txtPassword.setVisible(true);
+        }
     }
-
 }

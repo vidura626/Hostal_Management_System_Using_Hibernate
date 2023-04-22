@@ -17,7 +17,7 @@ public class CustomRepositoryImple implements CustomRepository {
 
     @Override
     public List<Custom> getNotFullPaidList(Session session) {
-        Query query = session.createQuery("SELECT rs.res_id,s.name, rs.remainingAmount, m.room_type_id, m.type FROM Reservation AS rs INNER JOIN Student AS s ON s.id=rs.studentId INNER JOIN Room AS m ON m.id=rs.room");
+        Query query = session.createQuery("SELECT rs.res_id,s.name, rs.remainingAmount, m.room_type_id, m.type FROM Reservation AS rs INNER JOIN Student AS s ON s.id=rs.studentId INNER JOIN Room AS m ON m.id=rs.room WHERE rs.status = 'NOT_FULL'");
         query.setCacheable(true);
         final List<Object[]> list = query.getResultList();
         List<Custom> customList=new ArrayList<>();

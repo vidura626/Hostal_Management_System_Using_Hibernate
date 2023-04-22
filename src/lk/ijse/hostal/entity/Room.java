@@ -25,7 +25,6 @@ public class Room {
     double key_money;
     int qty;
     @OneToMany(mappedBy = "room",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.TRANSACTIONAL)
     List<Reservation> reservations;
 
     @Override

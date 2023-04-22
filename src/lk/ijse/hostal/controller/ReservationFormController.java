@@ -108,8 +108,8 @@ public class ReservationFormController {
         btnReserve.setText("RESERVE");
         textFields.clear();
         Collections.addAll(textFields, txtAmount);
-        loadStudentsCmb();
         loadRoomsCmb();
+        loadStudentsCmb();
         loadCheckoutCmb();
         loadId();
         setVisibility();
@@ -117,6 +117,7 @@ public class ReservationFormController {
     }
 
     private void setTable() {
+        tblManageReservation.getItems().clear();
         setCellValueFactory();
         List<ReservationDTO> allReservations = reservationBO.getAllReservations();
         ObservableList<ReservationTM> reservations = FXCollections.observableArrayList();
@@ -145,18 +146,30 @@ public class ReservationFormController {
                 try {
                     if (buttonType.orElse(cancel) == ok) {
                         ReservationTM selectedItem = tblManageReservation.getSelectionModel().getSelectedItem();
-                        boolean b = reservationBO.deleteReservation(selectedItem.getRes_id());
+//                        boolean b = reservationBO.deleteReservation(selectedItem.getRes_id());
+                        Reservation reservation1 = Convertor.toReservation(reservationBO.searchReservation(selectedItem.getRes_id()));
+                        Room room = reservation1.getRoom();
+                        room.setQty(room.getQty()+1);
+                        room.getReservations().remove(reservation1);
+
+                        reservation1.getStudentId().getReservations().remove(reservation1);
+                        studentBO.updateStudent(Convertor.fromStudent(reservation1.getStudentId()));
+                        roomBO.updateRoom(Convertor.fromRoom(room));
+                        reservationBO.deleteReservation(reservation1.getRes_id());
                         selectedItem.setRes_id(null);
-                        if (b) {
+                        System.out.println("success");
+                        /*if (b) {
                             new Alert(Alert.AlertType.CONFIRMATION, "Deleted Successfully !").show();
                         } else {
                             new Alert(Alert.AlertType.ERROR, "Not Deleted !").show();
-                        }
+                        }*/
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 } finally {
-                    initialize();
+                    btnClearOnAction(event);
+                    btnReserve.setText("RESERVE");
+                    setTable();
                 }
             });
         }

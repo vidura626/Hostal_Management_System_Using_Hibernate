@@ -2,9 +2,12 @@ package lk.ijse.hostal.repository.custom.imple;
 
 import lk.ijse.hostal.entity.Reservation;
 import lk.ijse.hostal.repository.custom.ReservationRepository;
+import lk.ijse.hostal.util.FactoryConfiguration;
+import org.hibernate.Cache;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
+import javax.persistence.EntityManager;
 import java.sql.ResultSet;
 import java.util.List;
 
